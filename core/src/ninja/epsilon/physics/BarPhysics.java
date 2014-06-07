@@ -9,6 +9,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 
@@ -134,7 +135,7 @@ public class BarPhysics implements Physics, Physics.InputCallback {
 		for (ListIterator<Body> i = glasses.listIterator(); i.hasNext();) {
 			Body glass = i.next();
 			if (glass.getLinearVelocity().isZero(MIN_STOP_VELOCITY)) {
-				Gdx.app.log(TAG, "Glass stopped!!!");
+				Gdx.app.log(TAG, "Glass stopped!");
 				scorer.gotOneDrink(TypeOfDrink.blondBeer, glass.getPosition().x, cur_t);
 				world.destroyBody(glass);
 				i.remove();
@@ -169,13 +170,16 @@ public class BarPhysics implements Physics, Physics.InputCallback {
 
 	private Body createGlass(float v) {
 		BodyDef glassDef = new BodyDef();
-		glassDef.position.set(new Vector2(0.0f, 10.0f));
+		glassDef.position.set(new Vector2(0.0f, 2.0f));
 		glassDef.type = BodyType.DynamicBody;
 		Body glass = world.createBody(glassDef);
 		PolygonShape glassShape = new PolygonShape();
 		glassShape.setAsBox(1.0f, 1.0f);
-		glass.createFixture(glassShape, 0.0f);
+		FixtureDef fixtureDef = new FixtureDef();
+		fixtureDef.shape = glassShape;
+		fixtureDef.density = 1.0f;
+		fixtureDef.friction = 0.1f;
+		glass.createFixture(fixtureDef);
 		return glass;
 	}
-
 }
