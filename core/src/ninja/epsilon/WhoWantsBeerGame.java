@@ -22,6 +22,7 @@ import ninja.epsilon.swipereader.SwipeReader;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 
 public class WhoWantsBeerGame extends ApplicationAdapter {
@@ -38,6 +39,8 @@ public class WhoWantsBeerGame extends ApplicationAdapter {
 	private Renderer backgroundRenderer;
 	private Renderer drinkRenderer = null;
 	
+	private SpriteBatch spriteBatch = null;
+	
 	@Override
 	public void create () {
 		renderers = new ArrayList<Renderer>();
@@ -50,8 +53,8 @@ public class WhoWantsBeerGame extends ApplicationAdapter {
 		renderers.add(drinkRenderer = new DrinkRenderer(physics));
 		renderers.add(drinkersRenderer = new DrinkersRenderer(drinkers));
 		renderers.add(dashboardRenderer = new DashboardRenderer(scorer));
-		
 
+		spriteBatch = new SpriteBatch();
 		for (Renderer renderer : renderers) {
 			renderer.create();
 			
@@ -67,9 +70,12 @@ public class WhoWantsBeerGame extends ApplicationAdapter {
 		long t = System.currentTimeMillis();
 		physics.update(t, inputReader.input(t));
 		drinkers.update(t, GameLevel.EASY);
+		
+		spriteBatch.begin();
 		for (Renderer renderer : renderers) {
-			renderer.render();
+			renderer.render(spriteBatch);
 		}
+		spriteBatch.end();
 	}
 	
 	@Override
