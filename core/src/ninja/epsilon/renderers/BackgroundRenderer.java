@@ -10,8 +10,8 @@ public class BackgroundRenderer implements Renderer {
 	
 	@Override
 	public void create() {
-		music = Gdx.audio.newMusic(Gdx.files.internal("barmusic.wav"));
-		//music.setVolume(0.5f); 
+		music = Gdx.audio.newMusic(Gdx.files.internal("sounds/barmusic.mp3"));
+		music.setVolume(0.5f); 
 		music.setLooping(true);
 	    music.play();
 	}
