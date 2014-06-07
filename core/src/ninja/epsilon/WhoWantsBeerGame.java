@@ -30,7 +30,7 @@ public class WhoWantsBeerGame extends ApplicationAdapter {
 	public void create () {
 		renderers = new ArrayList<Renderer>();
 		drinkers = new BarCounter();
-		inputReader = new SwipeReader(physics);
+//		inputReader = new SwipeReader(physics);
 //		scorer = new Scorer();
 
 		//Create and add renderers
