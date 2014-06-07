@@ -1,7 +1,15 @@
 package ninja.epsilon.drinkers;
 
+import java.io.File;
+
 public enum TypeOfDrink {
-	blondBeer(0), darkBeer(1), tequilaShot(2);
+		blondBeer (0), 
+		darkBeer (1), 
+		tequilaShot(2),
+		glassWine(3),
+		cactus(4)
+		;
+		
 	
 	private int type;
 
@@ -16,5 +24,22 @@ public enum TypeOfDrink {
 	@Override
 	public String toString() {
 		return super.toString().toLowerCase();
+	}
+
+	/// ... improvement.. add it in the plugin properties file/config file.
+	final static private String basePath = "drinks";
+	final static private String basePrefix = "spritesheet_";
+	public String getPath() {
+		String answer = basePath + File.separator + basePrefix; 
+		switch(this)
+		{
+		case blondBeer:return answer + "blondBeer.atlas";
+		case darkBeer:return answer + "darkBeer.atlas";
+		case tequilaShot:return answer + "tequilaShot.atlas";
+		case glassWine:return answer + "glassWine.atlas";
+		case cactus:return answer + "cactus.atlas";
+
+		};
+		return answer + "beer.atlas";
 	}
 }

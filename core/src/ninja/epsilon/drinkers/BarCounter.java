@@ -45,8 +45,8 @@ public class BarCounter implements Drinkers{
 	 */
 	public BarCounter() {
 		drinkersWaiting = new ArrayList<GenericDrinker>();
-		meanTimeBetweenDrinkers = 3000; // milliseconds
-		capacity = 3;
+		meanTimeBetweenDrinkers = 1000; // milliseconds
+		capacity = 6;
 		previousUpdateTime = 0; // milliseconds
 		currentUpdateTime = 0;  // milliseconds
 		length = (float) 3.5;   // meters
@@ -109,12 +109,15 @@ public class BarCounter implements Drinkers{
 		{
 			Random ran = new Random();
 			long randomTime = ran.nextLong() % meanTimeBetweenDrinkers;
+			if (randomTime < 0) randomTime += meanTimeBetweenDrinkers;
 			
+			long deltaTime = currentUpdateTime - previousUpdateTime;
 			// Make this more fancy later (Poisson process).
-			if (currentUpdateTime - previousUpdateTime < randomTime) {
+			if (deltaTime > randomTime) {
 				createDrinker();
 			}
-		}
+			Gdx.app.log("BarCounter", "Delta time " + deltaTime + " random time " + randomTime);
+			}
 	}
 	
 	/**
