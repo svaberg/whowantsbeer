@@ -2,6 +2,7 @@ package ninja.epsilon.drinkers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import com.badlogic.gdx.Gdx;
 
@@ -39,6 +40,8 @@ public class GenericDrinker implements Drinker {
 	 */
 	private float radius;
 	
+	DrinkerType type;
+	
 	/**
 	 * Drinks being ordered by the drinker. When all drinks have been received
 	 * the drinker will be satisfied and leave the bar (and a tip!).
@@ -55,14 +58,34 @@ public class GenericDrinker implements Drinker {
 		this.creationTime = nowTime;
 		this.drinkOrders = new ArrayList<GenericDrinkOrder>();
 		
-		// Add a drink order.
-		addDrinkOrder(TypeOfDrink.blondBeer);
+		{
+			Random ran = new Random();
+			int typeId = ran.nextInt(Drinker.DrinkerType.values().length);
+			this.type = DrinkerType.values()[typeId];
+		}
 		
+		// Add a few drink orders.
+		{
+			Random ran = new Random();
+			int exp = ran.nextInt(8);
+			for (int i = 1; i < 8; i *= 2)
+			{
+				if (exp % i == 0) {
+					addDrinkOrder();
+				}
+			}
+		}
+	}
+	
+	private void addDrinkOrder() {
+		Random ran = new Random();
+		int typeId = ran.nextInt(TypeOfDrink.values().length);
+		addDrinkOrder(TypeOfDrink.values()[typeId]);		
 	}
 	
 	private void addDrinkOrder(TypeOfDrink typeOfDrink) {
 		this.drinkOrders.add(new GenericDrinkOrder(typeOfDrink, this.position, creationTime));	
-		Gdx.app.log("GenericDrinker", "Drinker passed order for " + typeOfDrink.toString());
+		Gdx.app.log("GenericDrinker", this.type.toString() + " Drinker passed order for " + typeOfDrink.toString());
 	}
 	
 	/**
@@ -112,8 +135,7 @@ public class GenericDrinker implements Drinker {
 
 	@Override
 	public DrinkerType GetDrinkerType() {
-		// TODO Auto-generated method stub
-		return DrinkerType.GERMAN;
+		return type;
 	}
 
 	public float getPosition() {

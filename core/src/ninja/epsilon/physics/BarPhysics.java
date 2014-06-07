@@ -1,7 +1,8 @@
 package ninja.epsilon.physics;
 
+import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.List;
+import java.util.ListIterator;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
@@ -10,6 +11,9 @@ import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
+
+import ninja.epsilon.drinkers.TypeOfDrink;
+import ninja.epsilon.score.Scorer;
 
 /**
  * Main physics engine class.
@@ -27,11 +31,13 @@ public class BarPhysics implements Physics, Physics.InputCallback {
 
 	private static final Vector2 GRAVITY = new Vector2(0, -10.0f);
 	private static final float GLASS_MASS = 0.5f;
+	private static final float MIN_STOP_VELOCITY = 0.1f;
 
 	private World world;
-	private List<Body> glasses;
-	private float prev_t;
+	private LinkedList<Body> glasses;
+	private long prev_t;
 	private boolean running;
+	private Scorer scorer;
 
 	public static class PhysicsException extends RuntimeException {
 		PhysicsException(String msg) {
@@ -39,16 +45,58 @@ public class BarPhysics implements Physics, Physics.InputCallback {
 		}
 	}
 
-	public BarPhysics() {
+	public BarPhysics(Scorer scorer) {
 		world = new World(GRAVITY, false); //TODO: try doSleep=true
 		createCounter();
 		glasses = new LinkedList<Body>();
 		running = false;
+		this.scorer = scorer;
+	}
+
+	private static GlassState bodyToState(Body body) {
+		GlassState state = new GlassState();
+		state.x = body.getPosition().x;
+		state.y = body.getPosition().y;
+		state.angle = body.getAngle();
+		return state;
+	}
+
+	private class GlassIterator implements Iterator<GlassState> {
+		private Iterator<Body> gi;
+
+		public GlassIterator(Iterator<Body> gi) {
+			this.gi = gi;
+		}
+
+		@Override
+		public boolean hasNext() {
+			return gi.hasNext();
+		}
+
+		@Override
+		public GlassState next() {
+			return bodyToState(gi.next());
+		}
+
+		@Override
+		public void remove() {
+			throw new UnsupportedOperationException("Hands off that glass!");
+		}
 	}
 
 	@Override
-	public void update(long t, long swipe) {
-		float cur_t = (float) t;
+	public Iterable<GlassState> whereAreTheGlasses() {
+		return new Iterable<GlassState>() {
+			@Override
+			public Iterator<GlassState> iterator() {
+				return new GlassIterator(glasses.iterator());
+			}
+		};
+	}
+
+	@Override
+	public void update(long t, float swipe) {
+		long cur_t = t;
 		if (running) {  // skip first loop to make sure prev_t is valid
 			doUpdate(cur_t);
 		}
@@ -56,13 +104,24 @@ public class BarPhysics implements Physics, Physics.InputCallback {
 		running = true;
 	}
 
-	private void doUpdate(float cur_t) {
+	private void doUpdate(long cur_t) {
 		float step_t = cur_t - prev_t;
+		//Gdx.app.log(TAG, "dt = " + step_t);
 		if (step_t <= 0.0) {
 			throw new PhysicsException("Negative time step: " + step_t);
 		}
 
 		world.step(step_t, VELOCITY_ITERATIONS, POSITION_ITERATIONS);
+
+		for (ListIterator<Body> i = glasses.listIterator(); i.hasNext();) {
+			Body glass = i.next();
+			if (glass.getLinearVelocity().isZero(MIN_STOP_VELOCITY)) {
+				Gdx.app.log(TAG, "Glass stopped");
+				scorer.gotOneDrink(TypeOfDrink.blondBeer, glass.getPosition().x, cur_t);
+				world.destroyBody(glass);
+				i.remove();
+			}
+		}
 	}
 
 	@Override
