@@ -1,13 +1,6 @@
 package ninja.epsilon.swipereader;
 
-import ninja.epsilon.renderers.Renderer;
-
-public class SwipeReader implements Renderer {
-
-	@Override
-	public void render() {
-		
-	}
+public class SwipeReader {
 
 	public DirectionGestureDetector getSwipeInputProcessor() {
 	   return new DirectionGestureDetector(new DirectionGestureDetector.DirectionListener() {
@@ -35,5 +28,4 @@ public class SwipeReader implements Renderer {
     		}
     	});
    }
-
-}
+}	
