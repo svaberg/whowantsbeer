@@ -11,6 +11,7 @@ import java.util.Map.Entry;
 
 import ninja.epsilon.drinkers.TypeOfDrink;
 import ninja.epsilon.physics.Physics;
+import ninja.epsilon.physics.Physics.GlassState;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
@@ -30,6 +31,7 @@ public class DrinkRenderer implements Renderer {
 	private Map<TypeOfDrink, Animation> animationIndex = new HashMap<TypeOfDrink, Animation>();
 	
 	private float elapsedTime = 0;
+	private Iterable<GlassState> glassesLocation = null;
 	
 	public DrinkRenderer(final Physics physics) {
 		this.refPhysics = physics;
@@ -62,16 +64,20 @@ public class DrinkRenderer implements Renderer {
 	 */
 	@Override
 	public void render(SpriteBatch spriteBatch) {
-//		Gdx.gl.glClearColor(1, 1, 1, 1);
-//		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);		
 
+		glassesLocation = this.refPhysics.whereAreTheGlasses();
+		
 		float xPos = 0;
 		//float yPos = (float) (RendererUtils.PixelsPerMeterY()*RendererUtils.PultHeight);
 		float yPos = 0;
 		elapsedTime += Gdx.graphics.getDeltaTime();
 		
-		//spriteBatch.draw(animation.getKeyFrame(elapsedTime, true), xPos, yPos);
-		
+		Iterator<GlassState> it = glassesLocation.iterator();
+		GlassState gs = null;
+		while(it.hasNext()) {
+			gs = it.next();
+			spriteBatch.draw(animationIndex.get(gs.type).getKeyFrame(elapsedTime, true), gs.x, gs.y);
+		}		
 	}
 	
     @Override
