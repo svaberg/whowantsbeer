@@ -6,7 +6,7 @@ public class ScoringValues {
 
 	private static int threshold =7000; //7s
 	
-	
+	//game over after so many missed
 	public static int getNrOfChances() {return 10;}
 	
 	public static int calculatePoints(long timeWaiting) {

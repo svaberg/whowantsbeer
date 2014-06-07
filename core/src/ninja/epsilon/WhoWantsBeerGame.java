@@ -58,7 +58,7 @@ public class WhoWantsBeerGame extends ApplicationAdapter {
 	}
 
 	@Override
-	public void render () {
+	public void render() {
 		long t = System.currentTimeMillis();
 		physics.update(t, inputReader.input(t));
 		drinkers.update(t, GameLevel.EASY);
