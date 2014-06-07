@@ -3,11 +3,17 @@
  */
 package ninja.epsilon.renderers;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import ninja.epsilon.drinkers.Drinker;
+import ninja.epsilon.drinkers.Drinker.DrinkerType;
 import ninja.epsilon.drinkers.Drinkers;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 /**
@@ -18,6 +24,8 @@ public class DrinkersRenderer implements Renderer {
 	
 	private Drinkers DrinkerPool;
 	private SpriteBatch SpriteBatch;
+	
+	Map <Integer, Sprite> SpriteMap = new HashMap<Integer, Sprite>();
 	
 	@Override
 	public void create() {
@@ -35,14 +43,46 @@ public class DrinkersRenderer implements Renderer {
 	 */
 	@Override
 	public void render() {
-		// TODO Auto-generated method stub
 		
+		// Get Drinker List
 		List<? extends Drinker> currentDrinkers = DrinkerPool.GetDrinkers();
 		
+		// Start Rendering Them
+		SpriteBatch.begin();
 		for (Drinker item : currentDrinkers) {
-		    System.out.println(item);
+			
+			Sprite Sprite = SpriteMap.get(item.hashCode());
+			if (Sprite == null)
+			{
+				Texture texture = new Texture(Gdx.files.internal(GetTexture(item.GetDrinkerType())));
+				Sprite = new Sprite(texture);
+				Sprite.setPosition(item.GetX(),item.GetY());
+				SpriteMap.put(item.hashCode(), Sprite);
+			}			
+		    Sprite.draw(SpriteBatch);
 		}
-
+		SpriteBatch.end();
 	}
-
+	
+	/*
+	 * Retrieves the Drinker Texture
+	 */
+	String GetTexture(DrinkerType Type) {
+		
+		switch (Type) {
+		case SPANISH:
+			return "ninja.png";
+		case GERMAN:
+			return "ninja.png";
+		case NORWEGIAN:
+			return "ninja.png";
+		case POLISH:
+			return "ninja.png";
+		case ROMANIAN:
+			return "ninja.png";
+		default:
+			return "ninja.png";
+		}		
+	}
+	
 }
