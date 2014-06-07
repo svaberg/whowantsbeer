@@ -8,15 +8,15 @@ public class GenericDrinkOrder implements DrinkOrder{
 	boolean isReceived;
 	TypeOfDrink whatsTheDrink;
 	int position = 0;
-	long timeWhenReceived = 0;
+	long orderTime = 0;
 	
-	GenericDrinkOrder(TypeOfDrink typeOfDrink, int drinkerPosition, long receivedTime)
+	GenericDrinkOrder(TypeOfDrink typeOfDrink, int drinkerPosition, long orderTime)
 	{
-		drink = new GenericDrink();
 		isReceived = false;
 		whatsTheDrink = typeOfDrink;
+		drink = new GenericDrink(whatsTheDrink);
 		position = drinkerPosition;
-		timeWhenReceived = receivedTime;
+		this.orderTime = orderTime;
 	}
 	
 	public void setReceived() {

@@ -46,7 +46,7 @@ public class GenericOrders implements Orders {
 				break;
 			}
 		 }
-		
+
 		//if found, get the point and remove it from the waiting list
 		if	(foundDrink>-1){
 			DrinkOrder order = waitingOrders.get(foundDrink);
@@ -75,6 +75,7 @@ public class GenericOrders implements Orders {
 		//remove all marked orders
 		for (int i = 0; i < orders2Remove.size(); i++) {
 			waitingOrders.remove(i);
+
 		}
 		
 	}

@@ -1,6 +1,13 @@
 package ninja.epsilon.physics;
 
 public interface Physics {
+	public static interface InputCallback {
+		/**
+		 * Callback from the input module to handle completed swipe.
+		 */
+		void swipe(float v);
+	}
+
 	/**
 	 * Updates state of the world.
 	 */

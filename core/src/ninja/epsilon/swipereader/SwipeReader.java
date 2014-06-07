@@ -1,37 +1,36 @@
 package ninja.epsilon.swipereader;
 
-public class SwipeReader implements InputReader {
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.input.GestureDetector;
 
-	@Override
-	public long input(long curTime) {
-		//TODO
-		return 0;
+import ninja.epsilon.physics.Physics;
+
+public class SwipeReader  extends GestureDetector implements InputReader {
+
+	private static final String TAG = "DirectionDestureDetector";
+	private static float velocityX = 0;
+	
+	public SwipeReader(Physics.InputCallback callback) {
+		super(new DirectionGestureListener());
+		//TODO: Use the callback
 	}
 
-	public DirectionGestureDetector getSwipeInputProcessor() {
-	   return new DirectionGestureDetector(new DirectionGestureDetector.DirectionListener() {
-		   @Override
-		   public void onUp() {
-    			// TODO Auto-generated method stub
-    		}
+	private static class DirectionGestureListener extends GestureAdapter {
+		
+		@Override
+		public boolean fling(float x, float y, int button) {
+			if(Math.abs(x) > Math.abs(y)){
+				Gdx.app.log(TAG, Float.toString(velocityX));
+				velocityX = x;
+			} else {
+				// Ignore the input, because we don't care about up/down swipes.
+			}
+			return true; 
+		}
+	}
 
-    		@Override
-    		public void onRight() {
-    			// TODO Auto-generated method stub
-
-    		}
-
-    		@Override
-    		public void onLeft() {
-    			// TODO Auto-generated method stub
-
-    		}
-
-    		@Override
-    		public void onDown() {
-    			// TODO Auto-generated method stub
-
-    		}
-    	});
-   }
+	@Override
+	public float input(long curTime) {
+		return velocityX;
+	}
 }	

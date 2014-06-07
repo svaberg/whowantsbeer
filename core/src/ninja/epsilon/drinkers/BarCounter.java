@@ -8,12 +8,17 @@ import ninja.epsilon.GameLevel;
 
 import com.badlogic.gdx.Gdx;
 
-public class DrinkerPool implements Drinkers{
+public class BarCounter implements Drinkers{
 
 	/**
 	 * List of drinkers currently at the bar
 	 */
 	List<GenericDrinker> drinkersWaiting;
+	
+	/**
+	 * Capacity of bar to host drinkers at the same time.
+	 */
+	long capacity;
 	
 	/**
 	 * Mean time between drinkers appearing at the bar
@@ -30,20 +35,33 @@ public class DrinkerPool implements Drinkers{
 	 */
 	long currentUpdateTime;
 	
-	public DrinkerPool() {
+	/**
+	 * Length of counter
+	 */
+	float length;
+	
+	/**
+	 * Create bar counter object
+	 */
+	public BarCounter() {
 		drinkersWaiting = new ArrayList<GenericDrinker>();
 		meanTimeBetweenDrinkers = 3000; // milliseconds
-		previousUpdateTime = 0;
-		currentUpdateTime = 0;
+		capacity = 3;
+		previousUpdateTime = 0; // milliseconds
+		currentUpdateTime = 0;  // milliseconds
+		length = (float) 3.5;   // meters
 	}
 	
 	/**
 	 * Create a new drinker
 	 */
 	private void createDrinker() {
-		GenericDrinker drinker = new GenericDrinker(currentUpdateTime);
+		Random ran = new Random();
+		float position = ran.nextFloat() * length;
+
+		GenericDrinker drinker = new GenericDrinker(position, currentUpdateTime);
 		drinkersWaiting.add(drinker);
-		Gdx.app.log("MyTag", "Created new drinker. Size of drinker list: " + drinkersWaiting.size());
+		Gdx.app.log("BarCounter", "Created new drinker at position " + position + ". Size of drinker list: " + drinkersWaiting.size());
 	}
 	
 	/** 
@@ -55,7 +73,7 @@ public class DrinkerPool implements Drinkers{
 		for (GenericDrinker drinker : drinkersWaiting) {
 			drinker.update(currentUpdateTime);
 			if (drinker.hasLeft()) {
-				Gdx.app.log("MyTag", "Drinker has left. Size of drinker list: " + drinkersWaiting.size());
+				Gdx.app.log("BarCounter", "Drinker has left. Size of drinker list: " + drinkersWaiting.size());
 				leavers.add(drinker);
 			}
 		}
@@ -72,25 +90,36 @@ public class DrinkerPool implements Drinkers{
 		// Update the time information first
 		previousUpdateTime = currentUpdateTime;
 		currentUpdateTime = nowTime;
-		
+
+//		Gdx.app.log("BarCounter", "Update time: " + currentUpdateTime);
+
 		updateInternal();
 	}
 	
+	/**
+	 * Internal update method.
+	 */
 	private void updateInternal() {
 
 		// Remove drinkers
 		updateDrinkers();
 
 		// Add a new drinker if needed
-		Random ran = new Random();
-		long randomTime = ran.nextLong() % meanTimeBetweenDrinkers;
-		
-		// Make this more fancy later (Poisson process).
-		if (currentUpdateTime - previousUpdateTime > randomTime) {
-			createDrinker();
+		if (drinkersWaiting.size() < capacity)
+		{
+			Random ran = new Random();
+			long randomTime = ran.nextLong() % meanTimeBetweenDrinkers;
+			
+			// Make this more fancy later (Poisson process).
+			if (currentUpdateTime - previousUpdateTime < randomTime) {
+				createDrinker();
+			}
 		}
 	}
-
+	
+	/**
+	 * Get list of drinkers.
+	 */
 	@Override
 	public List<? extends Drinker> GetDrinkers() {
 		// TODO Auto-generated method stub

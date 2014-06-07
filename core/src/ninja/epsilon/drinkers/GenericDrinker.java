@@ -3,6 +3,8 @@ package ninja.epsilon.drinkers;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.badlogic.gdx.Gdx;
+
 
 public class GenericDrinker implements Drinker {
 	/**
@@ -28,6 +30,16 @@ public class GenericDrinker implements Drinker {
 	boolean hasReceivedAllOrders;
 	
 	/**
+	 * Position of the drinker in the bar
+	 */
+	private float position;
+	
+	/**
+	 * Radius of the drinker in the bar
+	 */
+	private float radius;
+	
+	/**
 	 * Drinks being ordered by the drinker. When all drinks have been received
 	 * the drinker will be satisfied and leave the bar (and a tip!).
 	 */
@@ -37,10 +49,14 @@ public class GenericDrinker implements Drinker {
 	 * Create a new drinker with the default persistence time
 	 * @param nowTime the current time in milliseconds.
 	 */
-	public GenericDrinker(long nowTime) {
-		persistenceTime = 3000; // milliseconds
-		creationTime = nowTime;
-		drinkOrders = new ArrayList<GenericDrinkOrder>();
+	public GenericDrinker(float position, long nowTime) {
+		this.setPosition(position);
+		this.persistenceTime = 3000; // milliseconds
+		this.creationTime = nowTime;
+		this.drinkOrders = new ArrayList<GenericDrinkOrder>();
+		
+		// Add a drink order.
+		this.drinkOrders.add(new GenericDrinkOrder(TypeOfDrink.blondBeer, 0, creationTime));
 	}
 	
 	/**
@@ -54,10 +70,12 @@ public class GenericDrinker implements Drinker {
 		for (GenericDrinkOrder drinkOrder : drinkOrders) {
 			hasReceivedAllOrders &= drinkOrder.isReceived();
 		}
+		if (hasReceivedAllOrders) Gdx.app.log("GenericDrinker", "Drinker has received all orders and is leaving.");
 
 		// Check whether the drinker has waited too long and thus will leave.
 		long timeWaited = nowTime - creationTime;
 		hasWaitedTooLong = (timeWaited > persistenceTime);
+		if (hasWaitedTooLong) Gdx.app.log("GenericDrinker", "Drinker has waited too long and is leaving.");
 
 	}
 	
@@ -89,18 +107,22 @@ public class GenericDrinker implements Drinker {
 	@Override
 	public DrinkerType GetDrinkerType() {
 		// TODO Auto-generated method stub
-		return null;
+		return DrinkerType.GERMAN;
 	}
 
-	@Override
-	public float GetX() {
-		// TODO Auto-generated method stub
-		return 0;
+	public float getPosition() {
+		return position;
 	}
 
-	@Override
-	public float GetY() {
-		// TODO Auto-generated method stub
-		return 0;
+	public void setPosition(float position) {
+		this.position = position;
+	}
+
+	float getRadius() {
+		return radius;
+	}
+
+	void setRadius(float radius) {
+		this.radius = radius;
 	}	
 }
