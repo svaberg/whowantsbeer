@@ -17,29 +17,26 @@ public class Score implements Scorer{
 	
 	private Orders orders;
 	
-	Score(){
+	public Score(){
 		orders = new GenericOrders();
 		currentScore = 0;
 		chances = ScoringValues.getNrOfChances();
 	}
 	
-	public void gotOneDrink(TypeOfDrink typeOfDrink, int position, long timeOfReceivingDrink)	{
+	public void gotOneDrink(TypeOfDrink typeOfDrink, float position, long timeOfReceivingDrink)	{
 		//Match the beer with wating orders
 		int poitnsGot = orders.matchDrink(position, typeOfDrink, timeOfReceivingDrink);
 		if(poitnsGot==-1){
 			//penalty
-			chances -=1;
-			if(chances<=0){
-				//Game over
-			}
+			chances = chances > 0? chances -1 : 0;
 		}
 		else{
 			currentScore+=poitnsGot;
 		}
 	}
 	
+	//Add the order in the list of orders
 	public void gotOneOrder(DrinkOrder order){
-		//Add the order in the list of orders
 		orders.addOrder(order);
 	}
 
@@ -48,14 +45,19 @@ public class Score implements Scorer{
 		}
 
 
-
+	//Remove order from the list of orders
 	public void removeOrder(DrinkOrder order) {
 		orders.removeOrder(order);
 	}
 
-	
-	public void drinkerLeft(int position) {
+	//Remove all orders at position from the list of orders
+	public void drinkerLeft(float position) {
 		orders.removeAllOrdersAtPosition(position);
+	}
+
+	//Flag Game Over
+	public boolean gameOver() {
+		return chances <= 0;
 	}
 
 }

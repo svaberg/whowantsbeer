@@ -11,7 +11,7 @@ public interface Scorer {
 	GameLevel getGameLevel();
 	
 	//Drink will be matched will orders -> leads to increment in score or penalty
-	void gotOneDrink(TypeOfDrink typeOfDrink, int position, long timeOfReceivingDrink);
+	void gotOneDrink(TypeOfDrink typeOfDrink, float position, long timeOfReceivingDrink);
 	
 	//Order will be added to the orders
 	void gotOneOrder(DrinkOrder order);
@@ -20,8 +20,10 @@ public interface Scorer {
 	void removeOrder(DrinkOrder order);
 	
 	//All Orders at that position will be removed
-	void drinkerLeft(int position);
+	void drinkerLeft(float position);
 	
 	// Returns the current score of the game.
 	int getScore();
+	
+	boolean gameOver();
 }
