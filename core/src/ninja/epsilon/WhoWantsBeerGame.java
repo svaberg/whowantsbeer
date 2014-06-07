@@ -54,6 +54,11 @@ public class WhoWantsBeerGame extends ApplicationAdapter {
 
 		for (Renderer renderer : renderers) {
 			renderer.create();
+			
+			if(scorer.gameOver())
+			{
+			
+			}
 		}
 	}
 
