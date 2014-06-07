@@ -16,6 +16,9 @@ public class GenericDrinker {
 	 */
 	long persistenceTime;
 	
+	boolean hasWaitedTooLong;
+	boolean hasReceivedAllOrders;
+	
 	/**
 	 * Drinks being ordered by the drinker. When all drinks have been received
 	 * the drinker will be satisfied and leave the bar (and a tip!).
@@ -35,11 +38,25 @@ public class GenericDrinker {
 	 * Returns true if the drinker has received all orders. Otherwise returns false.
 	 */
 	boolean hasReceivedAllOrders() {
-		boolean hasReceivedAllOrders = true;
+		return hasReceivedAllOrders;
+	}
+	
+	/**
+	 * Update the state of the drinker with the current time.
+	 * @param nowTime current time
+	 */
+	void update(long nowTime) {
+
+		// Check whether all orders have been received.
+		hasReceivedAllOrders = true;
 		for (GenericDrinkOrder drinkOrder : drinkOrders) {
 			hasReceivedAllOrders &= drinkOrder.isReceived();
 		}
-		return hasReceivedAllOrders;
+
+		// Check whether the drinker has waited too long and thus will leave.
+		long timeWaited = nowTime - creationTime;
+		hasWaitedTooLong = (timeWaited > persistenceTime);
+
 	}
 	
 	/** 
@@ -48,8 +65,7 @@ public class GenericDrinker {
 	 * @return true if the drinker has waited too long, otherwise false
 	 */
 	boolean hasWaitedTooLong(long nowTime) {
-		long timeWaited = nowTime - creationTime;
-		return (timeWaited > persistenceTime);
+		return hasWaitedTooLong;
 	}
 	
 	/**
