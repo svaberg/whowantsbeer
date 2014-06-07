@@ -11,6 +11,7 @@ import ninja.epsilon.physics.Physics;
 import ninja.epsilon.physics.Physics.InputCallback;
 import ninja.epsilon.renderers.BackgroundRenderer;
 import ninja.epsilon.renderers.DashboardRenderer;
+import ninja.epsilon.renderers.DrinkRenderer;
 import ninja.epsilon.renderers.DrinkersRenderer;
 import ninja.epsilon.renderers.Renderer;
 import ninja.epsilon.score.Score;
@@ -27,7 +28,7 @@ public class WhoWantsBeerGame extends ApplicationAdapter {
 	private static final String TAG = WhoWantsBeerGame.class.getSimpleName();
 
 	private Drinkers drinkers;
-	private Physics physics;
+	private BarPhysics physics;
 	private List<Renderer> renderers;
 	private Scorer scorer;
 	private InputReader inputReader;
@@ -35,6 +36,7 @@ public class WhoWantsBeerGame extends ApplicationAdapter {
 	private Renderer drinkersRenderer;
 	private Renderer dashboardRenderer;
 	private Renderer backgroundRenderer;
+	private Renderer drinkRenderer = null;
 	
 	@Override
 	public void create () {
@@ -42,11 +44,13 @@ public class WhoWantsBeerGame extends ApplicationAdapter {
 		scorer = new Score();
 		physics = new BarPhysics(scorer);
 		drinkers = new BarCounter();
-		inputReader = new SwipeReader((InputCallback) physics);
+		inputReader = new SwipeReader(physics);
 
 		renderers.add(backgroundRenderer = new BackgroundRenderer());
+		renderers.add(drinkRenderer = new DrinkRenderer(physics));
 		renderers.add(drinkersRenderer = new DrinkersRenderer(drinkers));
 		renderers.add(dashboardRenderer = new DashboardRenderer(scorer));
+		
 
 		for (Renderer renderer : renderers) {
 			renderer.create();
