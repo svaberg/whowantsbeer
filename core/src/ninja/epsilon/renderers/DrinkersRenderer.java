@@ -61,8 +61,8 @@ public class DrinkersRenderer implements Renderer {
 			{
 				Texture texture = new Texture(Gdx.files.internal(GetTexture(item.GetDrinkerType())));
 				Sprite = new Sprite(texture);
-				Sprite.setPosition(RendererUtils.PixelsPerMeterX()*item.GetX(),
-								   RendererUtils.PixelsPerMeterY()*item.GetY());
+				Sprite.setPosition(RendererUtils.PixelsPerMeterX()*item.getPosition(),
+								   RendererUtils.PixelsPerMeterY()*1);
 				SpriteMap.put(item.hashCode(), Sprite);
 			}
 		    Sprite.draw(SpriteBatch);

@@ -3,5 +3,6 @@ package ninja.epsilon.drinkers;
 public interface DrinkOrder {
 	TypeOfDrink getWhatsTheDrink();
 	int getPosition();
-	int getPointsReceived();
+	int getPointsReceived(long timeOfReceivingDrink);
+	void setReceived();
 }
