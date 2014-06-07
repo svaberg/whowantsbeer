@@ -25,8 +25,10 @@ import com.badlogic.gdx.graphics.GL20;
 
 
 public class WhoWantsBeerGame extends ApplicationAdapter {
+	private static final String TAG = WhoWantsBeerGame.class.getSimpleName();
+
 	private Drinkers drinkers;
-	private Physics physics;
+	private BarPhysics physics;
 	private List<Renderer> renderers;
 	private Scorer scorer;
 	private InputReader inputReader;
@@ -39,12 +41,11 @@ public class WhoWantsBeerGame extends ApplicationAdapter {
 	@Override
 	public void create () {
 		renderers = new ArrayList<Renderer>();
-		physics = new BarPhysics();
-		drinkers = new BarCounter();
-		inputReader = new SwipeReader((InputCallback) physics);
 		scorer = new Score();
+		physics = new BarPhysics(scorer);
+		drinkers = new BarCounter();
+		inputReader = new SwipeReader(physics);
 
-		//Create and add renderers
 		renderers.add(backgroundRenderer = new BackgroundRenderer());
 		renderers.add(drinkRenderer = new DrinkRenderer(physics));
 		renderers.add(drinkersRenderer = new DrinkersRenderer(drinkers));
@@ -59,8 +60,7 @@ public class WhoWantsBeerGame extends ApplicationAdapter {
 	@Override
 	public void render () {
 		long t = System.currentTimeMillis();
-//		long swipe = inputReader.input(t);
-//		physics.update(t, swipe);
+		physics.update(t, inputReader.input(t));
 		drinkers.update(t, GameLevel.EASY);
 		for (Renderer renderer : renderers) {
 			renderer.render();
