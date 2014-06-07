@@ -6,5 +6,5 @@ import ninja.epsilon.drinkers.TypeOfDrink;
 public interface Orders {
 	void addOrder(DrinkOrder order);
 	void removeOrder(DrinkOrder order);
-	void matchBeer(int position, TypeOfDrink typeOfDrink)
+	void matchBeer(int position, TypeOfDrink typeOfDrink);
 }

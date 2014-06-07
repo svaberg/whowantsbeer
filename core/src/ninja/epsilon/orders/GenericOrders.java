@@ -3,9 +3,9 @@ package ninja.epsilon.orders;
 import ninja.epsilon.drinkers.DrinkOrder;
 import ninja.epsilon.drinkers.TypeOfDrink;
 
-public class PlacedOrders implements Orders {
+public class GenericOrders implements Orders {
 
-	public PlacedOrders()
+	public GenericOrders()
 	{
 		
 	}

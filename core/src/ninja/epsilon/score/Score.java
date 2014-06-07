@@ -3,7 +3,7 @@ package ninja.epsilon.score;
 import ninja.epsilon.drinkers.DrinkOrder;
 import ninja.epsilon.drinkers.TypeOfDrink;
 import ninja.epsilon.orders.Orders;
-import ninja.epsilon.orders.PlacedOrders;
+import ninja.epsilon.orders.GenericOrders;
 
 
 public class Score {
@@ -12,7 +12,7 @@ public class Score {
 	private Orders orders;
 	
 	Score(){
-		orders = new PlacedOrders();
+		orders = new GenericOrders();
 	}
 	
 	public void GotOneBeer(TypeOfDrink typeOfDrink, int position)	{
