@@ -1,5 +1,7 @@
 package ninja.epsilon.renderers;
 
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
 public interface Renderer {
 	/**
 	 * Create. Called in the beginning to allow you to create textures, boxes and what not.
@@ -9,7 +11,7 @@ public interface Renderer {
 	/**
 	 * Draw and play sounds.
 	 */
-	void render();
+	void render(SpriteBatch spriteBatch);
 
 	/*
 	 * Dispose Renderer

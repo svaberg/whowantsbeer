@@ -15,7 +15,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  */
 public class DashboardRenderer implements Renderer {
 	
-	private SpriteBatch SpriteBatch = null;
 	private BitmapFont Font = null;
 	private Scorer Scorer= null;
 	
@@ -25,14 +24,12 @@ public class DashboardRenderer implements Renderer {
 	
 	@Override
 	public void create() {
-		SpriteBatch = new SpriteBatch(); 
 		Font = new BitmapFont();
 		Font.setColor(Color.BLUE);
 	}
 	
     @Override
     public void dispose() {
-    	SpriteBatch.dispose();
     	Font.dispose();
     }
 	
@@ -40,16 +37,14 @@ public class DashboardRenderer implements Renderer {
 	 * @see ninja.epsilon.renderers.Renderer#render()
 	 */
 	@Override
-	public void render() {
+	public void render(SpriteBatch spriteBatch) {
 		
 		// Start Rendering Them
-		SpriteBatch.begin();
 
 		// put Dashboard 2.3 meters high and 1.5 meter right
-		Font.draw(SpriteBatch, "You are awesome! SCORE is: " + Scorer.getScore(), 
+		Font.draw(spriteBatch, "You are awesome! SCORE is: " + Scorer.getScore(), 
 				RendererUtils.PixelsPerMeterX()*1.5f, 
 				RendererUtils.PixelsPerMeterY()*2.3f);
-		SpriteBatch.end();
 	}
 	
 }
