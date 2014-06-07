@@ -10,4 +10,9 @@ public interface Renderer {
 	 * Draw and play sounds.
 	 */
 	void render();
+
+	/*
+	 * Dispose Renderer
+	 */
+	void dispose();
 }
