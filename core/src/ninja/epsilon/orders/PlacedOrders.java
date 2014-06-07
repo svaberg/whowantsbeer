@@ -1,5 +1,7 @@
 package ninja.epsilon.orders;
 
+import ninja.epsilon.drinkers.DrinkOrder;
+
 public class PlacedOrders implements Orders {
 
 	public PlacedOrders()
@@ -7,11 +9,11 @@ public class PlacedOrders implements Orders {
 		
 	}
 	
-	public void addOrder(Order order){
+	public void addOrder(DrinkOrder order){
 	
 	}
 	
-	public void removeOrder(Order order){
+	public void removeOrder(DrinkOrder order){
 		
 	}
 }

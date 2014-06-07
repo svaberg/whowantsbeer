@@ -1,6 +1,7 @@
 package ninja.epsilon.score;
 
-import ninja.epsilon.orders.Order;
+import ninja.epsilon.drinkers.DrinkOrder;
+
 
 public class Score {
 
@@ -16,7 +17,7 @@ public class Score {
 	
 	}
 	
-	public void GotOneOrder(Order order){
+	public void GotOneOrder(DrinkOrder order){
 	
 	}
 }

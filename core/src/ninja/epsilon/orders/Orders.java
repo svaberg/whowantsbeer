@@ -1,6 +1,8 @@
 package ninja.epsilon.orders;
 
+import ninja.epsilon.drinkers.DrinkOrder;
+
 public interface Orders {
-	void addOrder(Order order);
-	void removeOrder(Order order);
+	void addOrder(DrinkOrder order);
+	void removeOrder(DrinkOrder order);
 }
