@@ -16,6 +16,11 @@ public class DrinkerPool implements Drinkers{
 	List<GenericDrinker> drinkersWaiting;
 	
 	/**
+	 * Capacity of bar to host drinkers at the same time.
+	 */
+	long capacity;
+	
+	/**
 	 * Mean time between drinkers appearing at the bar
 	 */
 	long meanTimeBetweenDrinkers;
@@ -30,9 +35,14 @@ public class DrinkerPool implements Drinkers{
 	 */
 	long currentUpdateTime;
 	
+	/**
+	 * Length of counter
+	 */
+	
 	public DrinkerPool() {
 		drinkersWaiting = new ArrayList<GenericDrinker>();
 		meanTimeBetweenDrinkers = 3000; // milliseconds
+		capacity = 3;
 		previousUpdateTime = 0;
 		currentUpdateTime = 0;
 	}
@@ -72,7 +82,9 @@ public class DrinkerPool implements Drinkers{
 		// Update the time information first
 		previousUpdateTime = currentUpdateTime;
 		currentUpdateTime = nowTime;
-		
+
+//		Gdx.app.log("MyTag", "Update time: " + currentUpdateTime);
+
 		updateInternal();
 	}
 	
@@ -82,15 +94,18 @@ public class DrinkerPool implements Drinkers{
 		updateDrinkers();
 
 		// Add a new drinker if needed
-		Random ran = new Random();
-		long randomTime = ran.nextLong() % meanTimeBetweenDrinkers;
-		
-		// Make this more fancy later (Poisson process).
-		if (currentUpdateTime - previousUpdateTime > randomTime) {
-			createDrinker();
+		if (drinkersWaiting.size() < capacity)
+		{
+			Random ran = new Random();
+			long randomTime = ran.nextLong() % meanTimeBetweenDrinkers;
+			
+			// Make this more fancy later (Poisson process).
+			if (currentUpdateTime - previousUpdateTime < randomTime) {
+				createDrinker();
+			}
 		}
 	}
-
+	
 	@Override
 	public List<? extends Drinker> GetDrinkers() {
 		// TODO Auto-generated method stub

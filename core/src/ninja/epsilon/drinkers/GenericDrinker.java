@@ -3,6 +3,8 @@ package ninja.epsilon.drinkers;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.badlogic.gdx.Gdx;
+
 
 public class GenericDrinker implements Drinker {
 	/**
@@ -28,6 +30,16 @@ public class GenericDrinker implements Drinker {
 	boolean hasReceivedAllOrders;
 	
 	/**
+	 * Position of the drinker in the bar
+	 */
+	float position;
+	
+	/**
+	 * Radius of the drinker in the bar
+	 */
+	float radius;
+	
+	/**
 	 * Drinks being ordered by the drinker. When all drinks have been received
 	 * the drinker will be satisfied and leave the bar (and a tip!).
 	 */
@@ -41,6 +53,8 @@ public class GenericDrinker implements Drinker {
 		persistenceTime = 3000; // milliseconds
 		creationTime = nowTime;
 		drinkOrders = new ArrayList<GenericDrinkOrder>();
+		
+		drinkOrders.add(new GenericDrinkOrder(TypeOfDrink.blondBeer, 0, creationTime));
 	}
 	
 	/**
@@ -54,10 +68,12 @@ public class GenericDrinker implements Drinker {
 		for (GenericDrinkOrder drinkOrder : drinkOrders) {
 			hasReceivedAllOrders &= drinkOrder.isReceived();
 		}
+		if (hasReceivedAllOrders) Gdx.app.log("GenericDrinker", "Drinker has received all orders and is leaving.");
 
 		// Check whether the drinker has waited too long and thus will leave.
 		long timeWaited = nowTime - creationTime;
 		hasWaitedTooLong = (timeWaited > persistenceTime);
+		if (hasWaitedTooLong) Gdx.app.log("GenericDrinker", "Drinker has waited too long and is leaving.");
 
 	}
 	
