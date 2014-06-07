@@ -107,7 +107,7 @@ public class GenericDrinker implements Drinker {
 	@Override
 	public DrinkerType GetDrinkerType() {
 		// TODO Auto-generated method stub
-		return null;
+		return DrinkerType.GERMAN;
 	}
 
 	@Override
