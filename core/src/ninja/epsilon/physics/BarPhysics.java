@@ -9,6 +9,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.BodyDef;
 import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 
@@ -31,13 +32,15 @@ public class BarPhysics implements Physics, Physics.InputCallback {
 
 	private static final Vector2 GRAVITY = new Vector2(0, -10.0f);
 	private static final float GLASS_MASS = 0.5f;
-	private static final float MIN_STOP_VELOCITY = 0.1f;
+	private static final float MIN_STOP_VELOCITY = 0.01f;
+	private static final float FALL_DETECT_THRESHOLD = -10.0f;
 
 	private World world;
 	private LinkedList<Body> glasses;
 	private long prev_t;
 	private boolean running;
 	private Scorer scorer;
+	private int fellGlassCount;
 
 	public static class PhysicsException extends RuntimeException {
 		PhysicsException(String msg) {
@@ -51,6 +54,7 @@ public class BarPhysics implements Physics, Physics.InputCallback {
 		glasses = new LinkedList<Body>();
 		running = false;
 		this.scorer = scorer;
+		Gdx.app.log(TAG, "NEW WORLD CREATED!");
 	}
 
 	private static GlassState bodyToState(Body body) {
@@ -95,6 +99,11 @@ public class BarPhysics implements Physics, Physics.InputCallback {
 	}
 
 	@Override
+	public int howManyFellOff() {
+		return fellGlassCount;
+	}
+
+	@Override
 	public void update(long t, float swipe) {
 		long cur_t = t;
 		if (running) {  // skip first loop to make sure prev_t is valid
@@ -104,8 +113,20 @@ public class BarPhysics implements Physics, Physics.InputCallback {
 		running = true;
 	}
 
+	private void logGlass(Body glass) {
+		Vector2 p = glass.getPosition();
+		Vector2 v = glass.getLinearVelocity();
+		Gdx.app.log(TAG, "x=" + p.x + "  y=" + p.y + "  vx=" + v.x + "  vy=" + v.y);
+	}
+
+	private void logGlasses() {
+		for (Body glass : glasses) {
+			logGlass(glass);
+		}
+	}
+
 	private void doUpdate(long cur_t) {
-		float step_t = cur_t - prev_t;
+		float step_t = (cur_t - prev_t) / 1000.0f;
 		//Gdx.app.log(TAG, "dt = " + step_t);
 		if (step_t <= 0.0) {
 			//throw new PhysicsException("Negative time step: " + step_t);
@@ -115,13 +136,21 @@ public class BarPhysics implements Physics, Physics.InputCallback {
 			return;
 		}
 
+		fellGlassCount = 0;
 		world.step(step_t, VELOCITY_ITERATIONS, POSITION_ITERATIONS);
+		logGlasses();
 
 		for (ListIterator<Body> i = glasses.listIterator(); i.hasNext();) {
 			Body glass = i.next();
 			if (glass.getLinearVelocity().isZero(MIN_STOP_VELOCITY)) {
-				Gdx.app.log(TAG, "Glass stopped");
+				Gdx.app.log(TAG, "Glass stopped!");
 				scorer.gotOneDrink(TypeOfDrink.blondBeer, glass.getPosition().x, cur_t);
+				world.destroyBody(glass);
+				i.remove();
+			}
+			if (glass.getPosition().y < FALL_DETECT_THRESHOLD) {
+				Gdx.app.log(TAG, "Glass has fallen off the counter!");
+				fellGlassCount++;
 				world.destroyBody(glass);
 				i.remove();
 			}
@@ -140,28 +169,31 @@ public class BarPhysics implements Physics, Physics.InputCallback {
 	}
 
 	private Vector2 getImpulse(float v) {
-		return new Vector2(v, 0.0f);
+		return new Vector2(v / 1000.0f, 0.0f);
 	}
 
 	private Body createCounter() {
 		BodyDef counterDef = new BodyDef();
-		counterDef.position.set(new Vector2());
+		counterDef.position.set(new Vector2(0.0f, 0.0f));
 		Body counter = world.createBody(counterDef);
 		PolygonShape counterShape = new PolygonShape();
-		counterShape.setAsBox(3.0f, 3.0f);
+		counterShape.setAsBox(3.0f, 1.0f);
 		counter.createFixture(counterShape, 0.0f);
 		return counter;
 	}
 
 	private Body createGlass(float v) {
 		BodyDef glassDef = new BodyDef();
-		glassDef.position.set(new Vector2());
+		glassDef.position.set(new Vector2(0.0f, 2.0f));
 		glassDef.type = BodyType.DynamicBody;
 		Body glass = world.createBody(glassDef);
 		PolygonShape glassShape = new PolygonShape();
-		glassShape.setAsBox(0.1f, 0.2f);
-		glass.createFixture(glassShape, 0.0f);
+		glassShape.setAsBox(1.0f, 1.0f);
+		FixtureDef fixtureDef = new FixtureDef();
+		fixtureDef.shape = glassShape;
+		fixtureDef.density = 1.0f;
+		fixtureDef.friction = 0.1f;
+		glass.createFixture(fixtureDef);
 		return glass;
 	}
-
 }
