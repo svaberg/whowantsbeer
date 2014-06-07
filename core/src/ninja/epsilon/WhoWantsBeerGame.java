@@ -13,7 +13,9 @@ public class WhoWantsBeerGame extends ApplicationAdapter {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
+		// we need a ninja!
+		// aa
+		img = new Texture("ninja.png");
 	}
 
 	@Override
