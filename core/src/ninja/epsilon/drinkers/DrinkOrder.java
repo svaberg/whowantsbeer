@@ -4,14 +4,14 @@ public class DrinkOrder {
 
 	Drink drink;
 	boolean isReceived;
-	TypeOfDrink whatDoesheDrink;
+	TypeOfDrink whatDoesHeDrink;
 	int position = 0;
 	
 	DrinkOrder(TypeOfDrink typeOfDrink, int drinkerPosition)
 	{
 		drink = new Drink();
 		isReceived = false;
-		whatDoesheDrink = typeOfDrink;
+		whatDoesHeDrink = typeOfDrink;
 		position = drinkerPosition;
 	}
 	
