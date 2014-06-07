@@ -9,10 +9,12 @@ public class SwipeReader  extends GestureDetector implements InputReader {
 
 	private static final String TAG = "DirectionDestureDetector";
 	private static float velocityX = 0;
+	private Physics.InputCallback physicsInputCallback;
 	
 	public SwipeReader(Physics.InputCallback callback) {
 		super(new DirectionGestureListener());
-		//TODO: Use the callback
+		physicsInputCallback = callback;
+		Gdx.input.setInputProcessor(this);
 	}
 
 	private static class DirectionGestureListener extends GestureAdapter {
@@ -22,6 +24,7 @@ public class SwipeReader  extends GestureDetector implements InputReader {
 			if(Math.abs(x) > Math.abs(y)){
 				Gdx.app.log(TAG, Float.toString(velocityX));
 				velocityX = x;
+				physicsInputCallback.swipe();
 			} else {
 				// Ignore the input, because we don't care about up/down swipes.
 			}
