@@ -24,11 +24,12 @@ public class Score implements Scorer{
 	public Score(){
 		orders = new GenericOrders();
 		currentScore = 0;
-		chances = ScoringValues.getNrOfChances();
+		chances = ScoringValues.getNrOfChancesAtGameStart();
 		
 		dropSound = Gdx.audio.newSound(Gdx.files.internal("sounds/coin-drop.wav"));
 	}
 	
+	@Override
 	public void gotOneDrink(TypeOfDrink typeOfDrink, float position, long timeOfReceivingDrink)	{
 		//Match the beer with wating orders
 		int poitnsGot = orders.matchDrink(position, typeOfDrink, timeOfReceivingDrink);
@@ -43,28 +44,43 @@ public class Score implements Scorer{
 	}
 	
 	//Add the order in the list of orders
+	@Override
 	public void gotOneOrder(DrinkOrder order){
 		orders.addOrder(order);
 	}
 
+	@Override
 	public GameLevel getGameLevel() {
 		return ScoringValues.calculateLevel(currentScore); 
 		}
 
 
-	//Remove order from the list of orders
+	//Removes order from the list of orders
+	@Override
 	public void removeOrder(DrinkOrder order) {
 		orders.removeOrder(order);
 	}
 
-	//Remove all orders at position from the list of orders
+	//Removes all orders at position from the list of orders
+	@Override
 	public void drinkerLeft(float position) {
 		orders.removeAllOrdersAtPosition(position);
 	}
 
 	//Flag Game Over
+	@Override
 	public boolean gameOver() {
 		return chances == 0;
+	}
+
+	@Override
+	public int getChances() {
+		return chances;
+	}
+
+	@Override
+	public int getNrOfFails() {
+		return ScoringValues.getNrOfChancesAtGameStart() - chances;
 	}
 
 }

@@ -25,5 +25,11 @@ public interface Scorer {
 	// Returns the current score of the game.
 	int getScore();
 	
+	// Returns how many times can the gamer still fail before game over
+	int getChances();
+	
+	// Returns how many times the gamer failed
+	int getNrOfFails();
+	
 	boolean gameOver();
 }
