@@ -7,9 +7,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import ninja.epsilon.drinkers.DrinkOrder;
 import ninja.epsilon.drinkers.Drinker;
 import ninja.epsilon.drinkers.Drinker.DrinkerType;
 import ninja.epsilon.drinkers.Drinkers;
+import ninja.epsilon.drinkers.GenericDrinkOrder;
 import ninja.epsilon.drinkers.TypeOfDrink;
 
 import com.badlogic.gdx.Gdx;
@@ -63,20 +65,35 @@ public class DrinkersRenderer implements Renderer {
 				Texture texture = new Texture(Gdx.files.internal(GetTexture(item.GetDrinkerType())));
 				Sprite = new Sprite(texture);
 				// maximum 3.5 + 0.5 meters on X
-				float xPixels = (float) (RendererUtils.PixelsPerMeterX()*(item.getPosition()+0.5));
+				float xPixels = (float) (RendererUtils.PixelsPerMeterX()*item.getPosition()+0.5*Sprite.getWidth());
 				// Bar is at 0.5 m height
 				float yPixels = (float) (RendererUtils.PixelsPerMeterY()*RendererUtils.PultHeight);
 				// Set Position
 				Sprite.setPosition(xPixels, yPixels);
 				SpriteMap.put(item.hashCode(), Sprite);
-				
-				// add speak bubble
-				//Texture BubbleTexture = new Texture(Gdx.files.internal(GetTextBubble(item.GetDrinkerType())));
-				//Sprite Bubble = new Sprite(BubbleTexture);
 			}
 		    Sprite.draw(SpriteBatch);
+		    
+			List<? extends DrinkOrder> drinkOrders = item.getDrinkOrders();
+			if (drinkOrders != null)
+			{
+				// add speak bubble
+				Texture BubbleTexture = new Texture(Gdx.files.internal(GetTextBubble(((DrinkOrder) drinkOrders.get(0)).getWhatsTheDrink())));
+				Sprite Bubble = new Sprite(BubbleTexture);
+				// scale
+				Bubble.setScale(0.75f);
+				// Set Position
+				Bubble.setPosition(Sprite.getX()+Sprite.getWidth(), Sprite.getY()+Sprite.getHeight());
+				Bubble.draw(SpriteBatch);
+			}
+
 		}
 		SpriteBatch.end();
+		
+		// missing feedback of leaving costumers
+		if (SpriteMap.size() > 50) {
+			SpriteMap.clear();
+		}
 	}
 	
 	/*
@@ -107,14 +124,14 @@ public class DrinkersRenderer implements Renderer {
 		
 		switch (Type) {
 		case blondBeer:
-			return "blonde.png";
+			return "bubble_blondBeer.png";
 		case darkBeer:
-			return "dark.png";
+			return "dark.jpg";
 		case tequilaShot:
-			return "tequila.png";
+			return "tequila.jpg";
 		default:
-			return "drinks/beer_01.jpg";
-		}		
+			return "bubble_blondBeer.png";
+		}
 	}
 	
 }
