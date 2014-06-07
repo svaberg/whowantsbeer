@@ -6,6 +6,7 @@ import java.util.List;
 
 import ninja.epsilon.drinkers.DrinkerPool;
 import ninja.epsilon.drinkers.Drinkers;
+import ninja.epsilon.physics.BarPhysics;
 import ninja.epsilon.physics.Physics;
 import ninja.epsilon.renderers.Renderer;
 import ninja.epsilon.score.Scorer;
@@ -24,6 +25,7 @@ public class WhoWantsBeerGame extends ApplicationAdapter {
 	@Override
 	public void create () {
 		renderers = new ArrayList<Renderer>();
+		physics = new BarPhysics();
 		drinkers = new DrinkerPool();
 		inputReader = new SwipeReader();
 //		scorer = new Scorer();
