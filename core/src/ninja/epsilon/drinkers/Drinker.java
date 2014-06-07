@@ -1,5 +1,7 @@
 package ninja.epsilon.drinkers;
 
+import java.util.List;
+
 public interface Drinker {
 	
 	public enum DrinkerType {
@@ -20,4 +22,9 @@ public interface Drinker {
 	 * @return
 	 */
 	float getPosition();
+	
+	/*
+	 * Return Drink Orders
+	 */
+	List<GenericDrinkOrder> getDrinkOrders();
 }
