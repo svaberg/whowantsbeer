@@ -1,12 +1,19 @@
 package ninja.epsilon.renderers;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 
 public class BackgroundRenderer implements Renderer {
 	
+	private Music music;
+	
 	@Override
 	public void create() {
+		music = Gdx.audio.newMusic(Gdx.files.internal("barmusic.wav"));
+		//music.setVolume(0.5f); 
+		music.setLooping(true);
+	    music.play();
 	}
 
 	@Override
@@ -17,8 +24,7 @@ public class BackgroundRenderer implements Renderer {
 
 	@Override
 	public void dispose() {
-		// TODO Auto-generated method stub
-		
+		music.dispose();
 	}
 
 }
