@@ -26,7 +26,7 @@ public class Score implements Scorer{
 		currentScore = 0;
 		chances = ScoringValues.getNrOfChances();
 		
-		dropSound = Gdx.audio.newSound(Gdx.files.internal("coin-drop.wav"));
+		dropSound = Gdx.audio.newSound(Gdx.files.internal("sounds/coin-drop.wav"));
 	}
 	
 	public void gotOneDrink(TypeOfDrink typeOfDrink, float position, long timeOfReceivingDrink)	{
