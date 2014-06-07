@@ -57,7 +57,7 @@ public class Score implements Scorer{
 
 	//Flag Game Over
 	public boolean gameOver() {
-		return chances <= 0;
+		return chances == 0;
 	}
 
 }
