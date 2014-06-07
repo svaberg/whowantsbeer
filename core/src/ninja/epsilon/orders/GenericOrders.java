@@ -34,7 +34,7 @@ public class GenericOrders implements Orders {
 		waitingOrders.remove(foundOrder);
 	}
 
-	public int matchDrink(int position, TypeOfDrink typeOfDrink, long timeOfReceivingDrink) {
+	public int matchDrink(float position, TypeOfDrink typeOfDrink, long timeOfReceivingDrink) {
 		int foundDrink = -1;
 		
 		//search the order
@@ -61,8 +61,7 @@ public class GenericOrders implements Orders {
 		
 	}
 
-	
-	public void removeAllOrdersAtPosition(int position) {
+	public void removeAllOrdersAtPosition(float position) {
 		List<Integer> orders2Remove = new ArrayList<Integer>(); 
 		//search the all orders at the position
 		for (int i = 0; i < waitingOrders.size(); i++) {
