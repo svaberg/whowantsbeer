@@ -1,18 +1,20 @@
 package ninja.epsilon.drinkers;
 
-public class GenericDrinkOrder {
+public class GenericDrinkOrder implements DrinkOrder{
 
 	GenericDrink drink;
 	boolean isReceived;
-	TypeOfDrink whatDoesHeDrink;
+	TypeOfDrink whatsTheDrink;
 	int position = 0;
-
-	GenericDrinkOrder(TypeOfDrink typeOfDrink, int drinkerPosition)
+	long timeWhenReceived = 0;
+	
+	GenericDrinkOrder(TypeOfDrink typeOfDrink, int drinkerPosition, long receivedTime)
 	{
 		drink = new GenericDrink();
 		isReceived = false;
-		whatDoesHeDrink = typeOfDrink;
+		whatsTheDrink = typeOfDrink;
 		position = drinkerPosition;
+		timeWhenReceived = receivedTime;
 	}
 	
 	void setReceived() {
@@ -21,5 +23,19 @@ public class GenericDrinkOrder {
 	
 	boolean isReceived() {
 		return isReceived;
+	}
+
+
+	public TypeOfDrink getWhatsTheDrink() {
+		return whatsTheDrink;
+	}
+
+	public int getPosition() {
+		return position;
+	}
+
+	public int getPointsReceived() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

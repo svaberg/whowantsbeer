@@ -1,15 +1,18 @@
 
 package ninja.epsilon;
 
-import com.badlogic.gdx.ApplicationAdapter;
+import java.util.ArrayList;
+import java.util.List;
 
+import ninja.epsilon.drinkers.DrinkerPool;
 import ninja.epsilon.drinkers.Drinkers;
 import ninja.epsilon.physics.Physics;
 import ninja.epsilon.renderers.Renderer;
 import ninja.epsilon.score.Scorer;
 import ninja.epsilon.swipereader.InputReader;
+import ninja.epsilon.swipereader.SwipeReader;
 
-import java.util.List;
+import com.badlogic.gdx.ApplicationAdapter;
 
 public class WhoWantsBeerGame extends ApplicationAdapter {
 	private Drinkers drinkers;
@@ -20,6 +23,11 @@ public class WhoWantsBeerGame extends ApplicationAdapter {
 	
 	@Override
 	public void create () {
+		renderers = new ArrayList<Renderer>();
+		drinkers = new DrinkerPool();
+		inputReader = new SwipeReader();
+//		scorer = new Scorer();
+
 		for (Renderer renderer : renderers) {
 			renderer.create();
 		}
@@ -28,12 +36,12 @@ public class WhoWantsBeerGame extends ApplicationAdapter {
 	@Override
 	public void render () {
 		long t = System.currentTimeMillis();
-		long swipe = inputReader.input(t);
-		physics.update(t, swipe);
-		drinkers.update(t, scorer.getGameLevel());
-		for (Renderer renderer : renderers) {
-			renderer.render();
-		}
+//		long swipe = inputReader.input(t);
+//		physics.update(t, swipe);
+		drinkers.update(t, GameLevel.EASY);
+//		for (Renderer renderer : renderers) {
+//			renderer.render();
+//		}
 	}
 }
 
