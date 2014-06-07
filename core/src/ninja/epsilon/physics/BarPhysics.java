@@ -31,7 +31,7 @@ public class BarPhysics implements Physics, Physics.InputCallback {
 
 	private static final Vector2 GRAVITY = new Vector2(0, -10.0f);
 	private static final float GLASS_MASS = 0.5f;
-	private static final float MIN_STOP_VELOCITY = 0.1f;
+	private static final float MIN_STOP_VELOCITY = 0.01f;
 
 	private World world;
 	private LinkedList<Body> glasses;
@@ -51,6 +51,7 @@ public class BarPhysics implements Physics, Physics.InputCallback {
 		glasses = new LinkedList<Body>();
 		running = false;
 		this.scorer = scorer;
+		Gdx.app.log(TAG, "NEW WORLD CREATED!");
 	}
 
 	private static GlassState bodyToState(Body body) {
@@ -117,7 +118,7 @@ public class BarPhysics implements Physics, Physics.InputCallback {
 	}
 
 	private void doUpdate(long cur_t) {
-		float step_t = cur_t - prev_t;
+		float step_t = (cur_t - prev_t) / 1000.0f;
 		//Gdx.app.log(TAG, "dt = " + step_t);
 		if (step_t <= 0.0) {
 			//throw new PhysicsException("Negative time step: " + step_t);
@@ -133,7 +134,7 @@ public class BarPhysics implements Physics, Physics.InputCallback {
 		for (ListIterator<Body> i = glasses.listIterator(); i.hasNext();) {
 			Body glass = i.next();
 			if (glass.getLinearVelocity().isZero(MIN_STOP_VELOCITY)) {
-				Gdx.app.log(TAG, "Glass stopped");
+				Gdx.app.log(TAG, "Glass stopped!!!");
 				scorer.gotOneDrink(TypeOfDrink.blondBeer, glass.getPosition().x, cur_t);
 				world.destroyBody(glass);
 				i.remove();
@@ -153,26 +154,26 @@ public class BarPhysics implements Physics, Physics.InputCallback {
 	}
 
 	private Vector2 getImpulse(float v) {
-		return new Vector2(100.0f*v, 0.0f);
+		return new Vector2(v / 1000.0f, 0.0f);
 	}
 
 	private Body createCounter() {
 		BodyDef counterDef = new BodyDef();
-		counterDef.position.set(new Vector2());
+		counterDef.position.set(new Vector2(0.0f, 0.0f));
 		Body counter = world.createBody(counterDef);
 		PolygonShape counterShape = new PolygonShape();
-		counterShape.setAsBox(3.0f, 3.0f);
+		counterShape.setAsBox(3.0f, 1.0f);
 		counter.createFixture(counterShape, 0.0f);
 		return counter;
 	}
 
 	private Body createGlass(float v) {
 		BodyDef glassDef = new BodyDef();
-		glassDef.position.set(new Vector2());
+		glassDef.position.set(new Vector2(0.0f, 10.0f));
 		glassDef.type = BodyType.DynamicBody;
 		Body glass = world.createBody(glassDef);
 		PolygonShape glassShape = new PolygonShape();
-		glassShape.setAsBox(0.1f, 0.2f);
+		glassShape.setAsBox(1.0f, 1.0f);
 		glass.createFixture(glassShape, 0.0f);
 		return glass;
 	}
