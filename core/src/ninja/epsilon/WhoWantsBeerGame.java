@@ -10,7 +10,7 @@ public class WhoWantsBeerGame extends ApplicationAdapter {
 	SpriteBatch batch;
 	Texture img;
 	Texture imgBadLogic;
-	
+	boolean isWhite;
 	// this is a comment 2 3 4 5 6
 	
 	@Override
@@ -20,11 +20,17 @@ public class WhoWantsBeerGame extends ApplicationAdapter {
 		// aa
 		img = new Texture("ninja.png");
 		imgBadLogic = new Texture("badlogic.jpg");
+		isWhite=false;
 	}
 
 	@Override
 	public void render () {
-		Gdx.gl.glClearColor(0, 1, 0, 1);
+		if (isWhite) {
+			Gdx.gl.glClearColor(1, 1, 1, 1);
+		} else {
+			Gdx.gl.glClearColor(1, 0, 0, 1);			
+		}
+		isWhite = !isWhite;
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
 		batch.draw(img, 50, 50);
