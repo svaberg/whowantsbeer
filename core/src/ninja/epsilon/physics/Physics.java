@@ -1,5 +1,9 @@
 package ninja.epsilon.physics;
 
+import java.io.File;
+
+import ninja.epsilon.drinkers.TypeOfDrink;
+
 public interface Physics {
 	public static interface InputCallback {
 		/**
@@ -12,6 +16,7 @@ public interface Physics {
 		public float x;
 		public float y;
 		public float angle;
+		public TypeOfDrink type;
 	}
 
 	/**
