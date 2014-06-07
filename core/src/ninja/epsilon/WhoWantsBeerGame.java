@@ -1,3 +1,4 @@
+
 package ninja.epsilon;
 
 import com.badlogic.gdx.ApplicationAdapter;
@@ -27,3 +28,4 @@ public class WhoWantsBeerGame extends ApplicationAdapter {
 		batch.end();
 	}
 }
+
