@@ -183,6 +183,7 @@ public class BarPhysics implements Physics, Physics.InputCallback {
 	}
 
 	private Body createGlass(float v) {
+		Gdx.app.log(TAG, "Created glass!");
 		BodyDef glassDef = new BodyDef();
 		glassDef.position.set(new Vector2(0.0f, 2.0f));
 		glassDef.type = BodyType.DynamicBody;
