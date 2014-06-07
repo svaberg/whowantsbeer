@@ -1,5 +1,6 @@
 package ninja.epsilon.drinkers;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -16,7 +17,14 @@ public class GenericDrinker implements Drinker {
 	 */
 	long persistenceTime;
 	
+	/** 
+	 * Whether the drinker has waited too long and has left.
+	 */
 	boolean hasWaitedTooLong;
+	
+	/**
+	 * Whether the drinker has received all orders (and has left).
+	 */
 	boolean hasReceivedAllOrders;
 	
 	/**
@@ -32,6 +40,7 @@ public class GenericDrinker implements Drinker {
 	public GenericDrinker(long nowTime) {
 		persistenceTime = 3000; // milliseconds
 		creationTime = nowTime;
+		drinkOrders = new ArrayList<GenericDrinkOrder>();
 	}
 	
 	/**

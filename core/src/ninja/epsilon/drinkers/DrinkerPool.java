@@ -6,6 +6,8 @@ import java.util.Random;
 
 import ninja.epsilon.GameLevel;
 
+import com.badlogic.gdx.Gdx;
+
 public class DrinkerPool implements Drinkers{
 
 	/**
@@ -41,6 +43,7 @@ public class DrinkerPool implements Drinkers{
 	private void createDrinker() {
 		GenericDrinker drinker = new GenericDrinker(currentUpdateTime);
 		drinkersWaiting.add(drinker);
+		Gdx.app.log("MyTag", "Created new drinker. Size of drinker list: " + drinkersWaiting.size());
 	}
 	
 	/** 
@@ -52,6 +55,7 @@ public class DrinkerPool implements Drinkers{
 		for (GenericDrinker drinker : drinkersWaiting) {
 			drinker.update(currentUpdateTime);
 			if (drinker.hasLeft()) {
+				Gdx.app.log("MyTag", "Drinker has left. Size of drinker list: " + drinkersWaiting.size());
 				leavers.add(drinker);
 			}
 		}
