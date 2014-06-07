@@ -20,10 +20,7 @@ public class Score implements Scorer{
 	Score(){
 		orders = new GenericOrders();
 		currentScore = 0;
-		
-		ScoringValues sv= new ScoringValues();
-		
-		chances = sv.getNrOfChances();
+		chances = ScoringValues.getNrOfChances();
 	}
 	
 	public void gotOneDrink(TypeOfDrink typeOfDrink, int position, long timeOfReceivingDrink)	{
@@ -47,12 +44,8 @@ public class Score implements Scorer{
 	}
 
 	public GameLevel getGameLevel() {
-		if(currentScore < 100) return GameLevel.EASY;
-		else if(currentScore < 500) return GameLevel.MEDIUM;
-		else if(currentScore < 1000) return GameLevel.DIFFICULT;
-		
-		return GameLevel.HARDCORE;
-	}
+		return ScoringValues.calculateLevel(currentScore); 
+		}
 
 
 

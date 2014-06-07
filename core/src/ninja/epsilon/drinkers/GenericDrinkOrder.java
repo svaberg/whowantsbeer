@@ -3,8 +3,6 @@ package ninja.epsilon.drinkers;
 import ninja.epsilon.score.ScoringValues;
 
 public class GenericDrinkOrder implements DrinkOrder{
-
-	GenericDrink drink;
 	boolean isReceived;
 	TypeOfDrink whatsTheDrink;
 	float position = 0;
@@ -14,7 +12,6 @@ public class GenericDrinkOrder implements DrinkOrder{
 	{
 		isReceived = false;
 		whatsTheDrink = typeOfDrink;
-		drink = new GenericDrink(whatsTheDrink);
 		position = drinkerPosition;
 		this.orderTime = orderTime;
 	}
@@ -36,12 +33,7 @@ public class GenericDrinkOrder implements DrinkOrder{
 	}
 
 	public int getPointsReceived(long timeOfReceivingDrink) {
-		long diff = timeOfReceivingDrink - orderTime;
-		
-		ScoringValues sv= new ScoringValues();
-		
-		return 0;
+		int pointsGot = ScoringValues.calculatePoints(timeOfReceivingDrink - orderTime); 
+		return pointsGot;
 	}
-
-
 }
