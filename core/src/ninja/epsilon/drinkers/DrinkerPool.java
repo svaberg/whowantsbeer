@@ -2,6 +2,7 @@ package ninja.epsilon.drinkers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import ninja.epsilon.GameLevel;
 
@@ -18,26 +19,39 @@ public class DrinkerPool implements Drinkers{
 	long meanTimeBetweenDrinkers;
 	
 	/** 
-	 * Last time the drinkers pool was updated
+	 * Previous time the drinkers pool was updated
 	 */
-	long lastUpdateTime;
+	long previousUpdateTime;
+	
+	/**
+	 * Current time the drinkers pool is updated
+	 */
+	long currentUpdateTime;
+	
+	public DrinkerPool() {
+		drinkersWaiting = new ArrayList<GenericDrinker>();
+		meanTimeBetweenDrinkers = 3000; // milliseconds
+		previousUpdateTime = 0;
+		currentUpdateTime = 0;
+	}
 	
 	/**
 	 * Create a new drinker
 	 */
 	private void createDrinker() {
-		GenericDrinker drinker = new GenericDrinker(lastUpdateTime);
+		GenericDrinker drinker = new GenericDrinker(currentUpdateTime);
 		drinkersWaiting.add(drinker);
 	}
 	
 	/** 
 	 * Purge the list of drinkers who have received all their orders.
 	 */
-	private void purge() {
+	private void updateDrinkers() {
 		// Create list of leavers
 		List<GenericDrinker> leavers = new ArrayList<GenericDrinker>();
 		for (GenericDrinker drinker : drinkersWaiting) {
-			if (drinker.hasLeft(lastUpdateTime)) {
+			drinker.update(currentUpdateTime);
+			if (drinker.hasLeft()) {
 				leavers.add(drinker);
 			}
 		}
@@ -51,12 +65,24 @@ public class DrinkerPool implements Drinkers{
 	 * @param nowTime the current time in milliseconds.
 	 */
 	public void update(long nowTime, GameLevel gameLevel) {
-		lastUpdateTime = nowTime;
+		// Update the time information first
+		previousUpdateTime = currentUpdateTime;
+		currentUpdateTime = nowTime;
 		
-		purge();
+		updateInternal();
+	}
+	
+	private void updateInternal() {
 
+		// Remove drinkers
+		updateDrinkers();
+
+		// Add a new drinker if needed
+		Random ran = new Random();
+		long randomTime = ran.nextLong() % meanTimeBetweenDrinkers;
+		
 		// Make this more fancy later (Poisson process).
-		if (nowTime % meanTimeBetweenDrinkers == 0) {
+		if (currentUpdateTime - previousUpdateTime > randomTime) {
 			createDrinker();
 		}
 	}
