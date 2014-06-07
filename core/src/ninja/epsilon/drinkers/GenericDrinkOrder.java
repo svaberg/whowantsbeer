@@ -33,16 +33,9 @@ public class GenericDrinkOrder implements DrinkOrder{
 	}
 
 	public int getPointsReceived(long timeOfReceivingDrink) {
-<<<<<<< HEAD
-		long diff = timeOfReceivingDrink - orderTime;
-		
-		ScoringValues sv= new ScoringValues();
-		
-		return 0;
-=======
 		int pointsGot = ScoringValues.calculatePoints(timeOfReceivingDrink - orderTime); 
 		return pointsGot;
->>>>>>> b9cec261019040ec44dedc31597990c46d9e9343
+
 	}
 
 

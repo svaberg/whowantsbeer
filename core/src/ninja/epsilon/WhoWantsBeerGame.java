@@ -6,13 +6,16 @@ import java.util.List;
 
 import ninja.epsilon.drinkers.BarCounter;
 import ninja.epsilon.drinkers.Drinkers;
+import ninja.epsilon.physics.BarPhysics;
 import ninja.epsilon.physics.Physics;
+import ninja.epsilon.physics.Physics.InputCallback;
 import ninja.epsilon.renderers.DashboardRenderer;
 import ninja.epsilon.renderers.DrinkersRenderer;
 import ninja.epsilon.renderers.Renderer;
 import ninja.epsilon.score.Score;
 import ninja.epsilon.score.Scorer;
 import ninja.epsilon.swipereader.InputReader;
+import ninja.epsilon.swipereader.SwipeReader;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
@@ -31,9 +34,9 @@ public class WhoWantsBeerGame extends ApplicationAdapter {
 	@Override
 	public void create () {
 		renderers = new ArrayList<Renderer>();
+		physics = new BarPhysics();
 		drinkers = new BarCounter();
-		// TODO: removed for compilation
-		// inputReader = new SwipeReader(physics);
+		inputReader = new SwipeReader((InputCallback) physics);
 		scorer = new Score();
 
 		//Create and add renderers
@@ -46,6 +49,9 @@ public class WhoWantsBeerGame extends ApplicationAdapter {
 		for (Renderer renderer : renderers) {
 			renderer.create();
 		}
+		
+		// Register swipe reader
+		Gdx.input.setInputProcessor(inputReader);
 	}
 
 	@Override
