@@ -10,6 +10,8 @@ public class WhoWantsBeerGame extends ApplicationAdapter {
 	SpriteBatch batch;
 	Texture img;
 	
+	// this is a comment 2 3 4 5
+	
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
@@ -23,8 +25,7 @@ public class WhoWantsBeerGame extends ApplicationAdapter {
 		Gdx.gl.glClearColor(0, 1, 0, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
-		batch.draw(img, 0, 0);
-		batch.draw(img, 400, 0);
+		batch.draw(img, 50, 50);
 		batch.end();
 	}
 }
