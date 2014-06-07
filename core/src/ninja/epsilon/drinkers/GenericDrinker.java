@@ -6,7 +6,7 @@ import java.util.List;
 public class GenericDrinker implements Drinker {
 	/**
 	 * Creation time in milliseconds [ms] 
-	 * Time drinker appears.
+	 * Time drinker appeared in the bar.
 	 */
 	long creationTime;
 
@@ -57,7 +57,7 @@ public class GenericDrinker implements Drinker {
 	 * @param nowTime
 	 * @return true if the drinker has waited too long, otherwise false
 	 */
-	public boolean hasWaitedTooLong(long nowTime) {
+	public boolean hasWaitedTooLong() {
 		return hasWaitedTooLong;
 	}
 	
@@ -73,7 +73,7 @@ public class GenericDrinker implements Drinker {
 	 * @param nowTime the current time in milliseconds
 	 * @return whether the drinker has left the bar
 	 */
-	public boolean hasLeft(long nowTime) {
-		return hasReceivedAllOrders() || hasWaitedTooLong(nowTime);
+	public boolean hasLeft() {
+		return hasReceivedAllOrders() || hasWaitedTooLong();
 	}	
 }
