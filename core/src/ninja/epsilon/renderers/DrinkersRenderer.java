@@ -6,6 +6,9 @@ package ninja.epsilon.renderers;
 import java.util.List;
 
 import ninja.epsilon.drinkers.Drinker;
+import ninja.epsilon.drinkers.Drinkers;
+
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 /**
  * @author treestrongs
@@ -13,16 +16,19 @@ import ninja.epsilon.drinkers.Drinker;
  */
 public class DrinkersRenderer implements Renderer {
 	
-	/**
-	 * List of drinkers currently at the bar
-	 */
-	List<Drinker> currentDrinkers;
-
+	private Drinkers DrinkerPool;
+	private SpriteBatch SpriteBatch;
+	
 	@Override
 	public void create() {
-		// TODO Auto-generated method stub
+		SpriteBatch = new SpriteBatch(); 
 		
 	}
+	
+    @Override
+    public void dispose() {
+    	SpriteBatch.dispose();
+    }
 	
 	/* (non-Javadoc)
 	 * @see ninja.epsilon.renderers.Renderer#render()
@@ -30,6 +36,12 @@ public class DrinkersRenderer implements Renderer {
 	@Override
 	public void render() {
 		// TODO Auto-generated method stub
+		
+		List<? extends Drinker> currentDrinkers = DrinkerPool.GetDrinkers();
+		
+		for (Drinker item : currentDrinkers) {
+		    System.out.println(item);
+		}
 
 	}
 
