@@ -45,14 +45,15 @@ public class DrinkRenderer implements Renderer {
 	 */
 	@Override
 	public void render() {
-		Gdx.gl.glClearColor(1, 1, 1, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);		
+//		Gdx.gl.glClearColor(1, 1, 1, 1);
+//		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);		
 		spriteBatch.begin();
 		
 		float xPos = 0;
 		//float yPos = (float) (RendererUtils.PixelsPerMeterY()*RendererUtils.PultHeight);
 		float yPos = 0;
 		elapsedTime += Gdx.graphics.getDeltaTime();
+		
 		spriteBatch.draw(animation.getKeyFrame(elapsedTime, true), xPos, yPos);
 		
         spriteBatch.end();
