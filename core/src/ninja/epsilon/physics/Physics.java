@@ -8,10 +8,17 @@ public interface Physics {
 		void swipe(float v);
 	}
 
+	public static class GlassState {
+		public float x;
+		public float y;
+		public float angle;
+	}
+
 	/**
 	 * Updates state of the world.
 	 */
 	void update(long t, float swipe);
 	
 	//TODO: Add methods to retrieve position of each glass.
+	Iterable<GlassState> whereAreTheGlasses();
 }
