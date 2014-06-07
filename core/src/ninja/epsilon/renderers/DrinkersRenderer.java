@@ -10,6 +10,7 @@ import java.util.Map;
 import ninja.epsilon.drinkers.Drinker;
 import ninja.epsilon.drinkers.Drinker.DrinkerType;
 import ninja.epsilon.drinkers.Drinkers;
+import ninja.epsilon.drinkers.TypeOfDrink;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -68,6 +69,10 @@ public class DrinkersRenderer implements Renderer {
 				// Set Position
 				Sprite.setPosition(xPixels, yPixels);
 				SpriteMap.put(item.hashCode(), Sprite);
+				
+				// add speak bubble
+				//Texture BubbleTexture = new Texture(Gdx.files.internal(GetTextBubble(item.GetDrinkerType())));
+				//Sprite Bubble = new Sprite(BubbleTexture);
 			}
 		    Sprite.draw(SpriteBatch);
 		}
@@ -81,17 +86,34 @@ public class DrinkersRenderer implements Renderer {
 		
 		switch (Type) {
 		case SPANISH:
-			return "ninja.png";
+			return "spanish.png";
 		case GERMAN:
-			return "ninja.png";
+			return "german.png";
 		case NORWEGIAN:
-			return "ninja.png";
+			return "norwegian.png";
 		case POLISH:
-			return "ninja.png";
+			return "polish.png";
 		case ROMANIAN:
-			return "ninja.png";
+			return "romanian.png";
 		default:
 			return "ninja.png";
+		}		
+	}
+	
+	/*
+	 * Retrieves the Drinker Texture
+	 */
+	String GetTextBubble(TypeOfDrink Type) {
+		
+		switch (Type) {
+		case blondBeer:
+			return "blonde.png";
+		case darkBeer:
+			return "dark.png";
+		case tequilaShot:
+			return "tequila.png";
+		default:
+			return "drinks/beer_01.jpg";
 		}		
 	}
 	
