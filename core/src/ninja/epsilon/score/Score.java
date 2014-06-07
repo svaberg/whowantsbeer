@@ -23,7 +23,7 @@ public class Score implements Scorer{
 		chances = ScoringValues.getNrOfChances();
 	}
 	
-	public void gotOneDrink(TypeOfDrink typeOfDrink, int position, long timeOfReceivingDrink)	{
+	public void gotOneDrink(TypeOfDrink typeOfDrink, float position, long timeOfReceivingDrink)	{
 		//Match the beer with wating orders
 		int poitnsGot = orders.matchDrink(position, typeOfDrink, timeOfReceivingDrink);
 		if(poitnsGot==-1){
@@ -51,7 +51,7 @@ public class Score implements Scorer{
 	}
 
 	//Remove all orders at position from the list of orders
-	public void drinkerLeft(int position) {
+	public void drinkerLeft(float position) {
 		orders.removeAllOrdersAtPosition(position);
 	}
 
