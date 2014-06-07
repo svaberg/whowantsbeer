@@ -86,6 +86,12 @@ public class DrinkerPool implements Drinkers{
 			createDrinker();
 		}
 	}
+
+	@Override
+	public List<? extends Drinker> GetDrinkers() {
+		// TODO Auto-generated method stub
+		return drinkersWaiting;
+	}
 	
 	
 }

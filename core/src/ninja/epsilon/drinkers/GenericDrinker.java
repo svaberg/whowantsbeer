@@ -3,7 +3,7 @@ package ninja.epsilon.drinkers;
 import java.util.List;
 
 
-public class GenericDrinker {
+public class GenericDrinker implements Drinker {
 	/**
 	 * Creation time in milliseconds [ms] 
 	 * Time drinker appears.

@@ -1,5 +1,6 @@
 package ninja.epsilon.drinkers;
 
+import java.util.List;
 import ninja.epsilon.GameLevel;
 
 public interface Drinkers {
@@ -9,4 +10,10 @@ public interface Drinkers {
 	 * into the order book etc.
 	 */
 	void update(long curTime, GameLevel level);
+	
+	/*
+	 * Getter for the Drinkers List
+	 */
+	List<? extends Drinker> GetDrinkers();
+
 }
