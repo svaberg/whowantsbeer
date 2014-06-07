@@ -11,7 +11,7 @@ public interface Physics {
 	/**
 	 * Updates state of the world.
 	 */
-	void update(long t, long swipe);
+	void update(long t, float swipe);
 	
 	//TODO: Add methods to retrieve position of each glass.
 }
