@@ -46,7 +46,7 @@ public class GenericDrinker implements Drinker {
 	 * Drinks being ordered by the drinker. When all drinks have been received
 	 * the drinker will be satisfied and leave the bar (and a tip!).
 	 */
-	List<GenericDrinkOrder> drinkOrders;
+	private List<GenericDrinkOrder> drinkOrders;
 	
 	/**
 	 * Create a new drinker with the default persistence time
@@ -94,7 +94,7 @@ public class GenericDrinker implements Drinker {
 	}
 	
 	private void addDrinkOrder(TypeOfDrink typeOfDrink) {
-		this.drinkOrders.add(new GenericDrinkOrder(typeOfDrink, this.position, creationTime));	
+		this.getDrinkOrders().add(new GenericDrinkOrder(typeOfDrink, this.position, creationTime));	
 		Gdx.app.log("GenericDrinker", this.type.toString() + " Drinker passed order for " + typeOfDrink.toString());
 	}
 	
@@ -106,7 +106,7 @@ public class GenericDrinker implements Drinker {
 
 		// Check whether all orders have been received.
 		hasReceivedAllOrders = true;
-		for (GenericDrinkOrder drinkOrder : drinkOrders) {
+		for (GenericDrinkOrder drinkOrder : getDrinkOrders()) {
 			hasReceivedAllOrders &= drinkOrder.isReceived();
 		}
 		if (hasReceivedAllOrders) Gdx.app.log("GenericDrinker", "Drinker has received all orders and is leaving.");
@@ -162,5 +162,9 @@ public class GenericDrinker implements Drinker {
 
 	void setRadius(float radius) {
 		this.radius = radius;
+	}
+
+	public List<GenericDrinkOrder> getDrinkOrders() {
+		return drinkOrders;
 	}	
 }
