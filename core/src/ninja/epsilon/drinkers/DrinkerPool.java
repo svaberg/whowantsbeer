@@ -28,6 +28,12 @@ public class DrinkerPool implements Drinkers{
 	public void update() {
 		
 	}
+
+	@Override
+	public List<Drinker> GetDrinkers() {
+		// TODO Auto-generated method stub
+		return drinkersWaiting;
+	}
 	
 	
 }

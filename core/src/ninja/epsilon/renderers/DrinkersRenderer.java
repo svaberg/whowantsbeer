@@ -3,14 +3,27 @@
  */
 package ninja.epsilon.renderers;
 
-import ninja.epsilon.drinkers.Drinkers;
+import java.util.List;
+
+import ninja.epsilon.drinkers.Drinker;
 
 /**
  * @author treestrongs
  *
  */
-public class DrinkersRenderer implements Drinkers, Renderer {
+public class DrinkersRenderer implements Renderer {
+	
+	/**
+	 * List of drinkers currently at the bar
+	 */
+	List<Drinker> currentDrinkers;
 
+	@Override
+	public void create() {
+		// TODO Auto-generated method stub
+		
+	}
+	
 	/* (non-Javadoc)
 	 * @see ninja.epsilon.renderers.Renderer#render()
 	 */
@@ -18,21 +31,6 @@ public class DrinkersRenderer implements Drinkers, Renderer {
 	public void render() {
 		// TODO Auto-generated method stub
 
-	}
-
-	/* (non-Javadoc)
-	 * @see ninja.epsilon.drinkers.Drinkers#update()
-	 */
-	@Override
-	public void update() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void create() {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

@@ -1,5 +1,7 @@
 package ninja.epsilon.drinkers;
 
+import java.util.List;
+
 public interface Drinkers {
 	/**
 	 * Hook for the drinkers called from the main loop.
@@ -7,4 +9,9 @@ public interface Drinkers {
 	 * into the order book etc.
 	 */
 	void update();
+	
+	/*
+	 * Getter for the Drinkers List
+	 */
+	List<Drinker> GetDrinkers();
 }
