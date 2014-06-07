@@ -27,7 +27,7 @@ public class WhoWantsBeerGame extends ApplicationAdapter {
 	private static final String TAG = WhoWantsBeerGame.class.getSimpleName();
 
 	private Drinkers drinkers;
-	private Physics physics;
+	private BarPhysics physics;
 	private List<Renderer> renderers;
 	private Scorer scorer;
 	private InputReader inputReader;
@@ -42,7 +42,7 @@ public class WhoWantsBeerGame extends ApplicationAdapter {
 		scorer = new Score();
 		physics = new BarPhysics(scorer);
 		drinkers = new BarCounter();
-		inputReader = new SwipeReader((InputCallback) physics);
+		inputReader = new SwipeReader(physics);
 
 		renderers.add(backgroundRenderer = new BackgroundRenderer());
 		renderers.add(drinkersRenderer = new DrinkersRenderer(drinkers));

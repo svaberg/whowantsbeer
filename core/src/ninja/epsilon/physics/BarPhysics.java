@@ -1,5 +1,6 @@
 package ninja.epsilon.physics;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.ListIterator;
 
@@ -52,6 +53,47 @@ public class BarPhysics implements Physics, Physics.InputCallback {
 		this.scorer = scorer;
 	}
 
+	private static GlassState bodyToState(Body body) {
+		GlassState state = new GlassState();
+		state.x = body.getPosition().x;
+		state.y = body.getPosition().y;
+		state.angle = body.getAngle();
+		return state;
+	}
+
+	private class GlassIterator implements Iterator<GlassState> {
+		private Iterator<Body> gi;
+
+		public GlassIterator(Iterator<Body> gi) {
+			this.gi = gi;
+		}
+
+		@Override
+		public boolean hasNext() {
+			return gi.hasNext();
+		}
+
+		@Override
+		public GlassState next() {
+			return bodyToState(gi.next());
+		}
+
+		@Override
+		public void remove() {
+			throw new UnsupportedOperationException("Hands off that glass!");
+		}
+	}
+
+	@Override
+	public Iterable<GlassState> whereAreTheGlasses() {
+		return new Iterable<GlassState>() {
+			@Override
+			public Iterator<GlassState> iterator() {
+				return new GlassIterator(glasses.iterator());
+			}
+		};
+	}
+
 	@Override
 	public void update(long t, float swipe) {
 		long cur_t = t;
@@ -64,7 +106,7 @@ public class BarPhysics implements Physics, Physics.InputCallback {
 
 	private void doUpdate(long cur_t) {
 		float step_t = cur_t - prev_t;
-		Gdx.app.log(TAG, "dt = " + step_t);
+		//Gdx.app.log(TAG, "dt = " + step_t);
 		if (step_t <= 0.0) {
 			throw new PhysicsException("Negative time step: " + step_t);
 		}
