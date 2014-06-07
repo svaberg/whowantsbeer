@@ -53,6 +53,7 @@ public class DrinkRenderer implements Renderer {
 		//float yPos = (float) (RendererUtils.PixelsPerMeterY()*RendererUtils.PultHeight);
 		float yPos = 0;
 		elapsedTime += Gdx.graphics.getDeltaTime();
+		
 		spriteBatch.draw(animation.getKeyFrame(elapsedTime, true), xPos, yPos);
 		
         spriteBatch.end();
