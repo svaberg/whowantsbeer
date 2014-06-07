@@ -36,7 +36,7 @@ public class GenericDrinkOrder implements DrinkOrder{
 	}
 
 	public int getPointsReceived(long timeOfReceivingDrink) {
-		long diff = timeOfReceivingDrink - timeWhenReceived;
+		long diff = timeOfReceivingDrink - orderTime;
 		
 		ScoringValues sv= new ScoringValues();
 		

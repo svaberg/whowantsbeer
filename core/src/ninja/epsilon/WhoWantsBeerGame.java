@@ -7,11 +7,12 @@ import java.util.List;
 import ninja.epsilon.drinkers.BarCounter;
 import ninja.epsilon.drinkers.Drinkers;
 import ninja.epsilon.physics.Physics;
+import ninja.epsilon.renderers.DashboardRenderer;
 import ninja.epsilon.renderers.DrinkersRenderer;
 import ninja.epsilon.renderers.Renderer;
+import ninja.epsilon.score.Score;
 import ninja.epsilon.score.Scorer;
 import ninja.epsilon.swipereader.InputReader;
-import ninja.epsilon.swipereader.SwipeReader;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
@@ -25,17 +26,22 @@ public class WhoWantsBeerGame extends ApplicationAdapter {
 	private InputReader inputReader;
 	
 	private Renderer drinkersRenderer;
+	private Renderer dashboardRenderer;
 	
 	@Override
 	public void create () {
 		renderers = new ArrayList<Renderer>();
 		drinkers = new BarCounter();
-		inputReader = new SwipeReader(physics);
-//		scorer = new Scorer();
+		// TODO: removed for compilation
+		// inputReader = new SwipeReader(physics);
+		scorer = new Score();
 
 		//Create and add renderers
-		drinkersRenderer = new DrinkersRenderer(drinkers);
+		drinkersRenderer= new DrinkersRenderer(drinkers);
+		dashboardRenderer = new DashboardRenderer(scorer);
 		renderers.add(drinkersRenderer);
+		renderers.add(dashboardRenderer);
+
 		
 		for (Renderer renderer : renderers) {
 			renderer.create();

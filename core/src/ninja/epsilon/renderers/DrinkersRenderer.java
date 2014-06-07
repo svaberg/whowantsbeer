@@ -61,8 +61,12 @@ public class DrinkersRenderer implements Renderer {
 			{
 				Texture texture = new Texture(Gdx.files.internal(GetTexture(item.GetDrinkerType())));
 				Sprite = new Sprite(texture);
-				Sprite.setPosition(RendererUtils.PixelsPerMeterX()*item.getPosition(),
-								   RendererUtils.PixelsPerMeterY()*1);
+				// maximum 3.5 + 0.5 meters on X
+				float xPixels = (float) (RendererUtils.PixelsPerMeterX()*(item.getPosition()+0.5));
+				// Bar is at 0.5 m height
+				float yPixels = (float) (RendererUtils.PixelsPerMeterY()*RendererUtils.PultHeight);
+				// Set Position
+				Sprite.setPosition(xPixels, yPixels);
 				SpriteMap.put(item.hashCode(), Sprite);
 			}
 		    Sprite.draw(SpriteBatch);

@@ -24,7 +24,8 @@ public class SwipeReader  extends GestureDetector implements InputReader {
 			if(Math.abs(x) > Math.abs(y)){
 				Gdx.app.log(TAG, Float.toString(velocityX));
 				velocityX = x;
-				physicsInputCallback.swipe();
+				// TODO: removed for compilation
+				//physicsInputCallback.swipe();
 			} else {
 				// Ignore the input, because we don't care about up/down swipes.
 			}

@@ -17,7 +17,7 @@ public class Score implements Scorer{
 	
 	private Orders orders;
 	
-	Score(){
+	public Score(){
 		orders = new GenericOrders();
 		currentScore = 0;
 		
