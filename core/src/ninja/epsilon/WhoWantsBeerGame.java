@@ -43,6 +43,13 @@ public class WhoWantsBeerGame extends ApplicationAdapter {
 //			renderer.render();
 //		}
 	}
+	
+	@Override
+	public void dispose() {
+//		for (Renderer renderer : renderers) {
+//			renderer.dispose();
+//		}
+	}
 }
 
 
