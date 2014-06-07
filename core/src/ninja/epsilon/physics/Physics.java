@@ -23,7 +23,16 @@ public interface Physics {
 	 * Updates state of the world.
 	 */
 	void update(long t, float swipe);
-	
-	//TODO: Add methods to retrieve position of each glass.
+
+	/**
+	 * Returns position and orientation of all glasses.
+	 *
+	 * @return iterable over glass state
+	 */
 	Iterable<GlassState> whereAreTheGlasses();
+
+	/**
+	 * Returns the number of glasses which fell off the counter on this iteration.
+	 */
+	int howManyFellOff();
 }
