@@ -35,13 +35,13 @@ public class GenericOrders implements Orders {
 			}
 		 }
 		
-		if	(foundDrink>-1){
+		if	(foundDrink > -1) {
 			DrinkOrder order = waitingOrders.get(foundDrink);
-			return order.
+			return 0;
 		}
 		else{
 			//something else
-			return -1;
+			return 0;
 		}
 	}
 }

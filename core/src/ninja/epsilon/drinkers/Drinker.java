@@ -15,14 +15,9 @@ public interface Drinker {
 	 */
 	DrinkerType GetDrinkerType();
 
-	/*
-	 * Get X Position in pixels
+	/**
+	 * Return drinker position along bar.
+	 * @return
 	 */
-	float GetX();
-
-	/*
-	 * Get Y Position in pixels
-	 */
-	float GetY();
-	
+	float getPosition();
 }

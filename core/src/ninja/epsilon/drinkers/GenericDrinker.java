@@ -110,18 +110,6 @@ public class GenericDrinker implements Drinker {
 		return DrinkerType.GERMAN;
 	}
 
-	@Override
-	public float GetX() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public float GetY() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
 	public float getPosition() {
 		return position;
 	}

@@ -40,6 +40,9 @@ public class WhoWantsBeerGame extends ApplicationAdapter {
 		for (Renderer renderer : renderers) {
 			renderer.create();
 		}
+		
+		// Register swipe reader
+		Gdx.input.setInputProcessor(new SwipeReader());
 	}
 
 	@Override
