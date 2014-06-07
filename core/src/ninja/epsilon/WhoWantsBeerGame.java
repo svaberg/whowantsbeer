@@ -1,3 +1,4 @@
+
 package ninja.epsilon;
 
 import com.badlogic.gdx.ApplicationAdapter;
@@ -35,8 +36,10 @@ public class WhoWantsBeerGame extends ApplicationAdapter {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		batch.begin();
 		batch.draw(img, 50, 50);
-		batch.draw(imgBadLogic, 450, 450);
+		batch.draw(img, 250, 50);
+		batch.draw(img, 150, 150);
 		batch.end();
 	}
 }
+
 
