@@ -33,12 +33,14 @@ public class BarPhysics implements Physics, Physics.InputCallback {
 	private static final Vector2 GRAVITY = new Vector2(0, -10.0f);
 	private static final float GLASS_MASS = 0.5f;
 	private static final float MIN_STOP_VELOCITY = 0.01f;
+	private static final float FALL_DETECT_THRESHOLD = -10.0f;
 
 	private World world;
 	private LinkedList<Body> glasses;
 	private long prev_t;
 	private boolean running;
 	private Scorer scorer;
+	private int fellGlassCount;
 
 	public static class PhysicsException extends RuntimeException {
 		PhysicsException(String msg) {
@@ -97,6 +99,11 @@ public class BarPhysics implements Physics, Physics.InputCallback {
 	}
 
 	@Override
+	public int howManyFellOff() {
+		return fellGlassCount;
+	}
+
+	@Override
 	public void update(long t, float swipe) {
 		long cur_t = t;
 		if (running) {  // skip first loop to make sure prev_t is valid
@@ -129,6 +136,7 @@ public class BarPhysics implements Physics, Physics.InputCallback {
 			return;
 		}
 
+		fellGlassCount = 0;
 		world.step(step_t, VELOCITY_ITERATIONS, POSITION_ITERATIONS);
 		logGlasses();
 
@@ -137,6 +145,12 @@ public class BarPhysics implements Physics, Physics.InputCallback {
 			if (glass.getLinearVelocity().isZero(MIN_STOP_VELOCITY)) {
 				Gdx.app.log(TAG, "Glass stopped!");
 				scorer.gotOneDrink(TypeOfDrink.blondBeer, glass.getPosition().x, cur_t);
+				world.destroyBody(glass);
+				i.remove();
+			}
+			if (glass.getPosition().y < FALL_DETECT_THRESHOLD) {
+				Gdx.app.log(TAG, "Glass has fallen off the counter!");
+				fellGlassCount++;
 				world.destroyBody(glass);
 				i.remove();
 			}
