@@ -1,117 +1,117 @@
 
-spritesheet_beer.png
+spritesheet_tequilaShot.png
 size: 976,248
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-beer0001
+shot0001
   rotate: false
   xy: 2, 126
   size: 120, 122
   orig: 120, 122
   offset: 0, 0
   index: -1
-beer0002
+shot0016
+  rotate: false
+  xy: 2, 126
+  size: 120, 122
+  orig: 120, 122
+  offset: 0, 0
+  index: -1
+shot0002
   rotate: false
   xy: 2, 2
   size: 120, 122
   orig: 120, 122
   offset: 0, 0
   index: -1
-beer0003
+shot0003
   rotate: false
   xy: 124, 126
   size: 120, 122
   orig: 120, 122
   offset: 0, 0
   index: -1
-beer0004
+shot0004
   rotate: false
   xy: 124, 2
   size: 120, 122
   orig: 120, 122
   offset: 0, 0
   index: -1
-beer0005
+shot0005
   rotate: false
   xy: 246, 126
   size: 120, 122
   orig: 120, 122
   offset: 0, 0
   index: -1
-beer0006
+shot0006
   rotate: false
   xy: 246, 2
   size: 120, 122
   orig: 120, 122
   offset: 0, 0
   index: -1
-beer0007
+shot0007
   rotate: false
   xy: 368, 126
   size: 120, 122
   orig: 120, 122
   offset: 0, 0
   index: -1
-beer0008
+shot0008
   rotate: false
   xy: 368, 2
   size: 120, 122
   orig: 120, 122
   offset: 0, 0
   index: -1
-beer0009
+shot0009
   rotate: false
   xy: 490, 126
   size: 120, 122
   orig: 120, 122
   offset: 0, 0
   index: -1
-beer0010
+shot0010
   rotate: false
   xy: 490, 2
   size: 120, 122
   orig: 120, 122
   offset: 0, 0
   index: -1
-beer0011
+shot0011
   rotate: false
   xy: 612, 126
   size: 120, 122
   orig: 120, 122
   offset: 0, 0
   index: -1
-beer0012
+shot0012
   rotate: false
   xy: 612, 2
   size: 120, 122
   orig: 120, 122
   offset: 0, 0
   index: -1
-beer0013
+shot0013
   rotate: false
   xy: 734, 126
   size: 120, 122
   orig: 120, 122
   offset: 0, 0
   index: -1
-beer0014
+shot0014
   rotate: false
   xy: 734, 2
   size: 120, 122
   orig: 120, 122
   offset: 0, 0
   index: -1
-beer0015
+shot0015
   rotate: false
   xy: 856, 126
-  size: 120, 122
-  orig: 120, 122
-  offset: 0, 0
-  index: -1
-beer0016
-  rotate: false
-  xy: 856, 2
   size: 120, 122
   orig: 120, 122
   offset: 0, 0
