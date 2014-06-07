@@ -104,6 +104,18 @@ public class BarPhysics implements Physics, Physics.InputCallback {
 		running = true;
 	}
 
+	private void logGlass(Body glass) {
+		Vector2 p = glass.getPosition();
+		Vector2 v = glass.getLinearVelocity();
+		Gdx.app.log(TAG, "x=" + p.x + "  y=" + p.y + "  vx=" + v.x + "  vy=" + v.y);
+	}
+
+	private void logGlasses() {
+		for (Body glass : glasses) {
+			logGlass(glass);
+		}
+	}
+
 	private void doUpdate(long cur_t) {
 		float step_t = cur_t - prev_t;
 		//Gdx.app.log(TAG, "dt = " + step_t);
@@ -112,6 +124,7 @@ public class BarPhysics implements Physics, Physics.InputCallback {
 		}
 
 		world.step(step_t, VELOCITY_ITERATIONS, POSITION_ITERATIONS);
+		logGlasses();
 
 		for (ListIterator<Body> i = glasses.listIterator(); i.hasNext();) {
 			Body glass = i.next();
