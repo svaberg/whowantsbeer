@@ -5,11 +5,11 @@ import com.badlogic.gdx.input.GestureDetector;
 
 import ninja.epsilon.physics.Physics;
 
-public class SwipeReader  extends GestureDetector implements InputReader {
+public class SwipeReader extends GestureDetector implements InputReader {
 
-	private static final String TAG = "DirectionDestureDetector";
+	private static final String TAG = "SwipeReader";
 	private static float velocityX = 0;
-	private Physics.InputCallback physicsInputCallback;
+	private static Physics.InputCallback physicsInputCallback;
 	
 	public SwipeReader(Physics.InputCallback callback) {
 		super(new DirectionGestureListener());
@@ -21,10 +21,10 @@ public class SwipeReader  extends GestureDetector implements InputReader {
 		
 		@Override
 		public boolean fling(float x, float y, int button) {
-			if(Math.abs(x) > Math.abs(y)){
+			if (Math.abs(x) > Math.abs(y)) {
 				Gdx.app.log(TAG, Float.toString(velocityX));
 				velocityX = x;
-//				physicsInputCallback.swipe();
+				physicsInputCallback.swipe(velocityX);
 			} else {
 				// Ignore the input, because we don't care about up/down swipes.
 			}
