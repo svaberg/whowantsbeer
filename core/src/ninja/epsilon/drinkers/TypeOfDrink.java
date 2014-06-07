@@ -6,7 +6,7 @@ public enum TypeOfDrink {
 		blondBeer (0), 
 		darkBeer (1), 
 		tequilaShot(2),
-		glass_wine(3),
+		glassWine(3),
 		cactus(4)
 		;
 		
@@ -36,8 +36,8 @@ public enum TypeOfDrink {
 		case blondBeer:return answer + "blondBeer.atlas";
 		case darkBeer:return answer + "darkBeer.atlas";
 		case tequilaShot:return answer + "tequilaShot.atlas";
-		case glass_wine:return answer + "glass_wine.atlas";
-		case cactus:return answer + "glass_cactus.atlas";
+		case glassWine:return answer + "glassWine.atlas";
+		case cactus:return answer + "cactus.atlas";
 
 		};
 		return answer + "beer.atlas";
