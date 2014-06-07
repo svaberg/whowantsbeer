@@ -1,6 +1,9 @@
 package ninja.epsilon.drinkers;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import com.badlogic.gdx.Gdx;
 
 
 public class GenericDrinker implements Drinker {
@@ -16,8 +19,25 @@ public class GenericDrinker implements Drinker {
 	 */
 	long persistenceTime;
 	
+	/** 
+	 * Whether the drinker has waited too long and has left.
+	 */
 	boolean hasWaitedTooLong;
+	
+	/**
+	 * Whether the drinker has received all orders (and has left).
+	 */
 	boolean hasReceivedAllOrders;
+	
+	/**
+	 * Position of the drinker in the bar
+	 */
+	private float position;
+	
+	/**
+	 * Radius of the drinker in the bar
+	 */
+	private float radius;
 	
 	/**
 	 * Drinks being ordered by the drinker. When all drinks have been received
@@ -29,9 +49,14 @@ public class GenericDrinker implements Drinker {
 	 * Create a new drinker with the default persistence time
 	 * @param nowTime the current time in milliseconds.
 	 */
-	public GenericDrinker(long nowTime) {
-		persistenceTime = 3000; // milliseconds
-		creationTime = nowTime;
+	public GenericDrinker(float position, long nowTime) {
+		this.setPosition(position);
+		this.persistenceTime = 3000; // milliseconds
+		this.creationTime = nowTime;
+		this.drinkOrders = new ArrayList<GenericDrinkOrder>();
+		
+		// Add a drink order.
+		this.drinkOrders.add(new GenericDrinkOrder(TypeOfDrink.blondBeer, 0, creationTime));
 	}
 	
 	/**
@@ -45,10 +70,12 @@ public class GenericDrinker implements Drinker {
 		for (GenericDrinkOrder drinkOrder : drinkOrders) {
 			hasReceivedAllOrders &= drinkOrder.isReceived();
 		}
+		if (hasReceivedAllOrders) Gdx.app.log("GenericDrinker", "Drinker has received all orders and is leaving.");
 
 		// Check whether the drinker has waited too long and thus will leave.
 		long timeWaited = nowTime - creationTime;
 		hasWaitedTooLong = (timeWaited > persistenceTime);
+		if (hasWaitedTooLong) Gdx.app.log("GenericDrinker", "Drinker has waited too long and is leaving.");
 
 	}
 	
@@ -75,5 +102,27 @@ public class GenericDrinker implements Drinker {
 	 */
 	public boolean hasLeft() {
 		return hasReceivedAllOrders() || hasWaitedTooLong();
+	}
+
+	@Override
+	public DrinkerType GetDrinkerType() {
+		// TODO Auto-generated method stub
+		return DrinkerType.GERMAN;
+	}
+
+	public float getPosition() {
+		return position;
+	}
+
+	public void setPosition(float position) {
+		this.position = position;
+	}
+
+	float getRadius() {
+		return radius;
+	}
+
+	void setRadius(float radius) {
+		this.radius = radius;
 	}	
 }
