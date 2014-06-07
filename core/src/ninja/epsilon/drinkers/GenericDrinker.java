@@ -35,17 +35,10 @@ public class GenericDrinker implements Drinker {
 	}
 	
 	/**
-	 * Returns true if the drinker has received all orders. Otherwise returns false.
-	 */
-	boolean hasReceivedAllOrders() {
-		return hasReceivedAllOrders;
-	}
-	
-	/**
 	 * Update the state of the drinker with the current time.
 	 * @param nowTime current time
 	 */
-	void update(long nowTime) {
+	public void update(long nowTime) {
 
 		// Check whether all orders have been received.
 		hasReceivedAllOrders = true;
@@ -64,8 +57,15 @@ public class GenericDrinker implements Drinker {
 	 * @param nowTime
 	 * @return true if the drinker has waited too long, otherwise false
 	 */
-	boolean hasWaitedTooLong(long nowTime) {
+	public boolean hasWaitedTooLong(long nowTime) {
 		return hasWaitedTooLong;
+	}
+	
+	/**
+	 * Returns true if the drinker has received all orders. Otherwise returns false.
+	 */
+	public boolean hasReceivedAllOrders() {
+		return hasReceivedAllOrders;
 	}
 	
 	/**
@@ -73,7 +73,7 @@ public class GenericDrinker implements Drinker {
 	 * @param nowTime the current time in milliseconds
 	 * @return whether the drinker has left the bar
 	 */
-	boolean hasLeft(long nowTime) {
+	public boolean hasLeft(long nowTime) {
 		return hasReceivedAllOrders() || hasWaitedTooLong(nowTime);
 	}	
 }
