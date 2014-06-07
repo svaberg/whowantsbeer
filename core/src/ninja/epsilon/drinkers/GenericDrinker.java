@@ -100,5 +100,23 @@ public class GenericDrinker implements Drinker {
 	 */
 	public boolean hasLeft() {
 		return hasReceivedAllOrders() || hasWaitedTooLong();
+	}
+
+	@Override
+	public DrinkerType GetDrinkerType() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public float GetX() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public float GetY() {
+		// TODO Auto-generated method stub
+		return 0;
 	}	
 }
