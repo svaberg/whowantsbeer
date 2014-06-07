@@ -19,7 +19,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  */
 public class DashboardRenderer implements Renderer {
 	
-	private SpriteBatch SpriteBatch = null;
 	private BitmapFont Font = null;
 	private Scorer Scorer= null;
 	
@@ -29,14 +28,12 @@ public class DashboardRenderer implements Renderer {
 	
 	@Override
 	public void create() {
-		SpriteBatch = new SpriteBatch(); 
 		Font = new BitmapFont();
 		Font.setColor(Color.GREEN);
 	}
 	
     @Override
     public void dispose() {
-    	SpriteBatch.dispose();
     	Font.dispose();
     }
 	
@@ -44,15 +41,14 @@ public class DashboardRenderer implements Renderer {
 	 * @see ninja.epsilon.renderers.Renderer#render()
 	 */
 	@Override
-	public void render() {
+	public void render(SpriteBatch spriteBatch) {
 		
 		// Start Rendering Them
-		SpriteBatch.begin();
 
 		// set font
 		
 		// put Dashboard 2.3 meters high and 1.5 meter right
-		Font.draw(SpriteBatch, "You are awesome! SCORE is: " + Scorer.getScore(), 
+		Font.draw(spriteBatch, "You are awesome! SCORE is: " + Scorer.getScore(), 
 				RendererUtils.PixelsPerMeterX()*1.3f, 
 				RendererUtils.PixelsPerMeterY()*2.4f);
 		
@@ -67,7 +63,7 @@ public class DashboardRenderer implements Renderer {
 			Sprite ThumbsUp = new Sprite(ThumbsupTexture);
 			// Set Position
 			ThumbsUp.setPosition(RendererUtils.PixelsPerMeterX()*0.1f+ThumbsUp.getWidth()*i, RendererUtils.PixelsPerMeterY()*2.3f);
-			ThumbsUp.draw(SpriteBatch);
+			ThumbsUp.draw(spriteBatch);
 		}
 
 		// add thumbs down
@@ -78,11 +74,8 @@ public class DashboardRenderer implements Renderer {
 			Sprite ThumbsDown = new Sprite(ThumbsDownTexture);
 			// Set Position
 			ThumbsDown.setPosition(RendererUtils.PixelsPerMeterX()*0.1f+(ThumbsDown.getWidth()*(Chances+i)), RendererUtils.PixelsPerMeterY()*2.3f);
-			ThumbsDown.draw(SpriteBatch);
+			ThumbsDown.draw(spriteBatch);
 		}
-		
-		
-		SpriteBatch.end();
 	}
 	
 }

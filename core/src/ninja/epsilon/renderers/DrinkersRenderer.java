@@ -11,7 +11,6 @@ import ninja.epsilon.drinkers.DrinkOrder;
 import ninja.epsilon.drinkers.Drinker;
 import ninja.epsilon.drinkers.Drinker.DrinkerType;
 import ninja.epsilon.drinkers.Drinkers;
-import ninja.epsilon.drinkers.GenericDrinkOrder;
 import ninja.epsilon.drinkers.TypeOfDrink;
 
 import com.badlogic.gdx.Gdx;
@@ -26,7 +25,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class DrinkersRenderer implements Renderer {
 	
 	private Drinkers DrinkerPool = null;
-	private SpriteBatch SpriteBatch = null;
 	
 	private Map <Integer, Sprite> SpriteMap = new HashMap<Integer, Sprite>();
 	
@@ -37,26 +35,22 @@ public class DrinkersRenderer implements Renderer {
 	
 	@Override
 	public void create() {
-		SpriteBatch = new SpriteBatch(); 
-		
 	}
 	
     @Override
     public void dispose() {
-    	SpriteBatch.dispose();
     }
 	
 	/* (non-Javadoc)
 	 * @see ninja.epsilon.renderers.Renderer#render()
 	 */
 	@Override
-	public void render() {
+	public void render(SpriteBatch spriteBatch) {
 		
 		// Get Drinker List
 		List<? extends Drinker> currentDrinkers = DrinkerPool.GetDrinkers();
 		
 		// Start Rendering Them
-		SpriteBatch.begin();
 		for (Drinker item : currentDrinkers) {
 			
 			Sprite Sprite = SpriteMap.get(item.hashCode());
@@ -72,7 +66,7 @@ public class DrinkersRenderer implements Renderer {
 				Sprite.setPosition(xPixels, yPixels);
 				SpriteMap.put(item.hashCode(), Sprite);
 			}
-		    Sprite.draw(SpriteBatch);
+		    Sprite.draw(spriteBatch);
 		    
 			List<? extends DrinkOrder> drinkOrders = item.getDrinkOrders();
 			if (drinkOrders != null)
@@ -84,11 +78,9 @@ public class DrinkersRenderer implements Renderer {
 				Bubble.setScale(0.75f);
 				// Set Position
 				Bubble.setPosition(Sprite.getX()+Sprite.getWidth(), Sprite.getY()+Sprite.getHeight());
-				Bubble.draw(SpriteBatch);
+				Bubble.draw(spriteBatch);
 			}
-
 		}
-		SpriteBatch.end();
 		
 		// missing feedback of leaving costumers
 		if (SpriteMap.size() > 50) {
@@ -126,9 +118,9 @@ public class DrinkersRenderer implements Renderer {
 		case blondBeer:
 			return "bubble_blondBeer.png";
 		case darkBeer:
-			return "dark.jpg";
+			return "bubble_blondBeer.png";
 		case tequilaShot:
-			return "tequila.jpg";
+			return "bubble_blondBeer.png";
 		default:
 			return "bubble_blondBeer.png";
 		}
