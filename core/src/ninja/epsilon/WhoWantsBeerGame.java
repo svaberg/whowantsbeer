@@ -30,7 +30,7 @@ public class WhoWantsBeerGame extends ApplicationAdapter {
 	public void create () {
 		renderers = new ArrayList<Renderer>();
 		drinkers = new BarCounter();
-		inputReader = new SwipeReader();
+		inputReader = new SwipeReader(physics);
 //		scorer = new Scorer();
 
 		//Create and add renderers
@@ -42,7 +42,7 @@ public class WhoWantsBeerGame extends ApplicationAdapter {
 		}
 		
 		// Register swipe reader
-		Gdx.input.setInputProcessor(new SwipeReader());
+		Gdx.input.setInputProcessor(inputReader);
 	}
 
 	@Override

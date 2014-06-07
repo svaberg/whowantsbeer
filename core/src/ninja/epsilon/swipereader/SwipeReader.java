@@ -3,13 +3,16 @@ package ninja.epsilon.swipereader;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.input.GestureDetector;
 
+import ninja.epsilon.physics.Physics;
+
 public class SwipeReader  extends GestureDetector implements InputReader {
 
 	private static final String TAG = "DirectionDestureDetector";
 	private static float velocityX = 0;
 	
-	public SwipeReader() {
+	public SwipeReader(Physics.InputCallback callback) {
 		super(new DirectionGestureListener());
+		//TODO: Use the callback
 	}
 
 	private static class DirectionGestureListener extends GestureAdapter {
