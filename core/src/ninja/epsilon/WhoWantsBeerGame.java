@@ -10,7 +10,7 @@ public class WhoWantsBeerGame extends ApplicationAdapter {
 	SpriteBatch batch;
 	Texture img;
 	
-	// this is a comment 2 3 4
+	// this is a comment 2 3 4 5
 	
 	@Override
 	public void create () {
