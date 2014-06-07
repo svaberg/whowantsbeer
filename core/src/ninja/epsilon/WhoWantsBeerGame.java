@@ -28,7 +28,7 @@ public class WhoWantsBeerGame extends ApplicationAdapter {
 		if (isWhite) {
 			Gdx.gl.glClearColor(1, 1, 1, 1);
 		} else {
-			Gdx.gl.glClearColor(1, 0, 0, 1);			
+			Gdx.gl.glClearColor(1, 1, 0, 1);			
 		}
 		isWhite = !isWhite;
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
