@@ -32,12 +32,12 @@ public class GenericDrinker implements Drinker {
 	/**
 	 * Position of the drinker in the bar
 	 */
-	float position;
+	private float position;
 	
 	/**
 	 * Radius of the drinker in the bar
 	 */
-	float radius;
+	private float radius;
 	
 	/**
 	 * Drinks being ordered by the drinker. When all drinks have been received
@@ -49,12 +49,14 @@ public class GenericDrinker implements Drinker {
 	 * Create a new drinker with the default persistence time
 	 * @param nowTime the current time in milliseconds.
 	 */
-	public GenericDrinker(long nowTime) {
-		persistenceTime = 3000; // milliseconds
-		creationTime = nowTime;
-		drinkOrders = new ArrayList<GenericDrinkOrder>();
+	public GenericDrinker(float position, long nowTime) {
+		this.setPosition(position);
+		this.persistenceTime = 3000; // milliseconds
+		this.creationTime = nowTime;
+		this.drinkOrders = new ArrayList<GenericDrinkOrder>();
 		
-		drinkOrders.add(new GenericDrinkOrder(TypeOfDrink.blondBeer, 0, creationTime));
+		// Add a drink order.
+		this.drinkOrders.add(new GenericDrinkOrder(TypeOfDrink.blondBeer, 0, creationTime));
 	}
 	
 	/**
@@ -118,5 +120,21 @@ public class GenericDrinker implements Drinker {
 	public float GetY() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	public float getPosition() {
+		return position;
+	}
+
+	public void setPosition(float position) {
+		this.position = position;
+	}
+
+	float getRadius() {
+		return radius;
+	}
+
+	void setRadius(float radius) {
+		this.radius = radius;
 	}	
 }
