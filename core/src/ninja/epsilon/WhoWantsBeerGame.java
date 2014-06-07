@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class WhoWantsBeerGame extends ApplicationAdapter {
 	SpriteBatch batch;
 	Texture img;
+	Texture imgBeer;
 	Texture imgBadLogic;
 	boolean isWhite;
 	// this is a comment 2 3 4 5 6
@@ -21,6 +22,7 @@ public class WhoWantsBeerGame extends ApplicationAdapter {
 		// aa
 		img = new Texture("ninja.png");
 		imgBadLogic = new Texture("badlogic.jpg");
+		imgBeer = new Texture("beer.png");
 		isWhite=false;
 	}
 
@@ -36,6 +38,7 @@ public class WhoWantsBeerGame extends ApplicationAdapter {
 		batch.begin();
 		batch.draw(img, 50, 50);
 		batch.draw(imgBadLogic, 450, 450);
+		batch.draw(imgBeer, 150, 150);
 		batch.end();
 	}
 }
