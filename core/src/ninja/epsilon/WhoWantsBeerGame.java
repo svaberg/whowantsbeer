@@ -70,7 +70,7 @@ public class WhoWantsBeerGame extends ApplicationAdapter {
 		for (Renderer renderer : renderers) {
 			renderer.render(spriteBatch);
 		}
-		spriteBatch = new SpriteBatch();
+		spriteBatch.end();
 	}
 	
 	@Override
