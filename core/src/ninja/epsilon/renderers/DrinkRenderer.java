@@ -44,11 +44,10 @@ public class DrinkRenderer implements Renderer {
 	 * @see ninja.epsilon.renderers.Renderer#render()
 	 */
 	@Override
-	public void render() {
+	public void render(SpriteBatch spriteBatch) {
 //		Gdx.gl.glClearColor(1, 1, 1, 1);
 //		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);		
-		spriteBatch.begin();
-		
+
 		float xPos = 0;
 		//float yPos = (float) (RendererUtils.PixelsPerMeterY()*RendererUtils.PultHeight);
 		float yPos = 0;
@@ -56,7 +55,6 @@ public class DrinkRenderer implements Renderer {
 		
 		spriteBatch.draw(animation.getKeyFrame(elapsedTime, true), xPos, yPos);
 		
-        spriteBatch.end();
 	}
 	
     @Override

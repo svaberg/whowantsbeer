@@ -24,7 +24,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class DrinkersRenderer implements Renderer {
 	
 	private Drinkers DrinkerPool = null;
-	private SpriteBatch SpriteBatch = null;
 	
 	private Map <Integer, Sprite> SpriteMap = new HashMap<Integer, Sprite>();
 	
@@ -35,26 +34,22 @@ public class DrinkersRenderer implements Renderer {
 	
 	@Override
 	public void create() {
-		SpriteBatch = new SpriteBatch(); 
-		
 	}
 	
     @Override
     public void dispose() {
-    	SpriteBatch.dispose();
     }
 	
 	/* (non-Javadoc)
 	 * @see ninja.epsilon.renderers.Renderer#render()
 	 */
 	@Override
-	public void render() {
+	public void render(SpriteBatch spriteBatch) {
 		
 		// Get Drinker List
 		List<? extends Drinker> currentDrinkers = DrinkerPool.GetDrinkers();
 		
 		// Start Rendering Them
-		SpriteBatch.begin();
 		for (Drinker item : currentDrinkers) {
 			
 			Sprite Sprite = SpriteMap.get(item.hashCode());
@@ -74,9 +69,8 @@ public class DrinkersRenderer implements Renderer {
 				//Texture BubbleTexture = new Texture(Gdx.files.internal(GetTextBubble(item.GetDrinkerType())));
 				//Sprite Bubble = new Sprite(BubbleTexture);
 			}
-		    Sprite.draw(SpriteBatch);
+		    Sprite.draw(spriteBatch);
 		}
-		SpriteBatch.end();
 	}
 	
 	/*
