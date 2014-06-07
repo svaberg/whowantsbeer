@@ -18,11 +18,11 @@ import com.badlogic.gdx.Gdx;
 
 public class WhoWantsBeerGame extends ApplicationAdapter {
 	private Drinkers drinkers;
-	private Physics physics;
+	private BarPhysics physics;
 	private List<Renderer> renderers;
 	private Scorer scorer;
 	private InputReader inputReader;
-	
+
 	@Override
 	public void create () {
 		renderers = new ArrayList<Renderer>();
@@ -34,7 +34,7 @@ public class WhoWantsBeerGame extends ApplicationAdapter {
 		for (Renderer renderer : renderers) {
 			renderer.create();
 		}
-		
+
 		// Register swipe reader
 		Gdx.input.setInputProcessor(inputReader);
 	}
@@ -49,7 +49,7 @@ public class WhoWantsBeerGame extends ApplicationAdapter {
 //			renderer.render();
 //		}
 	}
-	
+
 	@Override
 	public void dispose() {
 //		for (Renderer renderer : renderers) {
