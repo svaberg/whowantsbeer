@@ -1,4 +1,4 @@
-package ninja.epsilon;
+package ninja.epsilon.drinkers;
 
 public interface Drinkers {
 	/**
