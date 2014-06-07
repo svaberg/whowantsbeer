@@ -54,7 +54,7 @@ public class GenericDrinker implements Drinker {
 	 */
 	public GenericDrinker(float position, long nowTime) {
 		this.setPosition(position);
-		this.persistenceTime = 3000; // milliseconds
+		this.persistenceTime = 6000; // milliseconds
 		this.creationTime = nowTime;
 		this.drinkOrders = new ArrayList<GenericDrinkOrder>();
 		
@@ -77,6 +77,16 @@ public class GenericDrinker implements Drinker {
 		}
 	}
 	
+	public void receiveDrink(TypeOfDrink typeOfDrink) {
+		for (GenericDrinkOrder drinkOrder : drinkOrders) {
+			if (drinkOrder.getWhatsTheDrink() == typeOfDrink) {
+				drinkOrder.setReceived();
+				Gdx.app.log("GenericDrinker", "Drinker has received an ordered" + typeOfDrink.toString());
+				break;
+			}
+		}
+	}
+		
 	private void addDrinkOrder() {
 		Random ran = new Random();
 		int typeId = ran.nextInt(TypeOfDrink.values().length);

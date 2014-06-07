@@ -26,7 +26,7 @@ public class Score implements Scorer{
 		currentScore = 0;
 		chances = ScoringValues.getNrOfChancesAtGameStart();
 		
-		dropSound = Gdx.audio.newSound(Gdx.files.internal("sounds/coin-drop.wav"));
+		dropSound = Gdx.audio.newSound(Gdx.files.internal("sounds/coin-drop.mp3"));
 	}
 	
 	@Override
