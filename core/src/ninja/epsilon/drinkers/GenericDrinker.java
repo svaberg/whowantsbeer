@@ -56,7 +56,13 @@ public class GenericDrinker implements Drinker {
 		this.drinkOrders = new ArrayList<GenericDrinkOrder>();
 		
 		// Add a drink order.
-		this.drinkOrders.add(new GenericDrinkOrder(TypeOfDrink.blondBeer, 0, creationTime));
+		addDrinkOrder(TypeOfDrink.blondBeer);
+		
+	}
+	
+	private void addDrinkOrder(TypeOfDrink typeOfDrink) {
+		this.drinkOrders.add(new GenericDrinkOrder(typeOfDrink, this.position, creationTime));	
+		Gdx.app.log("GenericDrinker", "Drinker passed order for " + typeOfDrink.toString());
 	}
 	
 	/**

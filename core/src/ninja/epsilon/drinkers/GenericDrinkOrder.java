@@ -5,10 +5,10 @@ import ninja.epsilon.score.ScoringValues;
 public class GenericDrinkOrder implements DrinkOrder{
 	boolean isReceived;
 	TypeOfDrink whatsTheDrink;
-	int position = 0;
+	float position = 0;
 	long orderTime = 0;
 	
-	GenericDrinkOrder(TypeOfDrink typeOfDrink, int drinkerPosition, long orderTime)
+	GenericDrinkOrder(TypeOfDrink typeOfDrink, float drinkerPosition, long orderTime)
 	{
 		isReceived = false;
 		whatsTheDrink = typeOfDrink;
@@ -28,7 +28,7 @@ public class GenericDrinkOrder implements DrinkOrder{
 		return whatsTheDrink;
 	}
 
-	public int getPosition() {
+	public float getPosition() {
 		return position;
 	}
 
@@ -37,6 +37,4 @@ public class GenericDrinkOrder implements DrinkOrder{
 		return pointsGot;
 
 	}
-
-
 }
