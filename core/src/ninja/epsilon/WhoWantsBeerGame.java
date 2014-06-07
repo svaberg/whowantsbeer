@@ -30,3 +30,4 @@ public class WhoWantsBeerGame extends ApplicationAdapter {
 	}
 }
 
+
