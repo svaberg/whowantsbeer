@@ -1,6 +1,12 @@
 package ninja.epsilon.swipereader;
 
-public class SwipeReader {
+public class SwipeReader implements InputReader {
+
+	@Override
+	public long input(long curTime) {
+		//TODO
+		return 0;
+	}
 
 	public DirectionGestureDetector getSwipeInputProcessor() {
 	   return new DirectionGestureDetector(new DirectionGestureDetector.DirectionListener() {
