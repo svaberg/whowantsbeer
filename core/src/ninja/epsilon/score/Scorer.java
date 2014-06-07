@@ -24,4 +24,6 @@ public interface Scorer {
 	
 	// Returns the current score of the game.
 	int getScore();
+	
+	boolean gameOver();
 }

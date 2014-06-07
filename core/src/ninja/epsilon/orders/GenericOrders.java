@@ -61,7 +61,6 @@ public class GenericOrders implements Orders {
 		
 	}
 
-	
 	public void removeAllOrdersAtPosition(int position) {
 		List<Integer> orders2Remove = new ArrayList<Integer>(); 
 		//search the all orders at the position
