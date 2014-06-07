@@ -14,6 +14,7 @@ import ninja.epsilon.swipereader.InputReader;
 import ninja.epsilon.swipereader.SwipeReader;
 
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Gdx;
 
 public class WhoWantsBeerGame extends ApplicationAdapter {
 	private Drinkers drinkers;
@@ -27,12 +28,15 @@ public class WhoWantsBeerGame extends ApplicationAdapter {
 		renderers = new ArrayList<Renderer>();
 		physics = new BarPhysics();
 		drinkers = new BarCounter();
-		inputReader = new SwipeReader();
+		inputReader = new SwipeReader(physics);
 //		scorer = new Scorer();
 
 		for (Renderer renderer : renderers) {
 			renderer.create();
 		}
+		
+		// Register swipe reader
+		Gdx.input.setInputProcessor(inputReader);
 	}
 
 	@Override

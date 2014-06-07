@@ -22,10 +22,15 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  */
 public class DrinkersRenderer implements Renderer {
 	
-	private Drinkers DrinkerPool;
-	private SpriteBatch SpriteBatch;
+	private Drinkers DrinkerPool = null;
+	private SpriteBatch SpriteBatch = null;
 	
-	Map <Integer, Sprite> SpriteMap = new HashMap<Integer, Sprite>();
+	private Map <Integer, Sprite> SpriteMap = new HashMap<Integer, Sprite>();
+	
+	public DrinkersRenderer(Drinkers Drinkers) {
+		
+		DrinkerPool = Drinkers; 
+	}
 	
 	@Override
 	public void create() {
@@ -56,9 +61,10 @@ public class DrinkersRenderer implements Renderer {
 			{
 				Texture texture = new Texture(Gdx.files.internal(GetTexture(item.GetDrinkerType())));
 				Sprite = new Sprite(texture);
-				Sprite.setPosition(item.GetX(),item.GetY());
+				Sprite.setPosition(RendererUtils.PixelsPerMeterX()*item.GetX(),
+								   RendererUtils.PixelsPerMeterY()*item.GetY());
 				SpriteMap.put(item.hashCode(), Sprite);
-			}			
+			}
 		    Sprite.draw(SpriteBatch);
 		}
 		SpriteBatch.end();
