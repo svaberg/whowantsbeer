@@ -6,9 +6,13 @@ import ninja.epsilon.drinkers.TypeOfDrink;
 import ninja.epsilon.orders.GenericOrders;
 import ninja.epsilon.orders.Orders;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
+
 
 public class Score implements Scorer{
 
+	Sound dropSound;
 	private int currentScore;
 	private int chances;
 	public int getScore() {
@@ -21,6 +25,8 @@ public class Score implements Scorer{
 		orders = new GenericOrders();
 		currentScore = 0;
 		chances = ScoringValues.getNrOfChances();
+		
+		dropSound = Gdx.audio.newSound(Gdx.files.internal("sounds/coin-drop.wav"));
 	}
 	
 	public void gotOneDrink(TypeOfDrink typeOfDrink, float position, long timeOfReceivingDrink)	{
@@ -32,6 +38,7 @@ public class Score implements Scorer{
 		}
 		else{
 			currentScore+=poitnsGot;
+			dropSound.play();
 		}
 	}
 	
@@ -57,7 +64,7 @@ public class Score implements Scorer{
 
 	//Flag Game Over
 	public boolean gameOver() {
-		return chances <= 0;
+		return chances == 0;
 	}
 
 }
