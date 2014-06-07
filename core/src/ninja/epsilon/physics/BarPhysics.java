@@ -153,7 +153,7 @@ public class BarPhysics implements Physics, Physics.InputCallback {
 	}
 
 	private Vector2 getImpulse(float v) {
-		return new Vector2(v, 0.0f);
+		return new Vector2(100.0f*v, 0.0f);
 	}
 
 	private Body createCounter() {
