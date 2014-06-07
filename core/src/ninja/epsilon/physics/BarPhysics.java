@@ -34,7 +34,7 @@ public class BarPhysics implements Physics, Physics.InputCallback {
 
 	private World world;
 	private LinkedList<Body> glasses;
-	private float prev_t;
+	private long prev_t;
 	private boolean running;
 	private Scorer scorer;
 
@@ -53,8 +53,8 @@ public class BarPhysics implements Physics, Physics.InputCallback {
 	}
 
 	@Override
-	public void update(long t, long swipe) {
-		float cur_t = (float) t;
+	public void update(long t, float swipe) {
+		long cur_t = t;
 		if (running) {  // skip first loop to make sure prev_t is valid
 			doUpdate(cur_t);
 		}
@@ -62,8 +62,9 @@ public class BarPhysics implements Physics, Physics.InputCallback {
 		running = true;
 	}
 
-	private void doUpdate(float cur_t) {
+	private void doUpdate(long cur_t) {
 		float step_t = cur_t - prev_t;
+		Gdx.app.log(TAG, "dt = " + step_t);
 		if (step_t <= 0.0) {
 			throw new PhysicsException("Negative time step: " + step_t);
 		}
@@ -74,7 +75,7 @@ public class BarPhysics implements Physics, Physics.InputCallback {
 			Body glass = i.next();
 			if (glass.getLinearVelocity().isZero(MIN_STOP_VELOCITY)) {
 				Gdx.app.log(TAG, "Glass stopped");
-				scorer.GotOneDrink(TypeOfDrink.blondBeer, glass.getPosition().x);
+				scorer.gotOneDrink(TypeOfDrink.blondBeer, glass.getPosition().x, cur_t);
 				world.destroyBody(glass);
 				i.remove();
 			}
