@@ -3,7 +3,7 @@ package ninja.epsilon.drinkers;
 import java.util.List;
 
 
-public class Drinker {
+public class GenericDrinker {
 	/**
 	 * Creation time in milliseconds [ms] 
 	 * Time drinker appears.
@@ -20,14 +20,23 @@ public class Drinker {
 	 * Drinks being ordered by the drinker. When all drinks have been received
 	 * the drinker will be satisfied and leave the bar (and a tip!).
 	 */
-	List<DrinkOrder> drinkOrders;
+	List<GenericDrinkOrder> drinkOrders;
+	
+	/**
+	 * Create a new drinker with the default persistence time
+	 * @param nowTime the current time in milliseconds.
+	 */
+	public GenericDrinker(long nowTime) {
+		persistenceTime = 3000; // milliseconds
+		creationTime = nowTime;
+	}
 	
 	/**
 	 * Returns true if the drinker has received all orders. Otherwise returns false.
 	 */
 	boolean hasReceivedAllOrders() {
 		boolean hasReceivedAllOrders = true;
-		for (DrinkOrder drinkOrder : drinkOrders) {
+		for (GenericDrinkOrder drinkOrder : drinkOrders) {
 			hasReceivedAllOrders &= drinkOrder.isReceived();
 		}
 		return hasReceivedAllOrders;
@@ -43,5 +52,12 @@ public class Drinker {
 		return (timeWaited > persistenceTime);
 	}
 	
-	
+	/**
+	 * Returns true if the drinker has left the bar at this time.
+	 * @param nowTime the current time in milliseconds
+	 * @return whether the drinker has left the bar
+	 */
+	boolean hasLeft(long nowTime) {
+		return hasReceivedAllOrders() || hasWaitedTooLong(nowTime);
+	}	
 }

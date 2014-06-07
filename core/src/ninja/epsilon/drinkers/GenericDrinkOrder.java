@@ -1,13 +1,13 @@
 package ninja.epsilon.drinkers;
 
-public class DrinkOrder {
+public class GenericDrinkOrder {
 
-	Drink drink;
+	GenericDrink drink;
 	boolean isReceived;
 	
-	DrinkOrder()
+	GenericDrinkOrder()
 	{
-		drink = new Drink();
+		drink = new GenericDrink();
 		isReceived = false;
 	}
 	

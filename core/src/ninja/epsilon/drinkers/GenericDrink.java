@@ -1,5 +1,5 @@
 package ninja.epsilon.drinkers;
 
-public class Drink {
+public class GenericDrink {
 	
 }
