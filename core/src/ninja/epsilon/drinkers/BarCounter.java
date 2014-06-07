@@ -8,7 +8,7 @@ import ninja.epsilon.GameLevel;
 
 import com.badlogic.gdx.Gdx;
 
-public class DrinkerPool implements Drinkers{
+public class BarCounter implements Drinkers{
 
 	/**
 	 * List of drinkers currently at the bar
@@ -39,7 +39,7 @@ public class DrinkerPool implements Drinkers{
 	 * Length of counter
 	 */
 	
-	public DrinkerPool() {
+	public BarCounter() {
 		drinkersWaiting = new ArrayList<GenericDrinker>();
 		meanTimeBetweenDrinkers = 3000; // milliseconds
 		capacity = 3;
