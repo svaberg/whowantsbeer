@@ -29,7 +29,6 @@ public class DrinkRenderer implements Renderer {
 	private Map<TypeOfDrink, TextureAtlas> textureIndex = new HashMap<TypeOfDrink, TextureAtlas>();
 	private Map<TypeOfDrink, Animation> animationIndex = new HashMap<TypeOfDrink, Animation>();
 	
-	private SpriteBatch spriteBatch = null;
 	private float elapsedTime = 0;
 	
 	public DrinkRenderer(final Physics physics) {
@@ -39,7 +38,6 @@ public class DrinkRenderer implements Renderer {
 
 	@Override
 	public void create() {
-		spriteBatch = new SpriteBatch();
 		
 		TypeOfDrink[] values = TypeOfDrink.values();
 		TypeOfDrink drink = null;
@@ -78,8 +76,6 @@ public class DrinkRenderer implements Renderer {
 	
     @Override
     public void dispose() {
-    	spriteBatch.dispose();
-    	
 
     	Iterator<Entry<TypeOfDrink, TextureAtlas>> it = textureIndex.entrySet().iterator();
     	while (it.hasNext()) 
