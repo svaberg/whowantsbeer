@@ -1,5 +1,7 @@
 package ninja.epsilon.drinkers;
 
+import ninja.epsilon.score.ScoringValues;
+
 public class GenericDrinkOrder implements DrinkOrder{
 
 	GenericDrink drink;
@@ -17,14 +19,13 @@ public class GenericDrinkOrder implements DrinkOrder{
 		timeWhenReceived = receivedTime;
 	}
 	
-	void setReceived() {
+	public void setReceived() {
 		isReceived = true;
 	}
 	
 	boolean isReceived() {
 		return isReceived;
 	}
-
 
 	public TypeOfDrink getWhatsTheDrink() {
 		return whatsTheDrink;
@@ -34,8 +35,13 @@ public class GenericDrinkOrder implements DrinkOrder{
 		return position;
 	}
 
-	public int getPointsReceived() {
-		// TODO Auto-generated method stub
+	public int getPointsReceived(long timeOfReceivingDrink) {
+		long diff = timeOfReceivingDrink - timeWhenReceived;
+		
+		ScoringValues sv= new ScoringValues();
+		
 		return 0;
 	}
+
+
 }
