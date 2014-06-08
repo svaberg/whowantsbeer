@@ -59,9 +59,9 @@ public class GameScreen implements Screen {
 		inputReader = new SwipeReader(physics);
 		
 		renderers.add(backgroundRenderer = new BackgroundRenderer());
+		renderers.add(drinkersRenderer = new DrinkersRenderer(drinkers));
 		renderers.add(barRenderer = new BarRenderer());
 		renderers.add(drinkRenderer = new DrinkRenderer(physics));
-		renderers.add(drinkersRenderer = new DrinkersRenderer(drinkers));
 		renderers.add(dashboardRenderer = new DashboardRenderer(scorer));
 
 		spriteBatch = new SpriteBatch();
