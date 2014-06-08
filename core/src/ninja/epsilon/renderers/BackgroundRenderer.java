@@ -37,7 +37,6 @@ public class BackgroundRenderer implements Renderer {
 		//Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
 		spriteBatch.draw(backgroundImg, 0, 0);
-
 	}
 
 	@Override
