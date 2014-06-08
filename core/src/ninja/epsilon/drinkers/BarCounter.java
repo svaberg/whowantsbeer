@@ -6,6 +6,8 @@ import java.util.Random;
 
 import ninja.epsilon.Dimensions;
 import ninja.epsilon.GameLevel;
+import ninja.epsilon.score.Scorer;
+import ninja.epsilon.score.ScoringValues;
 
 import com.badlogic.gdx.Gdx;
 
@@ -41,16 +43,19 @@ public class BarCounter implements Drinkers{
 	 */
 	float length;
 	
+	Scorer score;
+	
 	/**
 	 * Create bar counter object
 	 */
-	public BarCounter() {
+	public BarCounter(Scorer score) {
 		drinkersWaiting = new ArrayList<GenericDrinker>();
 		meanTimeBetweenDrinkers = Dimensions.BAR_MEAN_TIME_BETWEEN_DRINKERS;
 		capacity = Dimensions.BAR_COUNTER_CAPACITY;
 		previousUpdateTime = 0; // milliseconds
 		currentUpdateTime = 0;  // milliseconds
 		length = Dimensions.PULT_LENGTH;
+		this.score= score;
 	}
 	
 	/**
@@ -60,7 +65,7 @@ public class BarCounter implements Drinkers{
 		Random ran = new Random();
 		float position = ran.nextFloat() * length;
 
-		GenericDrinker drinker = new GenericDrinker(position, currentUpdateTime);
+		GenericDrinker drinker = new GenericDrinker(position, currentUpdateTime, score);
 		drinkersWaiting.add(drinker);
 		//Gdx.app.log("BarCounter", "Created new drinker at position " + position + ". Size of drinker list: " + drinkersWaiting.size());
 	}
@@ -128,6 +133,19 @@ public class BarCounter implements Drinkers{
 	public List<? extends Drinker> GetDrinkers() {
 		// TODO Auto-generated method stub
 		return drinkersWaiting;
+	}
+
+	@Override
+	public int giveDrink(TypeOfDrink typeOfDrink, float position,
+			long timeOfReceivingDrink) {
+		
+		int pointsGot=-1;
+		for (GenericDrinker drinker : drinkersWaiting) {
+			if(drinker.isBeerInRange(position) && drinker.receiveDrink(typeOfDrink)){
+				 pointsGot = ScoringValues.calculatePoints(timeOfReceivingDrink - drinker.getOrderTime()); 
+			}
+		} 
+		return pointsGot;
 	}
 	
 	

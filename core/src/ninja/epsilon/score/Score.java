@@ -1,10 +1,9 @@
 package ninja.epsilon.score;
 
 import ninja.epsilon.GameLevel;
-import ninja.epsilon.drinkers.DrinkOrder;
+import ninja.epsilon.drinkers.Drinkers;
 import ninja.epsilon.drinkers.TypeOfDrink;
-import ninja.epsilon.orders.GenericOrders;
-import ninja.epsilon.orders.Orders;
+
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
@@ -19,10 +18,10 @@ public class Score implements Scorer{
 		return currentScore;
 	}
 	
-	private Orders orders;
+	private Drinkers drinkers;
+
 	
 	public Score(){
-		orders = new GenericOrders();
 		currentScore = 0;
 		chances = ScoringValues.CHANCES_AT_GAME_START;
 		
@@ -31,9 +30,7 @@ public class Score implements Scorer{
 	
 	@Override
 	public void gotOneDrink(TypeOfDrink typeOfDrink, float position, long timeOfReceivingDrink)	{
-		//Match the beer with wating orders
-		//int poitnsGot = orders.matchDrink(position, typeOfDrink, timeOfReceivingDrink);
-		int poitnsGot =1; //testing only
+		int poitnsGot = drinkers.giveDrink( typeOfDrink,  position,  timeOfReceivingDrink);
 		
 		if(poitnsGot==-1){
 			//penalty
@@ -45,29 +42,12 @@ public class Score implements Scorer{
 		}
 	}
 	
-	//Add the order in the list of orders
-	//@Override
-	//public void gotOneOrder(DrinkOrder order){
-	//	orders.addOrder(order);
-	//}
 
 	@Override
 	public GameLevel getGameLevel() {
 		return ScoringValues.calculateLevel(currentScore); 
 		}
 
-
-	//Removes order from the list of orders
-	@Override
-	public void removeOrder(DrinkOrder order) {
-		orders.removeOrder(order);
-	}
-
-	//Removes all orders at position from the list of orders
-	@Override
-	public void drinkerLeft(float position) {
-		orders.removeAllOrdersAtPosition(position);
-	}
 
 	//Flag Game Over
 	@Override
@@ -83,6 +63,12 @@ public class Score implements Scorer{
 	@Override
 	public int getNrOfFails() {
 		return ScoringValues.CHANCES_AT_GAME_START - chances;
+	}
+
+	@Override
+	public void setDrinkers(Drinkers drinkers) {
+		this.drinkers=drinkers;
+		
 	}
 
 }
