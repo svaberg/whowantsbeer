@@ -13,14 +13,11 @@ import ninja.epsilon.drinkers.Drinker;
 import ninja.epsilon.drinkers.Drinker.DrinkerType;
 import ninja.epsilon.drinkers.Drinkers;
 import ninja.epsilon.drinkers.TypeOfDrink;
-import ninja.epsilon.renderers.DashboardRenderer.ThumbType;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
 /**
  * @author treestrongs
@@ -85,7 +82,7 @@ public class DrinkersRenderer implements Renderer {
 		// Get Drinker List
 		List<? extends Drinker> currentDrinkers = DrinkerPool.GetDrinkers();
 
-		// Start Rendering Them
+		// Start Rendering Them`
 		for (Drinker item : currentDrinkers) {
 
 			Sprite Sprite = SpriteMap.get(item.GetDrinkerType());
