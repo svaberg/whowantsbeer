@@ -40,7 +40,7 @@ public class GameScreen implements Screen {
 	private Renderer drinkRenderer = null;
 	
 	private SpriteBatch spriteBatch = null;
-	long start = 0;
+	long start = 0; // Start of game
 	
 	Screen gameOverScreen;
 	
@@ -52,6 +52,7 @@ public class GameScreen implements Screen {
 	
 	public void create () {
 		start = System.currentTimeMillis();
+
 		renderers = new ArrayList<Renderer>();
 		scorer = new Score();
 		physics = new BarPhysics(scorer);
@@ -72,9 +73,10 @@ public class GameScreen implements Screen {
 	
 	@Override
 	public void render(float delta) {
+		long cur_t = System.currentTimeMillis();
 		
-		physics.update(start, inputReader.input(start));
-		drinkers.update(start, GameLevel.EASY);			
+		physics.update(cur_t, inputReader.input(cur_t));
+		drinkers.update(cur_t, GameLevel.EASY);
 		
 		spriteBatch.begin();
 		for (Renderer renderer : renderers) {

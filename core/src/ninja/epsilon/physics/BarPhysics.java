@@ -172,7 +172,7 @@ public class BarPhysics implements Physics, Physics.InputCallback {
 	}
 
 	private Vector2 getImpulse(float v) {
-		float impulse = 0.033f * v / 50.0f;
+		float impulse = 0.033f * v / 20.0f;
 		Gdx.app.log(TAG, "Applying impulse " + impulse);
 		return new Vector2(impulse, 0.0f);
 	}
