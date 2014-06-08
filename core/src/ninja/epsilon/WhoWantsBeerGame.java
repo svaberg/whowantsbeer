@@ -18,7 +18,6 @@ public class WhoWantsBeerGame extends Game {
     }
 
     public void dispose() {
-
     }
     
 }

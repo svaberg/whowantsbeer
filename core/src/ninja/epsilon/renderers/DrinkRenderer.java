@@ -3,7 +3,6 @@
  */
 package ninja.epsilon.renderers;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -14,16 +13,13 @@ import ninja.epsilon.physics.Physics;
 import ninja.epsilon.physics.Physics.GlassState;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
 
 public class DrinkRenderer implements Renderer {
-	
-	@SuppressWarnings("unused")
+
 	private Physics refPhysics = null;
 	
 	
@@ -66,18 +62,16 @@ public class DrinkRenderer implements Renderer {
 	public void render(SpriteBatch spriteBatch) {
 
 		glassesLocation = this.refPhysics.whereAreTheGlasses();
-		
-		float xPos = 0;
-		//float yPos = (float) (RendererUtils.PixelsPerMeterY()*RendererUtils.PultHeight);
-		float yPos = 0;
 		elapsedTime += Gdx.graphics.getDeltaTime();
-		
+
 		Iterator<GlassState> it = glassesLocation.iterator();
 		GlassState gs = null;
 		while(it.hasNext()) {
 			gs = it.next();
-			spriteBatch.draw(animationIndex.get(gs.type).getKeyFrame(elapsedTime, true), gs.x, gs.y);
-		}		
+			spriteBatch.draw(animationIndex.get(gs.type).getKeyFrame(elapsedTime, true),
+					gs.x*RendererUtils.PixelsPerMeterX(),
+					gs.y*RendererUtils.PixelsPerMeterY());
+		}
 	}
 	
     @Override

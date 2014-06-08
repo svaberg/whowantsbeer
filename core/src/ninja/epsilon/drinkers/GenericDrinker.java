@@ -77,6 +77,20 @@ public class GenericDrinker implements Drinker {
 		}
 	}
 	
+	/**
+	 * Returns true if the glass resting position is within the grasp of the drinker.
+	 * @param glassRestingPosition
+	 * @return
+	 */
+	public boolean isBeerInRange(float glassRestingPosition) {
+		float distance = Math.abs(glassRestingPosition - this.position);
+		return distance < radius;
+	}
+	
+	/**
+	 * 
+	 * @param typeOfDrink
+	 */
 	public void receiveDrink(TypeOfDrink typeOfDrink) {
 		for (GenericDrinkOrder drinkOrder : drinkOrders) {
 			if (drinkOrder.getWhatsTheDrink() == typeOfDrink) {
@@ -87,12 +101,19 @@ public class GenericDrinker implements Drinker {
 		}
 	}
 		
+	/**
+	 * Add a new drink order for a random drink
+	 */
 	private void addDrinkOrder() {
 		Random ran = new Random();
 		int typeId = ran.nextInt(TypeOfDrink.values().length);
 		addDrinkOrder(TypeOfDrink.values()[typeId]);		
 	}
 	
+	/**
+	 * Add a new drink order for a specific type of drink.
+	 * @param typeOfDrink
+	 */
 	private void addDrinkOrder(TypeOfDrink typeOfDrink) {
 		this.getDrinkOrders().add(new GenericDrinkOrder(typeOfDrink, this.position, creationTime));	
 		Gdx.app.log("GenericDrinker", this.type.toString() + " Drinker passed order for " + typeOfDrink.toString());

@@ -62,6 +62,7 @@ public class BarPhysics implements Physics, Physics.InputCallback {
 		state.x = body.getPosition().x;
 		state.y = body.getPosition().y;
 		state.angle = body.getAngle();
+		state.type = TypeOfDrink.tequilaShot;
 		return state;
 	}
 
@@ -129,7 +130,7 @@ public class BarPhysics implements Physics, Physics.InputCallback {
 		float step_t = (cur_t - prev_t) / 1000.0f;
 		//Gdx.app.log(TAG, "dt = " + step_t);
 		if (step_t <= 0.0) {
-			//throw new PhysicsException("Negative time step: " + step_t);
+			//throw new PhysicsException("Non-positive time step: " + step_t);
 			// Skip iteration since another one just happened.
 			// This happens for example when one resizes the window
 			// or otherwise triggers a refresh.
