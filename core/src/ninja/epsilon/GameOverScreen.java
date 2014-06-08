@@ -24,8 +24,8 @@ public class GameOverScreen implements Screen {
 	
 	@Override
 	public void render(float delta) {
-		stage.act();
-	    stage.draw();	
+//		stage.act();
+//	    stage.draw();	
 	}
 
 	@Override
