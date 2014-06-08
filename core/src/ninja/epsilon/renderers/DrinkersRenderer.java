@@ -13,6 +13,7 @@ import ninja.epsilon.drinkers.Drinker;
 import ninja.epsilon.drinkers.Drinker.DrinkerType;
 import ninja.epsilon.drinkers.Drinkers;
 import ninja.epsilon.drinkers.TypeOfDrink;
+import ninja.epsilon.renderers.DashboardRenderer.ThumbType;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -28,10 +29,12 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 public class DrinkersRenderer implements Renderer {
 
 	private Drinkers DrinkerPool = null;
-	Sprite Sprite = null;
-	Sprite Bubble = null;
+	
+	private Map <DrinkerType, Sprite> SpriteMap = new HashMap<DrinkerType, Sprite>();
+	private Map <TypeOfDrink, Sprite> BubbleMap = new HashMap<TypeOfDrink, Sprite>();
+	
 	private Map <DrinkerType, Texture> TextureMap = new HashMap<DrinkerType, Texture>();
-	private Map <TypeOfDrink, Texture> BubbleTexture = new HashMap<TypeOfDrink, Texture>();
+	private Map <TypeOfDrink, Texture> BubbleTextureMap = new HashMap<TypeOfDrink, Texture>();
 
 
 	public DrinkersRenderer(Drinkers Drinkers) {
@@ -42,16 +45,16 @@ public class DrinkersRenderer implements Renderer {
 	@Override
 	public void create() {
 
-		Sprite = new Sprite();
-		Bubble = new Sprite();
-
 		// create texture maps
 		TypeOfDrink[] values = TypeOfDrink.values();
 		TypeOfDrink drink = null;
-		int i=0, ilen=values.length;
+		int i=0;
+		int ilen=values.length;
 		while(i<ilen) {
 			drink = values[i];
-			BubbleTexture.put(drink, new Texture(Gdx.files.internal(drink.getBubblePath())));
+			BubbleTextureMap.put(drink, new Texture(Gdx.files.internal(drink.getBubblePath())));
+			// create sprite
+			BubbleMap.put(drink, new Sprite(BubbleTextureMap.get(drink)));
 			++i;
 		}
 
@@ -61,7 +64,10 @@ public class DrinkersRenderer implements Renderer {
 		ilen=drinkers.length;
 		while(i<ilen) {
 			drinker = drinkers[i];
+			// create texture
 			TextureMap.put(drinker, new Texture(Gdx.files.internal(GetTexture(drinker))));
+			// create sprite
+			SpriteMap.put(drinker, new Sprite(TextureMap.get(drinker)));
 			++i;
 		}
 	}
@@ -82,7 +88,7 @@ public class DrinkersRenderer implements Renderer {
 		// Start Rendering Them
 		for (Drinker item : currentDrinkers) {
 
-			Sprite.setTexture(TextureMap.get(item.GetDrinkerType()));
+			Sprite Sprite = SpriteMap.get(item.GetDrinkerType());
 			// maximum 3.5 + 0.5 meters on X
 			float xPixels = (float) (RendererUtils.PixelsPerMeterX()*item.getPosition()+0.5*Sprite.getWidth());
 			// Bar is at 0.5 m height
@@ -95,7 +101,7 @@ public class DrinkersRenderer implements Renderer {
 			if (drinkOrders != null)
 			{
 				// add speak bubble
-				Bubble.setTexture(BubbleTexture.get(drinkOrders.get(0).getWhatsTheDrink()));
+				Sprite Bubble = BubbleMap.get(drinkOrders.get(0).getWhatsTheDrink());
 				// scale
 				Bubble.setScale(0.75f);
 				// Set Position
