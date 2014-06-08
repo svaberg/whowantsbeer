@@ -1,7 +1,6 @@
 package ninja.epsilon.score;
 
 import ninja.epsilon.GameLevel;
-import ninja.epsilon.drinkers.DrinkOrder;
 import ninja.epsilon.drinkers.Drinkers;
 import ninja.epsilon.drinkers.TypeOfDrink;
 
