@@ -38,6 +38,7 @@ public class GameScreen implements Screen {
 	private Renderer drinkRenderer = null;
 	
 	private SpriteBatch spriteBatch = null;
+	long t = 0;
 	
 	GameScreen(final WhoWantsBeerGame game){
 		this.game = game;
@@ -47,6 +48,7 @@ public class GameScreen implements Screen {
 	
 
 	public void create () {
+		t = System.currentTimeMillis();
 		renderers = new ArrayList<Renderer>();
 		scorer = new Score();
 		physics = new BarPhysics(scorer);
@@ -67,7 +69,7 @@ public class GameScreen implements Screen {
 	
 	@Override
 	public void render(float delta) {
-		long t = System.currentTimeMillis();
+		
 		physics.update(t, inputReader.input(t));
 		drinkers.update(t, GameLevel.EASY);			
 		
@@ -85,7 +87,7 @@ public class GameScreen implements Screen {
 		Long javaHeap = Gdx.app.getJavaHeap();
 		Long nativeHeap = Gdx.app.getNativeHeap();
 		
-		Gdx.app.log(TAG, "JH: " + Float.toString(javaHeap.floatValue()/1024f/1024f) + " NH: " + Float.toString(nativeHeap.floatValue()/1024f/1024f));
+		Gdx.app.log(TAG, "S: " + ((System.currentTimeMillis() - t) / 1000) + " JH: " + Float.toString(javaHeap.floatValue()/1024f/1024f) + " NH: " + Float.toString(nativeHeap.floatValue()/1024f/1024f));
 	}
 
 	public void dispose() {
