@@ -21,9 +21,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 
 public class GameScreen implements Screen {
-
-	final WhoWantsBeerGame game;
 	
+	final WhoWantsBeerGame game;
+
 	private static final String TAG = WhoWantsBeerGame.class.getSimpleName();
 
 	private Drinkers drinkers;
@@ -38,23 +38,24 @@ public class GameScreen implements Screen {
 	private Renderer drinkRenderer = null;
 	
 	private SpriteBatch spriteBatch = null;
-	long t = 0;
+	long start = 0;
 	
-	GameScreen(final WhoWantsBeerGame game){
+	Screen gameOverScreen;
+	
+	GameScreen(final WhoWantsBeerGame game) {
 		this.game = game;
+		gameOverScreen = new GameOverScreen(game);
 		create ();
 	}
 	
-	
-
 	public void create () {
-		t = System.currentTimeMillis();
+		start = System.currentTimeMillis();
 		renderers = new ArrayList<Renderer>();
 		scorer = new Score();
 		physics = new BarPhysics(scorer);
 		drinkers = new BarCounter();
 		inputReader = new SwipeReader(physics);
-
+		
 		renderers.add(backgroundRenderer = new BackgroundRenderer());
 		renderers.add(drinkRenderer = new DrinkRenderer(physics));
 		renderers.add(drinkersRenderer = new DrinkersRenderer(drinkers));
@@ -63,15 +64,14 @@ public class GameScreen implements Screen {
 		spriteBatch = new SpriteBatch();
 		for (Renderer renderer : renderers) {
 			renderer.create();
-			
 		}
 	}
 	
 	@Override
 	public void render(float delta) {
 		
-		physics.update(t, inputReader.input(t));
-		drinkers.update(t, GameLevel.EASY);			
+		physics.update(start, inputReader.input(start));
+		drinkers.update(start, GameLevel.EASY);			
 		
 		spriteBatch.begin();
 		for (Renderer renderer : renderers) {
@@ -79,15 +79,14 @@ public class GameScreen implements Screen {
 		}
 		spriteBatch.end();
 		
-		if(scorer.gameOver())
-		{
-			  game.setScreen(new GameOverScreen(game));
+		if (scorer.gameOver()) {
+			  game.setScreen(gameOverScreen);
 		}
 		
 		Long javaHeap = Gdx.app.getJavaHeap();
 		Long nativeHeap = Gdx.app.getNativeHeap();
 		
-		Gdx.app.log(TAG, "S: " + ((System.currentTimeMillis() - t) / 1000) + " JH: " + Float.toString(javaHeap.floatValue()/1024f/1024f) + " NH: " + Float.toString(nativeHeap.floatValue()/1024f/1024f));
+		Gdx.app.log(TAG, "S: " + ((System.currentTimeMillis() - start) / 1000) + " JH: " + Float.toString(javaHeap.floatValue()/1024f/1024f) + " NH: " + Float.toString(nativeHeap.floatValue()/1024f/1024f));
 	}
 
 	public void dispose() {
