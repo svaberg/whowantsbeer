@@ -15,14 +15,14 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
  * @author Certya
  *
  */
-public class SplashScreen implements Screen {
+public class LogoEpsilonNinjaScreen implements Screen {
 
 	private SpriteBatch spriteBatch;
     private Texture splsh;
     private float elapsedTime = 0;
     
 	private WhoWantsBeerGame refGame = null;
-	public SplashScreen(WhoWantsBeerGame game) {
+	public LogoEpsilonNinjaScreen(WhoWantsBeerGame game) {
 		this.refGame = game;
 	}
 
@@ -43,7 +43,7 @@ public class SplashScreen implements Screen {
          
          // wait 1.2 seconds for changing screen
          if(elapsedTime > 1.2)
-        	 refGame.setScreen(new LogoEpsilonNinjaScreen(refGame));
+        	 refGame.setScreen(new GameScreen(refGame));
 
 	}
 
@@ -61,7 +61,7 @@ public class SplashScreen implements Screen {
 	@Override
 	public void show() {
 		 spriteBatch = new SpriteBatch();
-         splsh = new Texture(Gdx.files.internal("screens" + File.separator + "whowantsbeer.png"));
+         splsh = new Texture(Gdx.files.internal("screens" + File.separator + "epsilon_ninja.png"));
 
 	}
 
