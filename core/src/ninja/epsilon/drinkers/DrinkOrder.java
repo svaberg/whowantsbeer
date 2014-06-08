@@ -5,4 +5,5 @@ public interface DrinkOrder {
 	float getPosition();
 	int getPointsReceived(long timeOfReceivingDrink);
 	void setReceived();
+	boolean isReceived();
 }

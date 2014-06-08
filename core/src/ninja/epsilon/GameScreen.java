@@ -56,7 +56,8 @@ public class GameScreen implements Screen {
 		renderers = new ArrayList<Renderer>();
 		scorer = new Score();
 		physics = new BarPhysics(scorer);
-		drinkers = new BarCounter();
+		drinkers = new BarCounter(scorer);
+		scorer.setDrinkers(drinkers);
 		inputReader = new SwipeReader(physics);
 		
 		renderers.add(backgroundRenderer = new BackgroundRenderer());

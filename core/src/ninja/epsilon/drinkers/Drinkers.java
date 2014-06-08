@@ -16,4 +16,7 @@ public interface Drinkers {
 	 */
 	List<? extends Drinker> GetDrinkers();
 
+	int giveDrink(TypeOfDrink typeOfDrink, float position,
+			long timeOfReceivingDrink);
+
 }
