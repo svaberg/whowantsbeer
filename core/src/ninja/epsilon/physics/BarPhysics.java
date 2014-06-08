@@ -3,6 +3,8 @@ package ninja.epsilon.physics;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.ListIterator;
+import java.util.Random;
+import java.util.Set;
 
 import ninja.epsilon.Dimensions;
 import ninja.epsilon.drinkers.Drinkers;
@@ -84,12 +86,12 @@ public class BarPhysics implements Physics, Physics.InputCallback {
 		world.dispose();
 	}
 
-	private GlassState bodyToState(Body body) {
+	private GlassState bodyToState(Glass glass) {
 		GlassState state = new GlassState();
-		state.x = body.getPosition().x;
-		state.y = body.getPosition().y;
-		state.angle = body.getAngle();
-		state.type = drinkers.drinkTypesOrderedNotReceived().iterator().next();
+		state.x = glass.getBody().getPosition().x;
+		state.y = glass.getBody().getPosition().y;
+		state.angle = glass.getBody().getAngle();
+		state.type = glass.getType();
 		return state;
 	}
 
@@ -107,7 +109,7 @@ public class BarPhysics implements Physics, Physics.InputCallback {
 
 		@Override
 		public GlassState next() {
-			return bodyToState(gi.next().getBody());
+			return bodyToState(gi.next());
 		}
 
 		@Override
@@ -174,11 +176,11 @@ public class BarPhysics implements Physics, Physics.InputCallback {
 			if (body.getLinearVelocity().isZero(MIN_STOP_VELOCITY)) {
 				float x = glass.getBody().getPosition().x;
 				if (scorer.gotOneDrink(TypeOfDrink.blondBeer, x, cur_t)) {
-					Gdx.app.log(TAG, "Glass claimed at x=" + x);
+					//Gdx.app.log(TAG, "Glass claimed at x=" + x);
 					world.destroyBody(body);
 					i.remove();
 				} else {
-					Gdx.app.log(TAG,  "Glass stopped unclaimed at x=" + x);
+					//Gdx.app.log(TAG,  "Glass stopped unclaimed at x=" + x);
 				}
 			}
 		}
@@ -186,7 +188,7 @@ public class BarPhysics implements Physics, Physics.InputCallback {
 			Glass glass = i.next();
 			Body body = glass.getBody();
 			if (body.getPosition().y < FALL_DETECT_THRESHOLD) {
-				Gdx.app.log(TAG, "Glass has fallen off the counter!");
+				//Gdx.app.log(TAG, "Glass has fallen off the counter!");
 				scorer.fellOneDrink();
 				fellGlassCount++;
 				world.destroyBody(body);
@@ -208,12 +210,16 @@ public class BarPhysics implements Physics, Physics.InputCallback {
 
 	private Vector2 getImpulse(float v) {
 		float impulse = 0.033f * v / 20.0f;
-		Gdx.app.log(TAG, "Applying impulse " + impulse);
+		//Gdx.app.log(TAG, "Applying impulse " + impulse);
 		return new Vector2(impulse, 0.0f);
 	}
 
 	private TypeOfDrink getNextType() {
-		return TypeOfDrink.blondBeer;
+		Set<TypeOfDrink> viableTypes = drinkers.drinkTypesOrderedNotReceived();
+		TypeOfDrink[] types = viableTypes.toArray(new TypeOfDrink[0]);
+		int i = new Random().nextInt(viableTypes.size());
+		Gdx.app.log(TAG, "Selecting type " + i + " (" + types[i].toString() + ") out of " + viableTypes.size());
+		return types[i];
 	}
 
 	private Body createCounterBody() {
@@ -227,7 +233,7 @@ public class BarPhysics implements Physics, Physics.InputCallback {
 	}
 
 	private Body createGlassBody(float v) {
-		Gdx.app.log(TAG, "Created glass!");
+		//Gdx.app.log(TAG, "Created glass!");
 		BodyDef glassDef = new BodyDef();
 		glassDef.position.set(new Vector2(0.0f, Dimensions.PULT_HEIGHT + Dimensions.GLASS_HEIGHT/2.0f));
 		glassDef.type = BodyType.DynamicBody;
