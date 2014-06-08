@@ -80,7 +80,7 @@ public class DrinkersRenderer implements Renderer {
 	public void render(SpriteBatch spriteBatch) {
 
 		// Get Drinker List
-		List<? extends Drinker> currentDrinkers = DrinkerPool.GetDrinkers();
+		List<? extends Drinker> currentDrinkers = DrinkerPool.getDrinkers();
 
 		// Start Rendering Them`
 		for (Drinker item : currentDrinkers) {

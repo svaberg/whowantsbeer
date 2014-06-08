@@ -1,8 +1,10 @@
 package ninja.epsilon.drinkers;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 import ninja.epsilon.Dimensions;
 import ninja.epsilon.GameLevel;
@@ -130,7 +132,7 @@ public class BarCounter implements Drinkers{
 	 * Get list of drinkers.
 	 */
 	@Override
-	public List<? extends Drinker> GetDrinkers() {
+	public List<? extends Drinker> getDrinkers() {
 		// TODO Auto-generated method stub
 		return drinkersWaiting;
 	}
@@ -146,6 +148,17 @@ public class BarCounter implements Drinkers{
 			}
 		} 
 		return pointsGot;
+	}
+
+	@Override
+	public Set<TypeOfDrink> drinkTypesOrderedNotReceived() {
+		Set<TypeOfDrink> viableDrinks = new HashSet<TypeOfDrink>();
+		for (Drinker drinker : drinkersWaiting) {
+			for (DrinkOrder order : drinker.getDrinkOrders()) {
+				viableDrinks.add(order.getWhatsTheDrink());
+			}
+		}
+		return viableDrinks;
 	}
 	
 	
