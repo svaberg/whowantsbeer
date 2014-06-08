@@ -37,11 +37,29 @@ public class BarPhysics implements Physics, Physics.InputCallback {
 	private static final float FALL_DETECT_THRESHOLD = -10.0f;
 
 	private World world;
-	private LinkedList<Body> glasses;
+	private LinkedList<Glass> glasses;
 	private long prev_t;
 	private boolean running;
 	private Scorer scorer;
 	private int fellGlassCount;
+
+	private static class Glass {
+		private Body body;
+		private TypeOfDrink type;
+
+		public Glass(Body body, TypeOfDrink type) {
+			this.body = body;
+			this.type = type;
+		}
+
+		public Body getBody() {
+			return body;
+		}
+
+		public TypeOfDrink getType() {
+			return type;
+		}
+	}
 
 	public static class PhysicsException extends RuntimeException {
 		PhysicsException(String msg) {
@@ -51,8 +69,8 @@ public class BarPhysics implements Physics, Physics.InputCallback {
 
 	public BarPhysics(Scorer scorer) {
 		world = new World(GRAVITY, false); //TODO: try doSleep=true
-		createCounter();
-		glasses = new LinkedList<Body>();
+		createCounterBody();
+		glasses = new LinkedList<Glass>();
 		running = false;
 		this.scorer = scorer;
 		Gdx.app.log(TAG, "NEW WORLD CREATED!");
@@ -68,9 +86,9 @@ public class BarPhysics implements Physics, Physics.InputCallback {
 	}
 
 	private class GlassIterator implements Iterator<GlassState> {
-		private Iterator<Body> gi;
+		private Iterator<Glass> gi;
 
-		public GlassIterator(Iterator<Body> gi) {
+		public GlassIterator(Iterator<Glass> gi) {
 			this.gi = gi;
 		}
 
@@ -81,7 +99,7 @@ public class BarPhysics implements Physics, Physics.InputCallback {
 
 		@Override
 		public GlassState next() {
-			return bodyToState(gi.next());
+			return bodyToState(gi.next().getBody());
 		}
 
 		@Override
@@ -115,14 +133,14 @@ public class BarPhysics implements Physics, Physics.InputCallback {
 		running = true;
 	}
 
-	private void logGlass(Body glass) {
-		Vector2 p = glass.getPosition();
-		Vector2 v = glass.getLinearVelocity();
+	private void logGlass(Glass glass) {
+		Vector2 p = glass.getBody().getPosition();
+		Vector2 v = glass.getBody().getLinearVelocity();
 		//Gdx.app.log(TAG, "x=" + p.x + "  y=" + p.y + "  vx=" + v.x + "  vy=" + v.y);
 	}
 
 	private void logGlasses() {
-		for (Body glass : glasses) {
+		for (Glass glass : glasses) {
 			logGlass(glass);
 		}
 	}
@@ -142,20 +160,21 @@ public class BarPhysics implements Physics, Physics.InputCallback {
 		world.step(step_t, VELOCITY_ITERATIONS, POSITION_ITERATIONS);
 		logGlasses();
 
-		for (ListIterator<Body> i = glasses.listIterator(); i.hasNext();) {
-			Body glass = i.next();
-			if (glass.getLinearVelocity().isZero(MIN_STOP_VELOCITY)) {
-				float x = glass.getPosition().x;
+		for (ListIterator<Glass> i = glasses.listIterator(); i.hasNext();) {
+			Glass glass = i.next();
+			Body body = glass.getBody();
+			if (body.getLinearVelocity().isZero(MIN_STOP_VELOCITY)) {
+				float x = glass.getBody().getPosition().x;
 				Gdx.app.log(TAG, "Glass stopped at x=" + x);
 				scorer.gotOneDrink(TypeOfDrink.blondBeer, x, cur_t);
-				world.destroyBody(glass);
+				world.destroyBody(body);
 				i.remove();
 			}
-			if (glass.getPosition().y < FALL_DETECT_THRESHOLD) {
+			if (body.getPosition().y < FALL_DETECT_THRESHOLD) {
 				Gdx.app.log(TAG, "Glass has fallen off the counter!");
 				scorer.fellOneDrink();
 				fellGlassCount++;
-				world.destroyBody(glass);
+				world.destroyBody(body);
 				i.remove();
 			}
 		}
@@ -163,13 +182,13 @@ public class BarPhysics implements Physics, Physics.InputCallback {
 
 	@Override
 	public void swipe(float v) {
-		Body glass = createGlass(v);
-		glass.applyLinearImpulse(getImpulse(v), glass.getWorldCenter(), true);
+		Body body = createGlassBody(v);
+		body.applyLinearImpulse(getImpulse(v), body.getWorldCenter(), true);
 		if (glasses.size() > MAX_GLASSES_COUNT) {
-			glasses.remove(0);
+			world.destroyBody(glasses.remove(0).getBody());
 			Gdx.app.log(TAG, "Too many glasses created, dropping...");
 		}
-		glasses.add(glass);
+		glasses.add(new Glass(body, getNextType()));
 	}
 
 	private Vector2 getImpulse(float v) {
@@ -178,7 +197,11 @@ public class BarPhysics implements Physics, Physics.InputCallback {
 		return new Vector2(impulse, 0.0f);
 	}
 
-	private Body createCounter() {
+	private TypeOfDrink getNextType() {
+		return TypeOfDrink.blondBeer;
+	}
+
+	private Body createCounterBody() {
 		BodyDef counterDef = new BodyDef();
 		counterDef.position.set(new Vector2(0.0f, 0.0f));
 		Body counter = world.createBody(counterDef);
@@ -188,7 +211,7 @@ public class BarPhysics implements Physics, Physics.InputCallback {
 		return counter;
 	}
 
-	private Body createGlass(float v) {
+	private Body createGlassBody(float v) {
 		Gdx.app.log(TAG, "Created glass!");
 		BodyDef glassDef = new BodyDef();
 		glassDef.position.set(new Vector2(0.0f, Dimensions.PULT_HEIGHT + Dimensions.GLASS_HEIGHT/2.0f));
