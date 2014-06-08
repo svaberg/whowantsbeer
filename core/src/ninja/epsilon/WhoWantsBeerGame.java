@@ -78,6 +78,7 @@ public class WhoWantsBeerGame extends ApplicationAdapter {
 		for (Renderer renderer : renderers) {
 			renderer.dispose();
 		}
+		spriteBatch.dispose();
 	}
 }
 

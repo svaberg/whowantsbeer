@@ -43,15 +43,6 @@ public class DashboardRenderer implements Renderer {
 	@Override
 	public void render(SpriteBatch spriteBatch) {
 		
-		// Start Rendering Them
-
-		// set font
-		
-		// put Dashboard 2.3 meters high and 1.5 meter right
-		Font.draw(spriteBatch, "You are awesome! SCORE is: " + Scorer.getScore(), 
-				RendererUtils.PixelsPerMeterX()*1.3f, 
-				RendererUtils.PixelsPerMeterY()*2.4f);
-		
 		int Fails = Scorer.getNrOfFails();
 		int Chances = Scorer.getChances();
 		
@@ -70,12 +61,19 @@ public class DashboardRenderer implements Renderer {
 		Texture ThumbsDownTexture = new Texture(Gdx.files.internal("thumbdown2.png"));
 		for (int i=1; i<Fails; i++)
 		{
-			// add thumbs up
+			// add thumbs down
 			Sprite ThumbsDown = new Sprite(ThumbsDownTexture);
 			// Set Position
 			ThumbsDown.setPosition(RendererUtils.PixelsPerMeterX()*0.1f+(ThumbsDown.getWidth()*(Chances+i)), RendererUtils.PixelsPerMeterY()*2.3f);
 			ThumbsDown.draw(spriteBatch);
 		}
+		
+		Sprite Thumbs = new Sprite(ThumbsDownTexture);
+		
+		// put Dashboard 2.3 meters high and 1.5 meter right
+		Font.draw(spriteBatch, "You are awesome! SCORE is: " + Scorer.getScore(), 
+				RendererUtils.PixelsPerMeterX()*0.2f+(Thumbs.getWidth()*(Chances+Fails)), 
+				RendererUtils.PixelsPerMeterY()*2.4f);
 	}
 	
 }
