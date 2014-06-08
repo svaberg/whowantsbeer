@@ -18,6 +18,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+import ninja.epsilon.Dimensions;
+
 /**
  * @author treestrongs
  *
@@ -61,7 +63,7 @@ public class DrinkersRenderer implements Renderer {
 				// maximum 3.5 + 0.5 meters on X
 				float xPixels = (float) (RendererUtils.PixelsPerMeterX()*item.getPosition()+0.5*Sprite.getWidth());
 				// Bar is at 0.5 m height
-				float yPixels = (float) (RendererUtils.PixelsPerMeterY()*RendererUtils.PultHeight);
+				float yPixels = (float) (RendererUtils.PixelsPerMeterY()*Dimensions.PULT_HEIGHT);
 				// Set Position
 				Sprite.setPosition(xPixels, yPixels);
 				SpriteMap.put(item.hashCode(), Sprite);
