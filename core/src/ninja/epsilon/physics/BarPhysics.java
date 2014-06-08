@@ -13,6 +13,7 @@ import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 
+import ninja.epsilon.Dimensions;
 import ninja.epsilon.drinkers.TypeOfDrink;
 import ninja.epsilon.score.Scorer;
 
@@ -178,7 +179,7 @@ public class BarPhysics implements Physics, Physics.InputCallback {
 		counterDef.position.set(new Vector2(0.0f, 0.0f));
 		Body counter = world.createBody(counterDef);
 		PolygonShape counterShape = new PolygonShape();
-		counterShape.setAsBox(3.0f, 1.0f);
+		counterShape.setAsBox(Dimensions.PULT_LENGTH/2.0f, Dimensions.PULT_HEIGHT/2.0f);
 		counter.createFixture(counterShape, 0.0f);
 		return counter;
 	}
@@ -186,15 +187,15 @@ public class BarPhysics implements Physics, Physics.InputCallback {
 	private Body createGlass(float v) {
 		Gdx.app.log(TAG, "Created glass!");
 		BodyDef glassDef = new BodyDef();
-		glassDef.position.set(new Vector2(0.0f, 2.0f));
+		glassDef.position.set(new Vector2(0.0f, Dimensions.PULT_HEIGHT/2.0f + Dimensions.GLASS_HEIGHT/2.0f));
 		glassDef.type = BodyType.DynamicBody;
 		Body glass = world.createBody(glassDef);
 		PolygonShape glassShape = new PolygonShape();
-		glassShape.setAsBox(1.0f, 1.0f);
+		glassShape.setAsBox(Dimensions.GLASS_WIDTH/2.0f, Dimensions.GLASS_HEIGHT/2.0f);
 		FixtureDef fixtureDef = new FixtureDef();
 		fixtureDef.shape = glassShape;
 		fixtureDef.density = 1.0f;
-		fixtureDef.friction = 0.1f;
+		fixtureDef.friction = 0.01f;
 		glass.createFixture(fixtureDef);
 		return glass;
 	}
