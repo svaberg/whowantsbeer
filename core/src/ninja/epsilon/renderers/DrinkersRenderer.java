@@ -78,30 +78,37 @@ public class DrinkersRenderer implements Renderer {
 
 		// Get Drinker List
 		List<? extends Drinker> currentDrinkers = DrinkerPool.GetDrinkers();
+		
+		Texture texture = null;
 
-		// Start Rendering Them
+		// Start Rendering Them`
 		for (Drinker item : currentDrinkers) {
-
-			Sprite.setTexture(TextureMap.get(item.GetDrinkerType()));
+			texture = TextureMap.get(item.GetDrinkerType());
+			
+			
+			//Sprite.setTexture(TextureMap.get(item.GetDrinkerType()));
 			// maximum 3.5 + 0.5 meters on X
-			float xPixels = (float) (RendererUtils.PixelsPerMeterX()*item.getPosition()+0.5*Sprite.getWidth());
+			float xPixels = (float) (RendererUtils.PixelsPerMeterX()*item.getPosition()+0.5*texture.getWidth());
 			// Bar is at 0.5 m height
 			float yPixels = (float) (RendererUtils.PixelsPerMeterY()*Dimensions.PULT_HEIGHT);
 			// Set Position
-			Sprite.setPosition(xPixels, yPixels);
-			Sprite.draw(spriteBatch);
+			//Sprite.setPosition(xPixels, yPixels);
+			//Sprite.draw(spriteBatch);
+			
+			spriteBatch.draw(texture, xPixels, yPixels);
 
-			List<? extends DrinkOrder> drinkOrders = item.getDrinkOrders();
-			if (drinkOrders != null)
-			{
-				// add speak bubble
-				Bubble.setTexture(BubbleTexture.get(drinkOrders.get(0).getWhatsTheDrink()));
-				// scale
-				Bubble.setScale(0.75f);
-				// Set Position
-				Bubble.setPosition(Sprite.getX()-20, Sprite.getY()+Sprite.getHeight()-20);
-				Bubble.draw(spriteBatch);
-			}
+
+//			List<? extends DrinkOrder> drinkOrders = item.getDrinkOrders();
+//			if (drinkOrders != null)
+//			{
+//				// add speak bubble
+//				Bubble.setTexture(BubbleTexture.get(drinkOrders.get(0).getWhatsTheDrink()));
+//				// scale
+//				Bubble.setScale(0.75f);
+//				// Set Position
+//				Bubble.setPosition(Sprite.getX()-20, Sprite.getY()+Sprite.getHeight()-20);
+//				Bubble.draw(spriteBatch);
+//			}
 		}
 	}
 
