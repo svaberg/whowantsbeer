@@ -97,11 +97,11 @@ public class GameScreen implements Screen {
 			
 			 Gdx.app.log(TAG, "Game over");
 			
-			  //game.setScreen(gameOverScreen);
+			 renderers.clear();
+			 hide();
+			  game.setScreen(gameOverScreen);
 			 
 			 // this.dispose();
-			 
-			  
 		}
 	}
 

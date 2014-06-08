@@ -36,9 +36,11 @@ public class GameOverScreen implements Screen {
 
 	@Override
 	public void show() {
-		stage = new Stage();
-		skin = new Skin();
-  
+		System.out.print("Game over screen");
+		
+//		stage = new Stage();
+//		skin = new Skin();
+//  
         
 //		Table table = new Table(ResPack._SKIN);
 //	 
@@ -69,7 +71,7 @@ public class GameOverScreen implements Screen {
 //	    table.row().height(75);
 //	    table.add(exit).center().width(500).pad(5f);
 //	    stage.addActor(table);
-	    Gdx.input.setInputProcessor(stage);
+	 //   Gdx.input.setInputProcessor(stage);
 	}
 
 	@Override

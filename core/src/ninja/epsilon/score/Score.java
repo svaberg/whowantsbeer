@@ -34,7 +34,7 @@ public class Score implements Scorer {
 		
 		if(poitnsGot==-1){
 			//penalty
-			chances = chances > 0 ? chances -1 : 0;
+			//chances = chances > 0 ? chances -1 : 0;
 		}
 		else{
 			currentScore+=poitnsGot;
