@@ -87,7 +87,9 @@ public class DrinkersRenderer implements Renderer {
 
 			Sprite Sprite = SpriteMap.get(item.GetDrinkerType());
 			// maximum 3.5 + 0.5 meters on X
-			float xPixels = (float) (RendererUtils.PixelsPerMeterX()*item.getPosition()+0.5*Sprite.getWidth());
+			float xPixels = (float) (RendererUtils.PixelsPerMeterX()*
+					(Dimensions.PULT_LENGTH/Dimensions.FULL_WIDTH)*
+					item.getPosition()+0.5*Sprite.getWidth());
 			// Bar is at 0.5 m height
 			float yPixels = (float) (RendererUtils.PixelsPerMeterY()*Dimensions.PULT_HEIGHT);
 			// Set Position
