@@ -153,6 +153,7 @@ public class BarPhysics implements Physics, Physics.InputCallback {
 			}
 			if (glass.getPosition().y < FALL_DETECT_THRESHOLD) {
 				Gdx.app.log(TAG, "Glass has fallen off the counter!");
+				scorer.fellOneDrink();
 				fellGlassCount++;
 				world.destroyBody(glass);
 				i.remove();

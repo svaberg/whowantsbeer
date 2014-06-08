@@ -9,7 +9,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
 
 
-public class Score implements Scorer{
+public class Score implements Scorer {
 
 	Sound dropSound;
 	private int currentScore;
@@ -42,6 +42,10 @@ public class Score implements Scorer{
 		}
 	}
 	
+	@Override
+	public void fellOneDrink() {
+		//TODO for Emilia
+	}
 
 	@Override
 	public GameLevel getGameLevel() {
