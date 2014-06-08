@@ -2,8 +2,10 @@ package ninja.epsilon.renderers;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 
 public class BackgroundRenderer implements Renderer {
 	
@@ -44,5 +46,4 @@ public class BackgroundRenderer implements Renderer {
 		music.dispose();
 		backgroundImg.dispose();
 	}
-
 }

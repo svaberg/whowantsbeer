@@ -3,19 +3,16 @@
  */
 package ninja.epsilon.renderers;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import ninja.epsilon.score.Scorer;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+//import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 
 /**
  * @author treestrongs
@@ -29,6 +26,8 @@ public class DashboardRenderer implements Renderer {
 	private Texture thumbDownTexture;
 	private Sprite thumbUpSprite;
 	private Sprite thumbDownSprite;
+	//TODO: Add typefont generator for creating fonts on runtime depending on screen size
+	//private FreeTypeFontGenerator generator;
 	
 	// Add more types in the future...
 	public enum ThumbType {
@@ -42,6 +41,7 @@ public class DashboardRenderer implements Renderer {
 	
 	@Override
 	public void create() {
+		//createFonts();
 		Font = new BitmapFont();
 		Font.setColor(Color.GREEN);
 		
@@ -56,7 +56,8 @@ public class DashboardRenderer implements Renderer {
     public void dispose() {
     	Font.dispose();
     	thumbUpTexture.dispose();
-    	thumbDownTexture.dispose();    	
+    	thumbDownTexture.dispose(); 
+    	//generator.dispose();
     }
 	
 	/* (non-Javadoc)
@@ -86,5 +87,14 @@ public class DashboardRenderer implements Renderer {
 		Font.draw(spriteBatch, "You are awesome! SCORE is: " + Scorer.getScore(), 
 				RendererUtils.PixelsPerMeterX()*0.2f+(thumbDownSprite.getWidth()*(Chances+Fails)), 
 				RendererUtils.PixelsPerMeterY()*2.4f);
-	}	
+	}
+	
+/*
+	private void createFonts() {
+	    FileHandle fontFile = Gdx.files.internal("fonts/Roboto-Regular.ttf");
+	    generator = new FreeTypeFontGenerator(fontFile);
+	    Font = generator.generateFont(Math.round(RendererUtils.PixelsPerMeterY()));
+	    generator.dispose();
+	}
+	*/
 }
