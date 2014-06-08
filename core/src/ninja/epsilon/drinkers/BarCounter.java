@@ -151,7 +151,7 @@ public class BarCounter implements Drinkers{
 	}
 
 	@Override
-	public Set<TypeOfDrink> getViableDrinks() {
+	public Set<TypeOfDrink> drinkTypesOrderedNotReceived() {
 		Set<TypeOfDrink> viableDrinks = new HashSet<TypeOfDrink>();
 		for (Drinker drinker : drinkersWaiting) {
 			for (DrinkOrder order : drinker.getDrinkOrders()) {

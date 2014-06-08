@@ -4,6 +4,11 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.ListIterator;
 
+import ninja.epsilon.Dimensions;
+import ninja.epsilon.drinkers.Drinkers;
+import ninja.epsilon.drinkers.TypeOfDrink;
+import ninja.epsilon.score.Scorer;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
@@ -12,10 +17,6 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.FixtureDef;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
-
-import ninja.epsilon.Dimensions;
-import ninja.epsilon.drinkers.TypeOfDrink;
-import ninja.epsilon.score.Scorer;
 
 /**
  * Main physics engine class.
@@ -42,6 +43,7 @@ public class BarPhysics implements Physics, Physics.InputCallback {
 	private boolean running;
 	private Scorer scorer;
 	private int fellGlassCount;
+	private Drinkers drinkers;
 
 	public static class PhysicsException extends RuntimeException {
 		PhysicsException(String msg) {
@@ -49,21 +51,22 @@ public class BarPhysics implements Physics, Physics.InputCallback {
 		}
 	}
 
-	public BarPhysics(Scorer scorer) {
+	public BarPhysics(Scorer scorer, Drinkers drinkers) {
 		world = new World(GRAVITY, false); //TODO: try doSleep=true
 		createCounter();
 		glasses = new LinkedList<Body>();
 		running = false;
 		this.scorer = scorer;
+		this.drinkers = drinkers;
 		Gdx.app.log(TAG, "NEW WORLD CREATED!");
 	}
 
-	private static GlassState bodyToState(Body body) {
+	private GlassState bodyToState(Body body) {
 		GlassState state = new GlassState();
 		state.x = body.getPosition().x;
 		state.y = body.getPosition().y;
 		state.angle = body.getAngle();
-		state.type = TypeOfDrink.blondBeer;
+		state.type = drinkers.drinkTypesOrderedNotReceived().iterator().next();
 		return state;
 	}
 

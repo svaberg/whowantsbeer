@@ -21,6 +21,6 @@ public interface Drinkers {
 	int giveDrink(TypeOfDrink typeOfDrink, float position,
 			long timeOfReceivingDrink);
 	
-	Set<TypeOfDrink> getViableDrinks();
+	Set<TypeOfDrink> drinkTypesOrderedNotReceived();
 
 }
