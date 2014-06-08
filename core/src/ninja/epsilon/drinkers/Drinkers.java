@@ -1,6 +1,8 @@
 package ninja.epsilon.drinkers;
 
 import java.util.List;
+import java.util.Set;
+
 import ninja.epsilon.GameLevel;
 
 public interface Drinkers {
@@ -14,9 +16,11 @@ public interface Drinkers {
 	/*
 	 * Getter for the Drinkers List
 	 */
-	List<? extends Drinker> GetDrinkers();
+	List<? extends Drinker> getDrinkers();
 
 	int giveDrink(TypeOfDrink typeOfDrink, float position,
 			long timeOfReceivingDrink);
+	
+	Set<TypeOfDrink> drinkTypesOrderedNotReceived();
 
 }
