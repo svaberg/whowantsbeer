@@ -72,16 +72,16 @@ public class GenericDrinker implements Drinker {
 		}
 		
 		// Add a few drink orders.
-		{
-			Random ran = new Random();
-			int exp = ran.nextInt(8);
-			for (int i = 1; i < 8; i *= 2)
-			{
-				if (exp % i == 0) {
+//		{
+//			Random ran = new Random();
+//			int exp = ran.nextInt(8);
+//			for (int i = 1; i < 8; i *= 2)
+//			{
+//				if (exp % i == 0) {
 					addDrinkOrder();
-				}
-			}
-		}
+//				}
+//			}
+//		}
 	}
 	
 	/**
