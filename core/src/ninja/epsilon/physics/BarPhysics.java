@@ -62,6 +62,7 @@ public class BarPhysics implements Physics, Physics.InputCallback {
 		state.x = body.getPosition().x;
 		state.y = body.getPosition().y;
 		state.angle = body.getAngle();
+		state.type = TypeOfDrink.tequilaShot;
 		return state;
 	}
 

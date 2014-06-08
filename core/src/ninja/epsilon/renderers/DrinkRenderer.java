@@ -77,7 +77,7 @@ public class DrinkRenderer implements Renderer {
 		while(it.hasNext()) {
 			gs = it.next();
 			spriteBatch.draw(animationIndex.get(gs.type).getKeyFrame(elapsedTime, true), gs.x, gs.y);
-		}		
+		}
 	}
 	
     @Override
