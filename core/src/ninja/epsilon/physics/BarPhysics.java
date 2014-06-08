@@ -179,7 +179,7 @@ public class BarPhysics implements Physics, Physics.InputCallback {
 		counterDef.position.set(new Vector2(0.0f, 0.0f));
 		Body counter = world.createBody(counterDef);
 		PolygonShape counterShape = new PolygonShape();
-		counterShape.setAsBox(Dimensions.PULT_LENGTH/2.0f, Dimensions.PULT_HEIGHT/2.0f);
+		counterShape.setAsBox(Dimensions.PULT_LENGTH, Dimensions.PULT_HEIGHT);
 		counter.createFixture(counterShape, 0.0f);
 		return counter;
 	}
@@ -187,7 +187,7 @@ public class BarPhysics implements Physics, Physics.InputCallback {
 	private Body createGlass(float v) {
 		Gdx.app.log(TAG, "Created glass!");
 		BodyDef glassDef = new BodyDef();
-		glassDef.position.set(new Vector2(0.0f, Dimensions.PULT_HEIGHT/2.0f + Dimensions.GLASS_HEIGHT/2.0f));
+		glassDef.position.set(new Vector2(0.0f, Dimensions.PULT_HEIGHT + Dimensions.GLASS_HEIGHT/2.0f));
 		glassDef.type = BodyType.DynamicBody;
 		Body glass = world.createBody(glassDef);
 		PolygonShape glassShape = new PolygonShape();
