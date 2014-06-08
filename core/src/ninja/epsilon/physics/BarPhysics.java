@@ -174,6 +174,8 @@ public class BarPhysics implements Physics, Physics.InputCallback {
 					Gdx.app.log(TAG, "Glass claimed at x=" + x);
 					world.destroyBody(body);
 					i.remove();
+				} else {
+					Gdx.app.log(TAG,  "Glass stopped unclaimed at x=" + x);
 				}
 			}
 		}

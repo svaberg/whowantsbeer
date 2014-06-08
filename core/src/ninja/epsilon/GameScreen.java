@@ -80,6 +80,10 @@ public class GameScreen implements Screen {
 		drinkers.update(cur_t, GameLevel.EASY);
 		
 		spriteBatch.begin();
+		
+
+		
+		
 		for (Renderer renderer : renderers) {
 			renderer.render(spriteBatch);
 		}
@@ -88,8 +92,8 @@ public class GameScreen implements Screen {
 		if (scorer.gameOver()) {
 			physics.dispose();
 			physics = null;
-			Gdx.app.log(TAG,  "Game over!!!");
 			game.setScreen(gameOverScreen);
+			Gdx.app.log(TAG, "Game over");
 		}
 		
 		Long javaHeap = Gdx.app.getJavaHeap();

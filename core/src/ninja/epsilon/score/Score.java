@@ -10,6 +10,7 @@ import com.badlogic.gdx.audio.Sound;
 
 
 public class Score implements Scorer {
+	private static final String TAG = Score.class.getSimpleName();
 
 	Sound dropSound;
 	private int currentScore;
@@ -33,8 +34,6 @@ public class Score implements Scorer {
 		int poitnsGot = drinkers.giveDrink( typeOfDrink,  position,  timeOfReceivingDrink);
 		
 		if(poitnsGot==-1){
-			//penalty
-			chances = chances > 0? chances -1 : 0;
 			return false;
 		}
 		else{
@@ -46,7 +45,8 @@ public class Score implements Scorer {
 	
 	@Override
 	public void fellOneDrink() {
-		//TODO for Emilia
+			//penalty
+			chances = chances > 0 ? chances -1 : 0;
 	}
 
 	@Override
