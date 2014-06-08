@@ -5,6 +5,7 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.Scaling;
 
 public class BackgroundRenderer implements Renderer {
 	
@@ -19,15 +20,25 @@ public class BackgroundRenderer implements Renderer {
 		music.setLooping(true);
 	    music.play();
 	    
+	    
 	    backgroundImg = new Texture(Gdx.files.internal("background-paper.jpg"));
+	    
+	/*
+	    backgroundImg.width = 1.0f * Gdx.graphics.getWidth();
+	    backgroundImg.setScaling(Scaling.fillX);
+
+	    //To resize in height's scale
+	    backgroundImg.width = 1.0f * Gdx.graphics.getHeight();
+	    backgroundImg.setScaling(Scaling.fillY);
+	    */
 	}
 
 	@Override
 	public void render(SpriteBatch spriteBatch) {
-		Gdx.gl.glClearColor(.5f, .5f,.5f, 1);
+		Gdx.gl.glClearColor(0f, .5f, 0f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
-		spriteBatch.draw(backgroundImg, 0, 0);
+		//spriteBatch.draw(backgroundImg, 0, 0);
 
 	}
 
