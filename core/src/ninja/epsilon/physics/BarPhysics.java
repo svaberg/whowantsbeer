@@ -118,7 +118,7 @@ public class BarPhysics implements Physics, Physics.InputCallback {
 	private void logGlass(Body glass) {
 		Vector2 p = glass.getPosition();
 		Vector2 v = glass.getLinearVelocity();
-		Gdx.app.log(TAG, "x=" + p.x + "  y=" + p.y + "  vx=" + v.x + "  vy=" + v.y);
+		//Gdx.app.log(TAG, "x=" + p.x + "  y=" + p.y + "  vx=" + v.x + "  vy=" + v.y);
 	}
 
 	private void logGlasses() {
@@ -172,7 +172,7 @@ public class BarPhysics implements Physics, Physics.InputCallback {
 	}
 
 	private Vector2 getImpulse(float v) {
-		float impulse = 0.033f * v / 50.0f;
+		float impulse = 0.033f * v / 20.0f;
 		Gdx.app.log(TAG, "Applying impulse " + impulse);
 		return new Vector2(impulse, 0.0f);
 	}

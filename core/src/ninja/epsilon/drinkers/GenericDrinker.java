@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import ninja.epsilon.Dimensions;
+import ninja.epsilon.score.Scorer;
 
 import com.badlogic.gdx.Gdx;
 
@@ -48,18 +49,21 @@ public class GenericDrinker implements Drinker {
 	 * Drinks being ordered by the drinker. When all drinks have been received
 	 * the drinker will be satisfied and leave the bar (and a tip!).
 	 */
-	private List<GenericDrinkOrder> drinkOrders;
+	private List<DrinkOrder> drinkOrders;
+	
+	Scorer score;
 	
 	/**
 	 * Create a new drinker with the default persistence time
 	 * @param nowTime the current time in milliseconds.
 	 */
-	public GenericDrinker(float position, long nowTime) {
+	public GenericDrinker(float position, long nowTime, Scorer score) {
 		this.setPosition(position);
 		this.persistenceTime = Dimensions.DRINKER_PERSISTENCE_TIME; // milliseconds
 		this.radius = Dimensions.DRINKER_WIDTH / 2;
 		this.creationTime = nowTime;
-		this.drinkOrders = new ArrayList<GenericDrinkOrder>();
+		this.drinkOrders = new ArrayList<DrinkOrder>();
+		this.score = score;
 		
 		{
 			Random ran = new Random();
@@ -94,14 +98,15 @@ public class GenericDrinker implements Drinker {
 	 * 
 	 * @param typeOfDrink
 	 */
-	public void receiveDrink(TypeOfDrink typeOfDrink) {
-		for (GenericDrinkOrder drinkOrder : drinkOrders) {
+	public boolean receiveDrink(TypeOfDrink typeOfDrink) {
+		for (DrinkOrder drinkOrder : drinkOrders) {
 			if (drinkOrder.getWhatsTheDrink() == typeOfDrink) {
 				drinkOrder.setReceived();
 				Gdx.app.log("GenericDrinker", "Drinker has received an ordered" + typeOfDrink.toString());
-				break;
+				return true;
 			}
 		}
+		return false;
 	}
 		
 	/**
@@ -119,7 +124,7 @@ public class GenericDrinker implements Drinker {
 	 */
 	private void addDrinkOrder(TypeOfDrink typeOfDrink) {
 		this.getDrinkOrders().add(new GenericDrinkOrder(typeOfDrink, this.position, creationTime));	
-		Gdx.app.log("GenericDrinker", this.type.toString() + " Drinker passed order for " + typeOfDrink.toString());
+		Gdx.app.log("GenericDrinker", this.type.toString() + " position: " + position + " Drinker passed order for " + typeOfDrink.toString());
 	}
 	
 	/**
@@ -130,7 +135,7 @@ public class GenericDrinker implements Drinker {
 
 		// Check whether all orders have been received.
 		hasReceivedAllOrders = true;
-		for (GenericDrinkOrder drinkOrder : getDrinkOrders()) {
+		for (DrinkOrder drinkOrder : getDrinkOrders()) {
 			hasReceivedAllOrders &= drinkOrder.isReceived();
 		}
 		if (hasReceivedAllOrders) Gdx.app.log("GenericDrinker", "Drinker has received all orders and is leaving.");
@@ -138,7 +143,7 @@ public class GenericDrinker implements Drinker {
 		// Check whether the drinker has waited too long and thus will leave.
 		long timeWaited = nowTime - creationTime;
 		hasWaitedTooLong = (timeWaited > persistenceTime);
-		if (hasWaitedTooLong) Gdx.app.log("GenericDrinker", "Drinker has waited too long and is leaving.");
+		//if (hasWaitedTooLong) Gdx.app.log("GenericDrinker", "Drinker has waited too long and is leaving.");
 
 	}
 	
@@ -188,7 +193,11 @@ public class GenericDrinker implements Drinker {
 		this.radius = radius;
 	}
 
-	public List<GenericDrinkOrder> getDrinkOrders() {
-		return drinkOrders;
+	public List<DrinkOrder> getDrinkOrders() {
+		return  drinkOrders;
+	}
+
+	public long getOrderTime() {
+		return creationTime;
 	}	
 }

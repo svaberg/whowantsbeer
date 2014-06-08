@@ -2,7 +2,8 @@ package ninja.epsilon.drinkers;
 
 import ninja.epsilon.score.ScoringValues;
 
-public class GenericDrinkOrder implements DrinkOrder{
+public class GenericDrinkOrder implements DrinkOrder
+{
 	boolean isReceived;
 	TypeOfDrink whatsTheDrink;
 	float position = 0;
@@ -20,7 +21,7 @@ public class GenericDrinkOrder implements DrinkOrder{
 		isReceived = true;
 	}
 	
-	boolean isReceived() {
+	public boolean isReceived() {
 		return isReceived;
 	}
 
