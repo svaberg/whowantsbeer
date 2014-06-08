@@ -33,8 +33,6 @@ public class BackgroundRenderer implements Renderer {
 
 	@Override
 	public void render(SpriteBatch spriteBatch) {
-		//Gdx.gl.glClearColor(0f, .5f, 0f, 1);
-		//Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
 		spriteBatch.draw(backgroundImg, 0, 0);
 	}
@@ -44,5 +42,4 @@ public class BackgroundRenderer implements Renderer {
 		music.dispose();
 		backgroundImg.dispose();
 	}
-
 }
