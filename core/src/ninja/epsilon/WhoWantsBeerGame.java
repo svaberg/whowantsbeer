@@ -9,8 +9,10 @@ public class WhoWantsBeerGame extends Game {
 	
 
     public void create() {
-
-        this.setScreen(new GameScreen(this));
+		this.setScreen(new SplashScreen(this));
+		// Created now in splahs screen
+//		if(Gdx.input.justTouched())
+//			this.setScreen(new GameScreen(this));
     }
 
     public void render() {
