@@ -77,7 +77,7 @@ public class DrinkersRenderer implements Renderer {
 				// scale
 				Bubble.setScale(0.75f);
 				// Set Position
-				Bubble.setPosition(Sprite.getX()+Sprite.getWidth(), Sprite.getY()+Sprite.getHeight());
+				Bubble.setPosition(Sprite.getX()-20, Sprite.getY()+Sprite.getHeight()-20);
 				Bubble.draw(spriteBatch);
 			}
 		}
