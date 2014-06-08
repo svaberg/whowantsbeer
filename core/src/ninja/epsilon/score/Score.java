@@ -29,16 +29,18 @@ public class Score implements Scorer {
 	}
 	
 	@Override
-	public void gotOneDrink(TypeOfDrink typeOfDrink, float position, long timeOfReceivingDrink)	{
+	public boolean gotOneDrink(TypeOfDrink typeOfDrink, float position, long timeOfReceivingDrink)	{
 		int poitnsGot = drinkers.giveDrink( typeOfDrink,  position,  timeOfReceivingDrink);
 		
 		if(poitnsGot==-1){
 			//penalty
 			chances = chances > 0? chances -1 : 0;
+			return false;
 		}
 		else{
 			currentScore+=poitnsGot;
 			dropSound.play();
+			return true;
 		}
 	}
 	

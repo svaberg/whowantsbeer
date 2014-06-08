@@ -86,7 +86,10 @@ public class GameScreen implements Screen {
 		spriteBatch.end();
 		
 		if (scorer.gameOver()) {
-			  game.setScreen(gameOverScreen);
+			physics.dispose();
+			physics = null;
+			Gdx.app.log(TAG,  "Game over!!!");
+			game.setScreen(gameOverScreen);
 		}
 		
 		Long javaHeap = Gdx.app.getJavaHeap();

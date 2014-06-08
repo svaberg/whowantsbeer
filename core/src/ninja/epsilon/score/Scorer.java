@@ -11,8 +11,9 @@ public interface Scorer {
 	 */
 	GameLevel getGameLevel();
 	
-	// Drink will be matched will orders -> leads to increment in score or penalty
-	void gotOneDrink(TypeOfDrink typeOfDrink, float position, long timeOfReceivingDrink);
+	// Drink will be matched will orders -> leads to increment in score or penalty.
+	// Returns true when a drinker claimed the drink.
+	boolean gotOneDrink(TypeOfDrink typeOfDrink, float position, long timeOfReceivingDrink);
 	
 	// Drink fell off the counter
 	void fellOneDrink();

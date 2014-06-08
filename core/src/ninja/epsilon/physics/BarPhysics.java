@@ -76,6 +76,11 @@ public class BarPhysics implements Physics, Physics.InputCallback {
 		Gdx.app.log(TAG, "NEW WORLD CREATED!");
 	}
 
+	@Override
+	public void dispose() {
+		world.dispose();
+	}
+
 	private static GlassState bodyToState(Body body) {
 		GlassState state = new GlassState();
 		state.x = body.getPosition().x;
@@ -165,11 +170,16 @@ public class BarPhysics implements Physics, Physics.InputCallback {
 			Body body = glass.getBody();
 			if (body.getLinearVelocity().isZero(MIN_STOP_VELOCITY)) {
 				float x = glass.getBody().getPosition().x;
-				Gdx.app.log(TAG, "Glass stopped at x=" + x);
-				scorer.gotOneDrink(TypeOfDrink.blondBeer, x, cur_t);
-				world.destroyBody(body);
-				i.remove();
+				if (scorer.gotOneDrink(TypeOfDrink.blondBeer, x, cur_t)) {
+					Gdx.app.log(TAG, "Glass claimed at x=" + x);
+					world.destroyBody(body);
+					i.remove();
+				}
 			}
+		}
+		for (ListIterator<Glass> i = glasses.listIterator(); i.hasNext();) {
+			Glass glass = i.next();
+			Body body = glass.getBody();
 			if (body.getPosition().y < FALL_DETECT_THRESHOLD) {
 				Gdx.app.log(TAG, "Glass has fallen off the counter!");
 				scorer.fellOneDrink();
