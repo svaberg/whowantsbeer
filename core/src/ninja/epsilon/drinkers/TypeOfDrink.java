@@ -42,4 +42,25 @@ public enum TypeOfDrink {
 		};
 		return answer + "beer.atlas";
 	}
+	
+	
+	/// ... improvement.. add it in the plugin properties file/config file.
+	final static private String bubbleBasePath = "bubbles";
+	final static private String bubbleBasePrefix = "bubble_";
+	public String getBubblePath() {
+		String answer = bubbleBasePath + File.separator + bubbleBasePrefix; 
+		switch(this)
+		{
+		case blondBeer:return answer + "blondBeer.png";
+		case darkBeer:return answer + "darkBeer.png";
+		case tequilaShot:return answer + "tequilaShot.png";
+		case glassWine:return answer + "glassWine.png";
+		case cactus:return answer + "cactus.png";
+
+		};
+		return answer + "blondBeer.png";  // question mark
+	}
+	
+	
+	
 }
