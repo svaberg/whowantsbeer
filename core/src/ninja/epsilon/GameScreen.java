@@ -19,6 +19,7 @@ import ninja.epsilon.swipereader.SwipeReader;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class GameScreen implements Screen {
@@ -79,11 +80,12 @@ public class GameScreen implements Screen {
 		physics.update(cur_t, inputReader.input(cur_t));
 		drinkers.update(cur_t, GameLevel.EASY);
 		
+		// clear screen
+		Gdx.gl.glClearColor(0f, .0f, 0f, 1);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		
+		// render
 		spriteBatch.begin();
-		
-
-		
-		
 		for (Renderer renderer : renderers) {
 			renderer.render(spriteBatch);
 		}
@@ -91,7 +93,6 @@ public class GameScreen implements Screen {
 		
 		if (scorer.gameOver()) {
 			  game.setScreen(gameOverScreen);
-			  Gdx.app.log(TAG, "Game over");
 		}
 		
 		Long javaHeap = Gdx.app.getJavaHeap();
