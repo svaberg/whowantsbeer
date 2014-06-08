@@ -62,7 +62,7 @@ public class BarCounter implements Drinkers{
 
 		GenericDrinker drinker = new GenericDrinker(position, currentUpdateTime);
 		drinkersWaiting.add(drinker);
-		Gdx.app.log("BarCounter", "Created new drinker at position " + position + ". Size of drinker list: " + drinkersWaiting.size());
+		//Gdx.app.log("BarCounter", "Created new drinker at position " + position + ". Size of drinker list: " + drinkersWaiting.size());
 	}
 	
 	/** 

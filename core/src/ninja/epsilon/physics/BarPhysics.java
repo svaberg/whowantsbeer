@@ -118,7 +118,7 @@ public class BarPhysics implements Physics, Physics.InputCallback {
 	private void logGlass(Body glass) {
 		Vector2 p = glass.getPosition();
 		Vector2 v = glass.getLinearVelocity();
-		Gdx.app.log(TAG, "x=" + p.x + "  y=" + p.y + "  vx=" + v.x + "  vy=" + v.y);
+		//Gdx.app.log(TAG, "x=" + p.x + "  y=" + p.y + "  vx=" + v.x + "  vy=" + v.y);
 	}
 
 	private void logGlasses() {

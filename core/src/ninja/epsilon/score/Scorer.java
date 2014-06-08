@@ -14,7 +14,7 @@ public interface Scorer {
 	void gotOneDrink(TypeOfDrink typeOfDrink, float position, long timeOfReceivingDrink);
 	
 	//Order will be added to the orders
-	void gotOneOrder(DrinkOrder order);
+	//void gotOneOrder(DrinkOrder order);
 	
 	//Order will be removed
 	void removeOrder(DrinkOrder order);

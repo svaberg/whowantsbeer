@@ -119,7 +119,7 @@ public class GenericDrinker implements Drinker {
 	 */
 	private void addDrinkOrder(TypeOfDrink typeOfDrink) {
 		this.getDrinkOrders().add(new GenericDrinkOrder(typeOfDrink, this.position, creationTime));	
-		Gdx.app.log("GenericDrinker", this.type.toString() + " Drinker passed order for " + typeOfDrink.toString());
+		Gdx.app.log("GenericDrinker", this.type.toString() + " position: " + position + " Drinker passed order for " + typeOfDrink.toString());
 	}
 	
 	/**
@@ -138,7 +138,7 @@ public class GenericDrinker implements Drinker {
 		// Check whether the drinker has waited too long and thus will leave.
 		long timeWaited = nowTime - creationTime;
 		hasWaitedTooLong = (timeWaited > persistenceTime);
-		if (hasWaitedTooLong) Gdx.app.log("GenericDrinker", "Drinker has waited too long and is leaving.");
+		//if (hasWaitedTooLong) Gdx.app.log("GenericDrinker", "Drinker has waited too long and is leaving.");
 
 	}
 	
