@@ -1,118 +1,111 @@
 
-spritesheet_beer.png
-size: 976,248
+spritesheet_blondBeer.png
+size: 126,215
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-beer0001
+beer_blond0001
   rotate: false
-  xy: 2, 126
-  size: 120, 122
-  orig: 120, 122
+  xy: 2, 174
+  size: 40, 41
+  orig: 40, 41
   offset: 0, 0
   index: -1
-beer0002
+beer_blond0002
+  rotate: false
+  xy: 2, 131
+  size: 40, 41
+  orig: 40, 41
+  offset: 0, 0
+  index: -1
+beer_blond0003
+  rotate: false
+  xy: 44, 174
+  size: 40, 41
+  orig: 40, 41
+  offset: 0, 0
+  index: -1
+beer_blond0004
+  rotate: false
+  xy: 86, 174
+  size: 40, 41
+  orig: 40, 41
+  offset: 0, 0
+  index: -1
+beer_blond0005
+  rotate: false
+  xy: 2, 88
+  size: 40, 41
+  orig: 40, 41
+  offset: 0, 0
+  index: -1
+beer_blond0006
+  rotate: false
+  xy: 44, 131
+  size: 40, 41
+  orig: 40, 41
+  offset: 0, 0
+  index: -1
+beer_blond0007
+  rotate: false
+  xy: 86, 131
+  size: 40, 41
+  orig: 40, 41
+  offset: 0, 0
+  index: -1
+beer_blond0008
+  rotate: false
+  xy: 2, 45
+  size: 40, 41
+  orig: 40, 41
+  offset: 0, 0
+  index: -1
+beer_blond0009
+  rotate: false
+  xy: 44, 88
+  size: 40, 41
+  orig: 40, 41
+  offset: 0, 0
+  index: -1
+beer_blond0010
+  rotate: false
+  xy: 86, 88
+  size: 40, 41
+  orig: 40, 41
+  offset: 0, 0
+  index: -1
+beer_blond0011
   rotate: false
   xy: 2, 2
-  size: 120, 122
-  orig: 120, 122
+  size: 40, 41
+  orig: 40, 41
   offset: 0, 0
   index: -1
-beer0003
+beer_blond0012
   rotate: false
-  xy: 124, 126
-  size: 120, 122
-  orig: 120, 122
+  xy: 44, 45
+  size: 40, 41
+  orig: 40, 41
   offset: 0, 0
   index: -1
-beer0004
+beer_blond0013
   rotate: false
-  xy: 124, 2
-  size: 120, 122
-  orig: 120, 122
+  xy: 86, 45
+  size: 40, 41
+  orig: 40, 41
   offset: 0, 0
   index: -1
-beer0005
+beer_blond0014
   rotate: false
-  xy: 246, 126
-  size: 120, 122
-  orig: 120, 122
+  xy: 44, 2
+  size: 40, 41
+  orig: 40, 41
   offset: 0, 0
   index: -1
-beer0006
+beer_blond0015
   rotate: false
-  xy: 246, 2
-  size: 120, 122
-  orig: 120, 122
-  offset: 0, 0
-  index: -1
-beer0007
-  rotate: false
-  xy: 368, 126
-  size: 120, 122
-  orig: 120, 122
-  offset: 0, 0
-  index: -1
-beer0008
-  rotate: false
-  xy: 368, 2
-  size: 120, 122
-  orig: 120, 122
-  offset: 0, 0
-  index: -1
-beer0009
-  rotate: false
-  xy: 490, 126
-  size: 120, 122
-  orig: 120, 122
-  offset: 0, 0
-  index: -1
-beer0010
-  rotate: false
-  xy: 490, 2
-  size: 120, 122
-  orig: 120, 122
-  offset: 0, 0
-  index: -1
-beer0011
-  rotate: false
-  xy: 612, 126
-  size: 120, 122
-  orig: 120, 122
-  offset: 0, 0
-  index: -1
-beer0012
-  rotate: false
-  xy: 612, 2
-  size: 120, 122
-  orig: 120, 122
-  offset: 0, 0
-  index: -1
-beer0013
-  rotate: false
-  xy: 734, 126
-  size: 120, 122
-  orig: 120, 122
-  offset: 0, 0
-  index: -1
-beer0014
-  rotate: false
-  xy: 734, 2
-  size: 120, 122
-  orig: 120, 122
-  offset: 0, 0
-  index: -1
-beer0015
-  rotate: false
-  xy: 856, 126
-  size: 120, 122
-  orig: 120, 122
-  offset: 0, 0
-  index: -1
-beer0016
-  rotate: false
-  xy: 856, 2
-  size: 120, 122
-  orig: 120, 122
+  xy: 86, 2
+  size: 40, 41
+  orig: 40, 41
   offset: 0, 0
   index: -1

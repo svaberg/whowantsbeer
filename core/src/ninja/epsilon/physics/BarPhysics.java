@@ -145,8 +145,9 @@ public class BarPhysics implements Physics, Physics.InputCallback {
 		for (ListIterator<Body> i = glasses.listIterator(); i.hasNext();) {
 			Body glass = i.next();
 			if (glass.getLinearVelocity().isZero(MIN_STOP_VELOCITY)) {
-				Gdx.app.log(TAG, "Glass stopped!");
-				scorer.gotOneDrink(TypeOfDrink.blondBeer, glass.getPosition().x, cur_t);
+				float x = glass.getPosition().x;
+				Gdx.app.log(TAG, "Glass stopped at x=" + x);
+				scorer.gotOneDrink(TypeOfDrink.blondBeer, x, cur_t);
 				world.destroyBody(glass);
 				i.remove();
 			}
@@ -171,7 +172,9 @@ public class BarPhysics implements Physics, Physics.InputCallback {
 	}
 
 	private Vector2 getImpulse(float v) {
-		return new Vector2(v / 1000.0f, 0.0f);
+		float impulse = 0.033f * v / 50.0f;
+		Gdx.app.log(TAG, "Applying impulse " + impulse);
+		return new Vector2(impulse, 0.0f);
 	}
 
 	private Body createCounter() {
@@ -179,7 +182,7 @@ public class BarPhysics implements Physics, Physics.InputCallback {
 		counterDef.position.set(new Vector2(0.0f, 0.0f));
 		Body counter = world.createBody(counterDef);
 		PolygonShape counterShape = new PolygonShape();
-		counterShape.setAsBox(Dimensions.PULT_LENGTH/2.0f, Dimensions.PULT_HEIGHT/2.0f);
+		counterShape.setAsBox(Dimensions.PULT_LENGTH, Dimensions.PULT_HEIGHT);
 		counter.createFixture(counterShape, 0.0f);
 		return counter;
 	}
@@ -187,7 +190,7 @@ public class BarPhysics implements Physics, Physics.InputCallback {
 	private Body createGlass(float v) {
 		Gdx.app.log(TAG, "Created glass!");
 		BodyDef glassDef = new BodyDef();
-		glassDef.position.set(new Vector2(0.0f, Dimensions.PULT_HEIGHT/2.0f + Dimensions.GLASS_HEIGHT/2.0f));
+		glassDef.position.set(new Vector2(0.0f, Dimensions.PULT_HEIGHT + Dimensions.GLASS_HEIGHT/2.0f));
 		glassDef.type = BodyType.DynamicBody;
 		Body glass = world.createBody(glassDef);
 		PolygonShape glassShape = new PolygonShape();
