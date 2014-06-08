@@ -16,9 +16,9 @@ import ninja.epsilon.score.Scorer;
 import ninja.epsilon.swipereader.InputReader;
 import ninja.epsilon.swipereader.SwipeReader;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class GameScreen implements Screen {
 	
