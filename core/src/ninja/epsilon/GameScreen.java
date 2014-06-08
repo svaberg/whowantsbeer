@@ -81,23 +81,28 @@ public class GameScreen implements Screen {
 		
 		spriteBatch.begin();
 		
-
-		
 		
 		for (Renderer renderer : renderers) {
 			renderer.render(spriteBatch);
 		}
 		spriteBatch.end();
-		
-		if (scorer.gameOver()) {
-			  game.setScreen(gameOverScreen);
-			  Gdx.app.log(TAG, "Game over");
-		}
+
 		
 		Long javaHeap = Gdx.app.getJavaHeap();
 		Long nativeHeap = Gdx.app.getNativeHeap();
 		
 		Gdx.app.log(TAG, "S: " + ((System.currentTimeMillis() - start) / 1000) + " JH: " + Float.toString(javaHeap.floatValue()/1024f/1024f) + " NH: " + Float.toString(nativeHeap.floatValue()/1024f/1024f));
+	
+		if (scorer.gameOver()) {
+			
+			 Gdx.app.log(TAG, "Game over");
+			
+			  //game.setScreen(gameOverScreen);
+			 
+			 // this.dispose();
+			 
+			  
+		}
 	}
 
 	public void dispose() {
