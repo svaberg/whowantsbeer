@@ -23,12 +23,12 @@ public class SwipeReader extends GestureDetector implements InputReader {
 		@Override
 		public boolean fling(float x, float y, int button) {
 			if (Math.abs(x) > Math.abs(y)) {
-				Gdx.app.log(TAG, "Swipe velocity: " + Float.toString(velocityX));
 				if (RendererUtils.PixelsPerMeterX() != 0) {
-					Gdx.app.log(TAG, "Swipe velocity adjusted: " + 2 * x / RendererUtils.PixelsPerMeterX());
 					velocityX = 2 * x / RendererUtils.PixelsPerMeterX();
+					Gdx.app.log(TAG, "Swipe velocity adjusted: " + Float.toString(velocityX));
 				} else {
 					velocityX = x;
+					Gdx.app.log(TAG, "Swipe velocity: " + Float.toString(velocityX));
 				}
 				physicsInputCallback.swipe(velocityX);
 			} else {

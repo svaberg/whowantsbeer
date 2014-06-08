@@ -17,6 +17,7 @@ import ninja.epsilon.swipereader.InputReader;
 import ninja.epsilon.swipereader.SwipeReader;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 
 public class GameScreen implements Screen {
@@ -80,6 +81,12 @@ public class GameScreen implements Screen {
 		{
 			  game.setScreen(new GameOverScreen(game));
 		}
+		
+		long javaHeap = Gdx.app.getJavaHeap();
+		long nativeHeap = Gdx.app.getNativeHeap();
+		
+		Gdx.app.log(TAG, "Java heap: " + Long.toString(javaHeap));
+		Gdx.app.log(TAG, "Java native heap: " + Long.toString(nativeHeap));
 	}
 
 	public void dispose() {
