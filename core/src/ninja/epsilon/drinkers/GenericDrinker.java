@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import ninja.epsilon.Dimensions;
+
 import com.badlogic.gdx.Gdx;
 
 
@@ -54,7 +56,8 @@ public class GenericDrinker implements Drinker {
 	 */
 	public GenericDrinker(float position, long nowTime) {
 		this.setPosition(position);
-		this.persistenceTime = 6000; // milliseconds
+		this.persistenceTime = Dimensions.DRINKER_PERSISTENCE_TIME; // milliseconds
+		this.radius = Dimensions.DRINKER_WIDTH / 2;
 		this.creationTime = nowTime;
 		this.drinkOrders = new ArrayList<GenericDrinkOrder>();
 		

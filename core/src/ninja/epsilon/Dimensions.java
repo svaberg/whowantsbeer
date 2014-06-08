@@ -13,6 +13,8 @@ public class Dimensions {
 	public static final float GLASS_HEIGHT = 0.25f;
 	public static final float GLASS_WIDTH = 0.1f;
 	
+	public static final float DRINKER_WIDTH = 0.5f;
+	public static final long DRINKER_PERSISTENCE_TIME = 6000;
 	private Dimensions() {
 	}
 }

@@ -116,7 +116,7 @@ public class BarCounter implements Drinkers{
 			if (deltaTime > randomTime) {
 				createDrinker();
 			}
-			Gdx.app.log("BarCounter", "Delta time " + deltaTime + " random time " + randomTime);
+//			Gdx.app.log("BarCounter", "Delta time " + deltaTime + " random time " + randomTime);
 			}
 	}
 	
