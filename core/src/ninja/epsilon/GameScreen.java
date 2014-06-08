@@ -69,7 +69,7 @@ public class GameScreen implements Screen {
 	public void render(float delta) {
 		long t = System.currentTimeMillis();
 		physics.update(t, inputReader.input(t));
-		//drinkers.update(t, GameLevel.EASY);			
+		drinkers.update(t, GameLevel.EASY);			
 		
 		spriteBatch.begin();
 		for (Renderer renderer : renderers) {
