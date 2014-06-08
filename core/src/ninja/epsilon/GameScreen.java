@@ -87,6 +87,7 @@ public class GameScreen implements Screen {
 		
 		if (scorer.gameOver()) {
 			  game.setScreen(gameOverScreen);
+			  Gdx.app.log(TAG, "Game over");
 		}
 		
 		Long javaHeap = Gdx.app.getJavaHeap();
