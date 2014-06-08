@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.input.GestureDetector;
 
 import ninja.epsilon.physics.Physics;
+import ninja.epsilon.renderers.RendererUtils;
 
 public class SwipeReader extends GestureDetector implements InputReader {
 
@@ -23,7 +24,9 @@ public class SwipeReader extends GestureDetector implements InputReader {
 		public boolean fling(float x, float y, int button) {
 			if (Math.abs(x) > Math.abs(y)) {
 				Gdx.app.log(TAG, "Swipe velocity: " + Float.toString(velocityX));
-				velocityX = x;
+				Gdx.app.log(TAG, "Swipe velocity adjusted: " + 2 * x / RendererUtils.PixelsPerMeterX());
+				velocityX = 2 * x / RendererUtils.PixelsPerMeterX();
+				
 				physicsInputCallback.swipe(velocityX);
 			} else {
 				// Ignore the input, because we don't care about up/down swipes.
