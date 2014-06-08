@@ -8,6 +8,7 @@ import ninja.epsilon.drinkers.Drinkers;
 import ninja.epsilon.physics.BarPhysics;
 import ninja.epsilon.renderers.BackgroundRenderer;
 import ninja.epsilon.renderers.BarRenderer;
+import ninja.epsilon.renderers.BarTenderRenderer;
 import ninja.epsilon.renderers.DashboardRenderer;
 import ninja.epsilon.renderers.DrinkRenderer;
 import ninja.epsilon.renderers.DrinkersRenderer;
@@ -39,6 +40,7 @@ public class GameScreen implements Screen {
 	private Renderer backgroundRenderer;
 	private Renderer barRenderer;
 	private Renderer drinkRenderer = null;
+	private Renderer barTenderRenderer = null;
 	
 	private SpriteBatch spriteBatch = null;
 	long start = 0; // Start of game
@@ -65,6 +67,7 @@ public class GameScreen implements Screen {
 		renderers.add(drinkersRenderer = new DrinkersRenderer(drinkers));
 		renderers.add(barRenderer = new BarRenderer());
 		renderers.add(drinkRenderer = new DrinkRenderer(physics));
+		renderers.add(barTenderRenderer = new BarTenderRenderer());
 		renderers.add(dashboardRenderer = new DashboardRenderer(scorer));
 
 		spriteBatch = new SpriteBatch();
