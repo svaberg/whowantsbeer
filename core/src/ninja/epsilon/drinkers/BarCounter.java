@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import ninja.epsilon.Dimensions;
 import ninja.epsilon.GameLevel;
 
 import com.badlogic.gdx.Gdx;
@@ -45,11 +46,11 @@ public class BarCounter implements Drinkers{
 	 */
 	public BarCounter() {
 		drinkersWaiting = new ArrayList<GenericDrinker>();
-		meanTimeBetweenDrinkers = 1000; // milliseconds
-		capacity = 6;
+		meanTimeBetweenDrinkers = Dimensions.BAR_MEAN_TIME_BETWEEN_DRINKERS;
+		capacity = Dimensions.BAR_COUNTER_CAPACITY;
 		previousUpdateTime = 0; // milliseconds
 		currentUpdateTime = 0;  // milliseconds
-		length = (float) 3.5;   // meters
+		length = Dimensions.PULT_LENGTH;
 	}
 	
 	/**
@@ -116,7 +117,7 @@ public class BarCounter implements Drinkers{
 			if (deltaTime > randomTime) {
 				createDrinker();
 			}
-			Gdx.app.log("BarCounter", "Delta time " + deltaTime + " random time " + randomTime);
+//			Gdx.app.log("BarCounter", "Delta time " + deltaTime + " random time " + randomTime);
 			}
 	}
 	
