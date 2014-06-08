@@ -16,10 +16,8 @@ import ninja.epsilon.drinkers.TypeOfDrink;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
 /**
  * @author treestrongs
@@ -28,10 +26,12 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 public class DrinkersRenderer implements Renderer {
 
 	private Drinkers DrinkerPool = null;
-	Sprite Sprite = null;
-	Sprite Bubble = null;
+	
+	private Map <DrinkerType, Sprite> SpriteMap = new HashMap<DrinkerType, Sprite>();
+	private Map <TypeOfDrink, Sprite> BubbleMap = new HashMap<TypeOfDrink, Sprite>();
+	
 	private Map <DrinkerType, Texture> TextureMap = new HashMap<DrinkerType, Texture>();
-	private Map <TypeOfDrink, Texture> BubbleTexture = new HashMap<TypeOfDrink, Texture>();
+	private Map <TypeOfDrink, Texture> BubbleTextureMap = new HashMap<TypeOfDrink, Texture>();
 
 
 	public DrinkersRenderer(Drinkers Drinkers) {
@@ -42,16 +42,16 @@ public class DrinkersRenderer implements Renderer {
 	@Override
 	public void create() {
 
-		Sprite = new Sprite();
-		Bubble = new Sprite();
-
 		// create texture maps
 		TypeOfDrink[] values = TypeOfDrink.values();
 		TypeOfDrink drink = null;
-		int i=0, ilen=values.length;
+		int i=0;
+		int ilen=values.length;
 		while(i<ilen) {
 			drink = values[i];
-			BubbleTexture.put(drink, new Texture(Gdx.files.internal(drink.getBubblePath())));
+			BubbleTextureMap.put(drink, new Texture(Gdx.files.internal(drink.getBubblePath())));
+			// create sprite
+			BubbleMap.put(drink, new Sprite(BubbleTextureMap.get(drink)));
 			++i;
 		}
 
@@ -61,7 +61,10 @@ public class DrinkersRenderer implements Renderer {
 		ilen=drinkers.length;
 		while(i<ilen) {
 			drinker = drinkers[i];
+			// create texture
 			TextureMap.put(drinker, new Texture(Gdx.files.internal(GetTexture(drinker))));
+			// create sprite
+			SpriteMap.put(drinker, new Sprite(TextureMap.get(drinker)));
 			++i;
 		}
 	}
@@ -78,37 +81,32 @@ public class DrinkersRenderer implements Renderer {
 
 		// Get Drinker List
 		List<? extends Drinker> currentDrinkers = DrinkerPool.GetDrinkers();
-		
-		Texture texture = null;
 
 		// Start Rendering Them`
 		for (Drinker item : currentDrinkers) {
-			texture = TextureMap.get(item.GetDrinkerType());
-			
-			
-			//Sprite.setTexture(TextureMap.get(item.GetDrinkerType()));
+
+			Sprite Sprite = SpriteMap.get(item.GetDrinkerType());
 			// maximum 3.5 + 0.5 meters on X
-			float xPixels = (float) (RendererUtils.PixelsPerMeterX()*item.getPosition()+0.5*texture.getWidth());
+			float xPixels = (float) (RendererUtils.PixelsPerMeterX()*
+					(Dimensions.PULT_LENGTH/Dimensions.FULL_WIDTH)*
+					item.getPosition()+0.5*Sprite.getWidth());
 			// Bar is at 0.5 m height
 			float yPixels = (float) (RendererUtils.PixelsPerMeterY()*Dimensions.PULT_HEIGHT);
 			// Set Position
-			//Sprite.setPosition(xPixels, yPixels);
-			//Sprite.draw(spriteBatch);
-			
-			spriteBatch.draw(texture, xPixels, yPixels);
+			Sprite.setPosition(xPixels, yPixels);
+			Sprite.draw(spriteBatch);
 
-
-//			List<? extends DrinkOrder> drinkOrders = item.getDrinkOrders();
-//			if (drinkOrders != null)
-//			{
-//				// add speak bubble
-//				Bubble.setTexture(BubbleTexture.get(drinkOrders.get(0).getWhatsTheDrink()));
-//				// scale
-//				Bubble.setScale(0.75f);
-//				// Set Position
-//				Bubble.setPosition(Sprite.getX()-20, Sprite.getY()+Sprite.getHeight()-20);
-//				Bubble.draw(spriteBatch);
-//			}
+			List<? extends DrinkOrder> drinkOrders = item.getDrinkOrders();
+			if (drinkOrders != null)
+			{
+				// add speak bubble
+				Sprite Bubble = BubbleMap.get(drinkOrders.get(0).getWhatsTheDrink());
+				// scale
+				Bubble.setScale(0.75f);
+				// Set Position
+				Bubble.setPosition(Sprite.getX()-20, Sprite.getY()+Sprite.getHeight()-20);
+				Bubble.draw(spriteBatch);
+			}
 		}
 	}
 

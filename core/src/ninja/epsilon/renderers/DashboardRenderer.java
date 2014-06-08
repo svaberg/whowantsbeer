@@ -25,15 +25,16 @@ public class DashboardRenderer implements Renderer {
 	
 	private BitmapFont Font = null;
 	private Scorer Scorer= null;
+	private Texture thumbUpTexture;
+	private Texture thumbDownTexture;
+	private Sprite thumbUpSprite;
+	private Sprite thumbDownSprite;
 	
 	// Add more types in the future...
 	public enum ThumbType {
 		THUMB_UP,
 		THUMB_DOWN
 	};
-	
-	// We stored the common used ones...
-	private Map<ThumbType, Texture> thumbsIndex = new HashMap<ThumbType, Texture>();
 	
 	public DashboardRenderer(Scorer ScorerReference) {
 		Scorer = ScorerReference;
@@ -44,16 +45,18 @@ public class DashboardRenderer implements Renderer {
 		Font = new BitmapFont();
 		Font.setColor(Color.GREEN);
 		
-		thumbsIndex.put(ThumbType.THUMB_UP, new Texture(Gdx.files.internal("thumbup2.png")));
-		thumbsIndex.put(ThumbType.THUMB_DOWN, new Texture(Gdx.files.internal("thumbdown2.png")));
+		thumbUpTexture = new Texture(Gdx.files.internal("thumbup2.png"));
+		thumbDownTexture =  new Texture(Gdx.files.internal("thumbdown2.png"));
+		
+		thumbUpSprite = new Sprite(thumbUpTexture);
+		thumbDownSprite =  new Sprite(thumbDownTexture);
 	}
 	
     @Override
     public void dispose() {
     	Font.dispose();
-    	Iterator<Entry<ThumbType, Texture>> it = thumbsIndex.entrySet().iterator();
-    	while(it.hasNext())
-    		it.next().getValue().dispose();
+    	thumbUpTexture.dispose();
+    	thumbDownTexture.dispose();    	
     }
 	
 	/* (non-Javadoc)
@@ -68,31 +71,20 @@ public class DashboardRenderer implements Renderer {
 		// add thumbs up
 		for (int i=1; i<Chances; i++)
 		{
-			// add thumbs up
-			Sprite ThumbsUp = new Sprite(thumbsIndex.get(ThumbType.THUMB_UP));
-			// Set Position
-			ThumbsUp.setPosition(RendererUtils.PixelsPerMeterX()*0.1f+ThumbsUp.getWidth()*i, RendererUtils.PixelsPerMeterY()*2.3f);
-			ThumbsUp.draw(spriteBatch);
+			thumbUpSprite.setPosition(RendererUtils.PixelsPerMeterX()*0.1f+thumbUpSprite.getWidth()*i, RendererUtils.PixelsPerMeterY()*2.3f);
+			thumbUpSprite.draw(spriteBatch);
 		}
 
 		// add thumbs down
 		for (int i=1; i<Fails; i++)
 		{
-			// add thumbs down
-			Sprite ThumbsDown =  new Sprite(thumbsIndex.get(ThumbType.THUMB_DOWN));
-			// Set Position
-			ThumbsDown.setPosition(RendererUtils.PixelsPerMeterX()*0.1f+(ThumbsDown.getWidth()*(Chances+i)), RendererUtils.PixelsPerMeterY()*2.3f);
-			ThumbsDown.draw(spriteBatch);
+			thumbDownSprite.setPosition(RendererUtils.PixelsPerMeterX()*0.1f+(thumbDownSprite.getWidth()*(Chances+i)), RendererUtils.PixelsPerMeterY()*2.3f);
+			thumbDownSprite.draw(spriteBatch);
 		}
-		
-		Sprite Thumbs = new Sprite(thumbsIndex.get(ThumbType.THUMB_DOWN));
 		
 		// put Dashboard 2.3 meters high and 1.5 meter right
 		Font.draw(spriteBatch, "You are awesome! SCORE is: " + Scorer.getScore(), 
-				RendererUtils.PixelsPerMeterX()*0.2f+(Thumbs.getWidth()*(Chances+Fails)), 
+				RendererUtils.PixelsPerMeterX()*0.2f+(thumbDownSprite.getWidth()*(Chances+Fails)), 
 				RendererUtils.PixelsPerMeterY()*2.4f);
-	}
-	
-	
-	
+	}	
 }
