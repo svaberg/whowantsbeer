@@ -26,5 +26,5 @@ public interface Drinker {
 	/*
 	 * Return Drink Orders
 	 */
-	List<GenericDrinkOrder> getDrinkOrders();
+	List<? extends DrinkOrder> getDrinkOrders();
 }
