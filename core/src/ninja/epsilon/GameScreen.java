@@ -55,8 +55,8 @@ public class GameScreen implements Screen {
 
 		renderers = new ArrayList<Renderer>();
 		scorer = new Score();
-		physics = new BarPhysics(scorer);
 		drinkers = new BarCounter(scorer);
+		physics = new BarPhysics(scorer, drinkers);
 		scorer.setDrinkers(drinkers);
 		inputReader = new SwipeReader(physics);
 		
@@ -90,8 +90,10 @@ public class GameScreen implements Screen {
 		spriteBatch.end();
 		
 		if (scorer.gameOver()) {
-			  game.setScreen(gameOverScreen);
-			  Gdx.app.log(TAG, "Game over");
+			physics.dispose();
+			physics = null;
+			game.setScreen(gameOverScreen);
+			Gdx.app.log(TAG, "Game over");
 		}
 		
 		Long javaHeap = Gdx.app.getJavaHeap();

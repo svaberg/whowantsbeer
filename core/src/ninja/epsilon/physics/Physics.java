@@ -25,6 +25,11 @@ public interface Physics {
 	void update(long t, float swipe);
 
 	/**
+	 * Release resources.
+	 */
+	void dispose();
+
+	/**
 	 * Returns position and orientation of all glasses.
 	 *
 	 * @return iterable over glass state
