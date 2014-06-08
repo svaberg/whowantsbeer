@@ -2,10 +2,8 @@ package ninja.epsilon.renderers;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 
 public class BackgroundRenderer implements Renderer {
 	
@@ -35,8 +33,6 @@ public class BackgroundRenderer implements Renderer {
 
 	@Override
 	public void render(SpriteBatch spriteBatch) {
-		//Gdx.gl.glClearColor(0f, .5f, 0f, 1);
-		//Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
 		spriteBatch.draw(backgroundImg, 0, 0);
 	}

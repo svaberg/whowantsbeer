@@ -5,6 +5,10 @@ public class Dimensions {
 	public static float FULL_WIDTH = 4.0f; // meters
 	public static float FULL_HEIGHT = 2.5f; // meters
 	
+	public static float VIRTUAL_WIDTH = 800f; // pixels
+	public static float VIRTUAL_HEIGHT = 480f; // pixels
+	public static final float ASPECT_RATIO = VIRTUAL_WIDTH/VIRTUAL_HEIGHT;
+	
 	// Bar is at 0.5 m height
 	public static final float PULT_HEIGHT = 0.5f;
 	// Bar is 3.5 m long
