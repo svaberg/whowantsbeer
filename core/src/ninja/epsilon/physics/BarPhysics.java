@@ -171,7 +171,8 @@ public class BarPhysics implements Physics, Physics.InputCallback {
 	}
 
 	private Vector2 getImpulse(float v) {
-		return new Vector2(v / 1000.0f, 0.0f);
+		float x = v / 50.0f;
+		return new Vector2(x * 0.033f, 0.0f);
 	}
 
 	private Body createCounter() {
