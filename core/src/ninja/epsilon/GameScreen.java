@@ -69,7 +69,7 @@ public class GameScreen implements Screen {
 	public void render(float delta) {
 		long t = System.currentTimeMillis();
 		physics.update(t, inputReader.input(t));
-		drinkers.update(t, GameLevel.EASY);			
+		//drinkers.update(t, GameLevel.EASY);			
 		
 		spriteBatch.begin();
 		for (Renderer renderer : renderers) {
@@ -82,11 +82,10 @@ public class GameScreen implements Screen {
 			  game.setScreen(new GameOverScreen(game));
 		}
 		
-		long javaHeap = Gdx.app.getJavaHeap();
-		long nativeHeap = Gdx.app.getNativeHeap();
+		Long javaHeap = Gdx.app.getJavaHeap();
+		Long nativeHeap = Gdx.app.getNativeHeap();
 		
-		Gdx.app.log(TAG, "Java heap: " + Long.toString(javaHeap));
-		Gdx.app.log(TAG, "Java native heap: " + Long.toString(nativeHeap));
+		Gdx.app.log(TAG, "JH: " + Float.toString(javaHeap.floatValue()/1024f/1024f) + " NH: " + Float.toString(nativeHeap.floatValue()/1024f/1024f));
 	}
 
 	public void dispose() {
