@@ -112,6 +112,7 @@ public class GameScreen implements Screen {
 		for (Renderer renderer : renderers) {
 			renderer.dispose();
 		}
+		spriteBatch.dispose();
 	}
 
 
