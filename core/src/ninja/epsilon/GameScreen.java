@@ -43,7 +43,7 @@ public class GameScreen implements Screen {
 	private Renderer barTenderRenderer = null;
 	
 	private SpriteBatch spriteBatch = null;
-	long start = 0; // Start of game
+	long start_t = 0; // Start of game
 	
 	Screen gameOverScreen;
 	
@@ -54,7 +54,7 @@ public class GameScreen implements Screen {
 	}
 	
 	public void create () {
-		start = System.currentTimeMillis();
+		start_t = System.currentTimeMillis();
 
 		renderers = new ArrayList<Renderer>();
 		scorer = new Score();
@@ -75,7 +75,7 @@ public class GameScreen implements Screen {
 			renderer.create();
 		}
 	}
-	
+
 	@Override
 	public void render(float delta) {
 		long cur_t = System.currentTimeMillis();
@@ -100,11 +100,11 @@ public class GameScreen implements Screen {
 			game.setScreen(gameOverScreen);
 			Gdx.app.log(TAG, "Game over");
 		}
-		
-		Long javaHeap = Gdx.app.getJavaHeap();
-		Long nativeHeap = Gdx.app.getNativeHeap();
-		
-		Gdx.app.log(TAG, "S: " + ((System.currentTimeMillis() - start) / 1000) + " JH: " + Float.toString(javaHeap.floatValue()/1024f/1024f) + " NH: " + Float.toString(nativeHeap.floatValue()/1024f/1024f));
+
+		long javaHeap = Gdx.app.getJavaHeap();
+		long nativeHeap = Gdx.app.getNativeHeap();
+
+		Gdx.app.log(TAG, "S: " + ((cur_t - start_t) / 1000) + " JH: " + javaHeap/1024f/1024f + " NH: " + nativeHeap/1024f/1024f);
 	
 	}
 
