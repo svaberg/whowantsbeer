@@ -95,13 +95,13 @@ public class GameScreen implements Screen {
 		spriteBatch.end();
 
 		if (scorer.gameOver()) {
-			physics.dispose();
-			physics = null;
 			
 			for (Renderer renderer : renderers) {
 				renderer.dispose();
 				renderer=null;
 			}
+			physics.dispose();
+			physics = null;
 			
 			gameOverScreen = new GameOverScreen(game, scorer.getScore());
 			game.setScreen(gameOverScreen);

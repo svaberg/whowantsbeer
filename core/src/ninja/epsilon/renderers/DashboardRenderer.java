@@ -70,14 +70,14 @@ public class DashboardRenderer implements Renderer {
 		int Chances = Scorer.getChances();
 		
 		// add thumbs up
-		for (int i=1; i<Chances; i++)
+		for (int i=1; i<Chances+1; i++)
 		{
 			thumbUpSprite.setPosition(RendererUtils.PixelsPerMeterX()*0.1f+thumbUpSprite.getWidth()*i, RendererUtils.PixelsPerMeterY()*2.3f);
 			thumbUpSprite.draw(spriteBatch);
 		}
 
 		// add thumbs down
-		for (int i=1; i<Fails; i++)
+		for (int i=1; i<Fails+1; i++)
 		{
 			thumbDownSprite.setPosition(RendererUtils.PixelsPerMeterX()*0.1f+(thumbDownSprite.getWidth()*(Chances+i)), RendererUtils.PixelsPerMeterY()*2.3f);
 			thumbDownSprite.draw(spriteBatch);
