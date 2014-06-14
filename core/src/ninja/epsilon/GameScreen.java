@@ -49,7 +49,7 @@ public class GameScreen implements Screen {
 	
 	GameScreen(final WhoWantsBeerGame game) {
 		this.game = game;
-		gameOverScreen = new GameOverScreen(game);
+		
 		create ();
 	}
 	
@@ -97,6 +97,13 @@ public class GameScreen implements Screen {
 		if (scorer.gameOver()) {
 			physics.dispose();
 			physics = null;
+			
+			for (Renderer renderer : renderers) {
+				renderer.dispose();
+				renderer=null;
+			}
+			
+			gameOverScreen = new GameOverScreen(game, scorer.getScore());
 			game.setScreen(gameOverScreen);
 			Gdx.app.log(TAG, "Game over");
 		}

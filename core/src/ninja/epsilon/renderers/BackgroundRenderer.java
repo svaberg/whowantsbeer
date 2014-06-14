@@ -39,6 +39,7 @@ public class BackgroundRenderer implements Renderer {
 
 	@Override
 	public void dispose() {
+		music.stop();
 		music.dispose();
 		backgroundImg.dispose();
 	}
