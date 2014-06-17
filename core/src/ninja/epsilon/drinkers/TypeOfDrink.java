@@ -6,8 +6,8 @@ public enum TypeOfDrink {
 		blondBeer (0), 
 		darkBeer (1), 
 		tequilaShot(2),
-		glassWine(3),
-		cactus(4)
+		//cocktail(3),
+		//cactus(4)
 		;
 		
 	
@@ -36,8 +36,8 @@ public enum TypeOfDrink {
 		case blondBeer:return answer + "blondBeer.atlas";
 		case darkBeer:return answer + "darkBeer.atlas";
 		case tequilaShot:return answer + "tequilaShot.atlas";
-		case glassWine:return answer + "glassWine.atlas";
-		case cactus:return answer + "cactus.atlas";
+		//case cocktail:return answer + "cocktail.atlas";
+		//case cactus:return answer + "cactus.atlas";
 
 		};
 		return answer + "beer.atlas";
@@ -54,8 +54,8 @@ public enum TypeOfDrink {
 		case blondBeer:return answer + "blondBeer.png";
 		case darkBeer:return answer + "darkBeer.png";
 		case tequilaShot:return answer + "tequilaShot.png";
-		case glassWine:return answer + "glassWine.png";
-		case cactus:return answer + "cactus.png";
+		//case cocktail answer + "cocktail.png";
+		//case cactus:return answer + "cactus.png";
 
 		};
 		return answer + "blondBeer.png";  // question mark
