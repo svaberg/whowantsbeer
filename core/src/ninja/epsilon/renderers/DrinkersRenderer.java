@@ -62,7 +62,7 @@ public class DrinkersRenderer implements Renderer {
 		while(i<ilen) {
 			drinker = drinkers[i];
 			// create texture
-			TextureMap.put(drinker, new Texture(Gdx.files.internal(GetTexture(drinker))));
+			TextureMap.put(drinker, new Texture(Gdx.files.internal(drinker.getImagePath())));
 			// create sprite
 			SpriteMap.put(drinker, new Sprite(TextureMap.get(drinker)));
 			++i;
@@ -110,25 +110,6 @@ public class DrinkersRenderer implements Renderer {
 		}
 	}
 
-	/*
-	 * Retrieves the Drinker Texture
-	 */
-	String GetTexture(DrinkerType Type) {
 
-		switch (Type) {
-		case SPANISH:
-			return "spanish.png";
-		case GERMAN:
-			return "german.png";
-		case NORWEGIAN:
-			return "norwegian.png";
-		case POLISH:
-			return "polish.png";
-		case ROMANIAN:
-			return "romanian.png";
-		default:
-			return "ninja.png";
-		}		
-	}
 
 }

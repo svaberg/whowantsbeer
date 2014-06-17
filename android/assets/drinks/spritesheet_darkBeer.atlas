@@ -1,118 +1,111 @@
 
 spritesheet_darkBeer.png
-size: 976,248
+size: 990,66
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
 beer_dark0001
   rotate: false
-  xy: 2, 126
-  size: 120, 122
-  orig: 120, 122
+  xy: 2, 2
+  size: 64, 64
+  orig: 64, 64
   offset: 0, 0
   index: -1
 beer_dark0002
   rotate: false
-  xy: 2, 2
-  size: 120, 122
-  orig: 120, 122
+  xy: 68, 2
+  size: 64, 64
+  orig: 64, 64
   offset: 0, 0
   index: -1
 beer_dark0003
   rotate: false
-  xy: 124, 126
-  size: 120, 122
-  orig: 120, 122
+  xy: 134, 2
+  size: 64, 64
+  orig: 64, 64
   offset: 0, 0
   index: -1
 beer_dark0004
   rotate: false
-  xy: 124, 2
-  size: 120, 122
-  orig: 120, 122
+  xy: 200, 2
+  size: 64, 64
+  orig: 64, 64
   offset: 0, 0
   index: -1
 beer_dark0005
   rotate: false
-  xy: 246, 126
-  size: 120, 122
-  orig: 120, 122
+  xy: 266, 2
+  size: 64, 64
+  orig: 64, 64
   offset: 0, 0
   index: -1
 beer_dark0006
   rotate: false
-  xy: 246, 2
-  size: 120, 122
-  orig: 120, 122
+  xy: 332, 2
+  size: 64, 64
+  orig: 64, 64
   offset: 0, 0
   index: -1
 beer_dark0007
   rotate: false
-  xy: 368, 126
-  size: 120, 122
-  orig: 120, 122
+  xy: 398, 2
+  size: 64, 64
+  orig: 64, 64
   offset: 0, 0
   index: -1
 beer_dark0008
   rotate: false
-  xy: 368, 2
-  size: 120, 122
-  orig: 120, 122
+  xy: 464, 2
+  size: 64, 64
+  orig: 64, 64
   offset: 0, 0
   index: -1
 beer_dark0009
   rotate: false
-  xy: 490, 126
-  size: 120, 122
-  orig: 120, 122
+  xy: 530, 2
+  size: 64, 64
+  orig: 64, 64
   offset: 0, 0
   index: -1
 beer_dark0010
   rotate: false
-  xy: 490, 2
-  size: 120, 122
-  orig: 120, 122
+  xy: 596, 2
+  size: 64, 64
+  orig: 64, 64
   offset: 0, 0
   index: -1
 beer_dark0011
   rotate: false
-  xy: 612, 126
-  size: 120, 122
-  orig: 120, 122
+  xy: 662, 2
+  size: 64, 64
+  orig: 64, 64
   offset: 0, 0
   index: -1
 beer_dark0012
   rotate: false
-  xy: 612, 2
-  size: 120, 122
-  orig: 120, 122
+  xy: 728, 2
+  size: 64, 64
+  orig: 64, 64
   offset: 0, 0
   index: -1
 beer_dark0013
   rotate: false
-  xy: 734, 126
-  size: 120, 122
-  orig: 120, 122
+  xy: 794, 2
+  size: 64, 64
+  orig: 64, 64
   offset: 0, 0
   index: -1
 beer_dark0014
   rotate: false
-  xy: 734, 2
-  size: 120, 122
-  orig: 120, 122
+  xy: 860, 2
+  size: 64, 64
+  orig: 64, 64
   offset: 0, 0
   index: -1
 beer_dark0015
   rotate: false
-  xy: 856, 126
-  size: 120, 122
-  orig: 120, 122
-  offset: 0, 0
-  index: -1
-beer_dark0016
-  rotate: false
-  xy: 856, 2
-  size: 120, 122
-  orig: 120, 122
+  xy: 926, 2
+  size: 64, 64
+  orig: 64, 64
   offset: 0, 0
   index: -1
